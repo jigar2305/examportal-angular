@@ -1,1 +1,23 @@
-<p>signup works!</p>
+
+
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <h2 style="text-align:center;">Signup</h2>
+        <form [formGroup]="userform" (ngSubmit)="adduser()">
+            FirstName: <input type="text" class="form-control" formControlName="FirstName"/><br>
+
+            lastName: <input type="text" class="form-control" formControlName="lasttName"/><br>
+            
+            Email: <input type="email"formControlName="email" class="form-control"/><br>
+            
+            Password: <input type="password"formControlName="password" class="form-control" /><br>
+            
+            gender:
+                male:<input type="radio" formControlName="gender"  value="male"/>
+                female:<input type="radio" formControlName="gender" value="female"/><br><br/>
+            
+            <button type="submit" class="btn btn-primary" >add</button>
+        </form>
+    </div>
+</div>
