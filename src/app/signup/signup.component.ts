@@ -32,6 +32,7 @@ get email() {
     if (this.userform.valid) {
       this.userservice.signupApi(this.userform.value).subscribe(res => {
         this.tostr.success("signup success")
+        this.router.navigateByUrl("/login")
       }, err => {
         this.tostr.error("something went wrong")
         console.log(err);

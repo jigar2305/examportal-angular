@@ -13,5 +13,18 @@ export class UserService {
   signupApi(user:any): Observable<any>{
     return this.http.post(environment.url+"public/signup",user)
   }
+  loginApi(login:any):Observable<any>{
+    return this.http.post(environment.url+"public/login",login)
+  }
+  emailsend(email:any):Observable<any>{
+    return this.http.post(environment.url+"public/otpsend",email)
+  }
+  checkotp(otpbean:any):Observable<any>{
+    return this.http.post(environment.url+"public/otp",otpbean)
+  }
+  resetpassword(passwordbean:any):Observable<any>{
+    return this.http.post(environment.url+"public/forgot",passwordbean)
+  }
+
 
 }
