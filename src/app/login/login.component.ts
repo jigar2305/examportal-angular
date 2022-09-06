@@ -29,12 +29,12 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  otpsende(){
+  otpsende() {
     console.log(this.otpsend.value);
-    if(this.otpsend.valid){
+    if (this.otpsend.valid) {
       this.userservice.emailsend(this.otpsend.value).subscribe(res => {
         this.tostr.success("otp send successfully")
-        localStorage.setItem("email",this.otpsend.value.email)
+        localStorage.setItem("email", this.otpsend.value.email)
         this.router.navigateByUrl("/forgot")
       }, err => {
         this.tostr.error("something went wrong")
@@ -48,18 +48,18 @@ export class LoginComponent implements OnInit {
 
   showDialog() {
     this.display = true;
-  
+    document.getElementById("login")?.setAttribute("style", "display:none")
   }
 
   login() {
     if (this.loginform.valid) {
       this.userservice.loginApi(this.loginform.value).subscribe(res => {
         this.tostr.success("login success")
-        if(res.data.role.roleName=='admin'){
-          this.router.navigateByUrl("/dashbord")
+        if (res.data.role.roleName == 'admin') {
+          this.router.navigateByUrl("/admin/dashbord")
+        }else{
+          this.router.navigateByUrl("/home")
         }
-        
-        // if(res.)
       }, err => {
         this.tostr.error("something went wrong")
         console.log(err);

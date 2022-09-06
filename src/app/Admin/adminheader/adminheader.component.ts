@@ -11,5 +11,4 @@ export class AdminheaderComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

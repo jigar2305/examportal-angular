@@ -13,6 +13,8 @@ import {DialogModule} from 'primeng/dialog';
 import { DashbordComponent } from './Admin/dashbord/dashbord.component';
 import { AdminheaderComponent } from './Admin/adminheader/adminheader.component';
 import { AdminComponent } from './Admin/admin/admin.component';
+import { CourseComponent } from './Admin/course/course.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { AdminComponent } from './Admin/admin/admin.component';
     ForgotpasswordComponent,
     DashbordComponent,
     AdminheaderComponent,
-    AdminComponent
+    AdminComponent,
+    CourseComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
