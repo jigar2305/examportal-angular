@@ -4,6 +4,8 @@ import { AdminComponent } from './Admin/admin/admin.component';
 import { AdminheaderComponent } from './Admin/adminheader/adminheader.component';
 import { CourseComponent } from './Admin/course/course.component';
 import { DashbordComponent } from './Admin/dashbord/dashbord.component';
+import { QuestionComponent } from './Admin/question/question.component';
+import { SubjectComponent } from './Admin/subject/subject.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
@@ -16,7 +18,8 @@ const routes: Routes = [
     {component:DashbordComponent, path:"dashbord"},
     {component:CourseComponent,path:"course"},
     {component:AdminheaderComponent,path:"header"},
-
+    {component:SubjectComponent,path:"subject"},
+    {component:QuestionComponent,path:"question"},
 
   ]},
 

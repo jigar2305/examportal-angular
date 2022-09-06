@@ -1,0 +1,60 @@
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Course</h5>
+                    <!-- Default Table -->
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">No.</th>
+                                <th scope="col">subject</th>
+                                <th scope="col">course</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let i of subjects">
+                                <th scope="row">{{i.subjectId}}</th>
+                                <td>{{i.subjectName}}</td>
+                                <td>{{i.course.courseName}}</td>
+                                <td>
+                                    <i class="ri-delete-bin-2-fill" (click)="deletesubject(i.subjectId)"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Add subject</h5>
+                    <form [formGroup]="subjectform" (ngSubmit)="addsubject()">
+                        <div class="row mb-3">
+                            <label for="inputEmail" class="col-sm-2 col-form-label">course</label>
+                            <div class="col-sm-10">
+                                <select class="form-select" aria-label="Default select example" formControlName="course" >
+                                    <option selected="" [ngValue]="null">plese select course</option>
+                                    <option *ngFor="let i of courses" [ngValue]="i">{{i.courseName}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">subject</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" formControlName="subjectName" id="inputText">
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary mr-2">Submit</button>&nbsp;
+                            <button type="reset" class="btn btn-secondary ml-2">Reset</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

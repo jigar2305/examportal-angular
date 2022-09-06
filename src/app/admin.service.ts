@@ -17,7 +17,16 @@ export class AdminService {
     return this.http.delete(environment.url+"course/delete/"+courseId)
   }
   addcourse(course:any): Observable<any>{
-    return this.http.post(environment.url+"course/add/",course)
+    return this.http.post(environment.url+"course/add",course)
+  }
+  Listsubject(): Observable<any>{
+    return this.http.get(environment.url+"subject/list")
+  }
+  deletesubject(subjectId:any): Observable<any>{
+    return this.http.delete(environment.url+"subject/delete/"+subjectId)
+  }
+  addsubject(subject:any): Observable<any>{
+    return this.http.post(environment.url+"subject/add/",subject)
   }
 
 

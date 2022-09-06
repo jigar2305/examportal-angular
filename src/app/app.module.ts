@@ -15,6 +15,8 @@ import { AdminheaderComponent } from './Admin/adminheader/adminheader.component'
 import { AdminComponent } from './Admin/admin/admin.component';
 import { CourseComponent } from './Admin/course/course.component';
 import { FooterComponent } from './footer/footer.component';
+import { SubjectComponent } from './Admin/subject/subject.component';
+import { QuestionComponent } from './Admin/question/question.component';
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import { FooterComponent } from './footer/footer.component';
     AdminheaderComponent,
     AdminComponent,
     CourseComponent,
-    FooterComponent
+    FooterComponent,
+    SubjectComponent,
+    QuestionComponent
   ],
   imports: [
     BrowserModule,
