@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  }
+  } 
   otpsende() {
     console.log(this.otpsend.value);
     if (this.otpsend.valid) {

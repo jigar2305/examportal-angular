@@ -3,22 +3,39 @@
     <div class="card">
         <div class="card-body">
             <h5 class="card-title">Add question</h5>
+            <div class="card-header">
 
+                <form [formGroup]="subjectform" (ngSubmit)="subjectvalue()">
+                    <div class="row">
+                        <div class="col-1">
+                            <label >subject</label>
+                        </div>
+                        <div class="col-2">
+                            <select aria-label="Default select example" formControlName="subject">
+                                <option selected="" [ngValue]="null">plese select subject</option>
+                                <option *ngFor="let i of subjects" [ngValue]="i">{{i.subjectName}}</option>
+                            </select>
+                        </div>
+                        <div class="col-2">
+                            <button class="btn btn-primary btn-sm">select</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
             <form [formGroup]="questionform" (ngSubmit)="onSubmit()">
                 <div class="card">
                     <h5 class="card-header"></h5>
-                    <div class="card-body border-bottom">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label>Number of Tickets</label>
-                                <select formControlName="Numberofquestion" class="form-control"
-                                    (change)="onChangequestion($event)" [ngClass]="{ 'is-invalid': submitted  }">
-                                    <option value=""></option>
-                                    <option *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">{{i}}</option>
-                                </select>
-                            </div>
+                    <div class="row mb-3">
+                        <label for="inputEmail3" class="col-sm-2 col-form-label">Number of question</label>
+                        <div class="col-sm-10">
+                            <select formControlName="Numberofquestion" class="form-control"
+                                (change)="onChangequestion($event)">
+                                <option value=""></option>
+                                <option *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">{{i}}</option>
+                            </select>
                         </div>
                     </div>
+                    
                     <div *ngFor="let question of questionFormGroups; let i = index" class="list-group list-group-flush">
                         <div class="list-group-item">
                             <h5 class="card-title">question {{i + 1}}</h5>
@@ -26,7 +43,8 @@
                                 <div class="row mb-3">
                                     <label for="inputEmail3" class="col-sm-2 col-form-label">question</label>
                                     <div class="col-sm-10">
-                                        <textarea type="text" class="form-control" formControlName="question" ></textarea>
+                                        <textarea type="text" class="form-control"
+                                            formControlName="question"></textarea>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -56,22 +74,27 @@
                                 <div class="row mb-3">
                                     <label for="inputEmail3" class="col-sm-2 col-form-label">Answer</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" formControlName="correctAnswer" id="inputText">
+                                        <select class="form-select" aria-label="Default select example"
+                                            formControlName="correctAnswer">
+                                            <option selected="">plese select answer</option>
+                                            <option value="a">a</option>
+                                            <option value="b">b</option>
+                                            <option value="c">c</option>
+                                            <option value="d">d</option>
+                                        </select>
                                     </div>
                                 </div>
-
-
                             </div>
                         </div>
                     </div>
                     <div class="card-footer text-center border-top-0">
-                        <button class="btn btn-primary mr-1">submit</button>
-                        <button class="btn btn-secondary mr-1" type="reset" (click)="onReset()">Reset</button>
+                        <button class="btn btn-primary mr-1">submit</button>&nbsp;
+                        <button class="btn btn-secondary mr-1" type="reset" (click)="onReset()">Reset</button>&nbsp;
                         <button class="btn btn-secondary" type="button" (click)="onClear()">Clear</button>
                     </div>
-                </div>
+               
+            </div>
             </form>
-
         </div>
     </div>
 </div>

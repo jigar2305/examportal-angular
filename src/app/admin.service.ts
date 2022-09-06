@@ -28,6 +28,12 @@ export class AdminService {
   addsubject(subject:any): Observable<any>{
     return this.http.post(environment.url+"subject/add/",subject)
   }
+  addquestions(question:any): Observable<any>{
+    return this.http.post(environment.url+"que/add/",question)
+  }
+  listquestions(): Observable<any>{
+    return this.http.get(environment.url+"que/list")
+  }
 
 
 }
