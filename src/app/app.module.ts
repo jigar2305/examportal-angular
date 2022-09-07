@@ -17,6 +17,11 @@ import { CourseComponent } from './Admin/course/course.component';
 import { FooterComponent } from './footer/footer.component';
 import { SubjectComponent } from './Admin/subject/subject.component';
 import { QuestionComponent } from './Admin/question/question.component';
+import { PaperComponent } from './student/paper/paper.component';
+import { HeaderComponent } from './student/header/header.component';
+import { StudentComponent } from './student/student/student.component';
+import { StudentdashbordComponent } from './student/studentdashbord/studentdashbord.component';
+import { ExamComponent } from './Admin/exam/exam.component';
 
 
 @NgModule({
@@ -31,7 +36,12 @@ import { QuestionComponent } from './Admin/question/question.component';
     CourseComponent,
     FooterComponent,
     SubjectComponent,
-    QuestionComponent
+    QuestionComponent,
+    PaperComponent,
+    HeaderComponent,
+    StudentComponent,
+    StudentdashbordComponent,
+    ExamComponent
   ],
   imports: [
     BrowserModule,

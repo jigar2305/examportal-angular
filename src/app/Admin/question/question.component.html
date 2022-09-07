@@ -25,14 +25,16 @@
             <form [formGroup]="questionform" (ngSubmit)="onSubmit()">
                 <div class="card">
                     <h5 class="card-header"></h5>
-                    <div class="row mb-3">
+                    <div class="row p-3">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">Number of question</label>
                         <div class="col-sm-10">
-                            <select formControlName="Numberofquestion" class="form-control"
+                            <!-- <select formControlName="Numberofquestion" class="form-control"
                                 (change)="onChangequestion($event)">
                                 <option value=""></option>
                                 <option *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">{{i}}</option>
-                            </select>
+                            </select> -->
+                            <input type="number" class="form-control" (change)="onChangequestion($event)" formControlName="Numberofquestion" id="inputText">
+
                         </div>
                     </div>
                     
