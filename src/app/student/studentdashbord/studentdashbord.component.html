@@ -19,7 +19,8 @@
                                 <th scope="row">{{i.examId}}</th>
                                 <td>{{i.examName}}</td>
                                 <td>{{i.subject.subjectName}}</td>
-                                <td class="row">
+                                <td>
+                                    <a routerLink="/student/paper/{{i.examId}}">start exam </a>
                                 </td>
                             </tr>
                     </tbody>

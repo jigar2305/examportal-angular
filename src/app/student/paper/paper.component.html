@@ -1,1 +1,54 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">exams</h5>
+          <div class="card mb-3">
+            <div class="row g-0">
+              <div class="col-md-12">
+                <div class="card-body">
+                  <form [formGroup]="examquestionform" (ngSubmit)="onsubmit()">
+                    <div class="list-group list-group-flush">
+                      <div class="list-group-item">
+                        <h5 class="card-title">question {{index +1}}</h5>
+                        <input type="number" class="form-control" value ="{{questions[index].question.questionId}}" formControlName="questionId" hidden>
+                        <label class="col-form-label">{{questions[index].question.question }}</label>
+                        <div class="row">
+                          <div class="col-6"> <input class="form-check-input" type="radio" 
+                            formControlName="correctAnswer" value="a">
+                            A. &nbsp; {{questions[index].question.a}}
+                          </div>
+                          <div class="col-6">
+                            <input class="form-check-input" type="radio" 
+                            formControlName="correctAnswer" value="b">
+                            B. &nbsp;{{questions[index].question.b}}</div>
+                          <div class="col-6">
+                            <input class="form-check-input" type="radio" 
+                            formControlName="correctAnswer" value="c">
+                            c. &nbsp; {{questions[index].question.c}}</div>
+                          <div class="col-6">
+                            <input class="form-check-input" type="radio" 
+                            formControlName="correctAnswer" value="d">
+                            D. &nbsp;{{questions[index].question.d}}</div>
+                        </div>
+                        <div class="row">
+                          <div class="col-8">
+                            <button class="btn btn-success" type="submit">privieus</button>
+                          </div>
+                          <div class="col-4">
+                            <button class="btn btn-success" type="submit">{{btnvalue}}</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

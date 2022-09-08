@@ -14,6 +14,7 @@ export class ForgotpasswordComponent implements OnInit {
   emailform: FormGroup;
   resetform: FormGroup;
   display: boolean = false;
+
   constructor(private tostr: ToastrService, private router: Router, private userservice: UserService) {
     let email = localStorage.getItem("email")
 

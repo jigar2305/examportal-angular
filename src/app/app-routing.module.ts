@@ -29,7 +29,7 @@ const routes: Routes = [
   ]},
   {component:StudentComponent, path:"student", children:[
     {component:StudentdashbordComponent, path:"dashbord"},
-    {component:PaperComponent,path:"paper"},
+    {component:PaperComponent,path:"paper/:examId"},
     {component:HeaderComponent,path:"header"}
   ]},
 
