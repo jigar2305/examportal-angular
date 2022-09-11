@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { UserService } from '../user.service';
+import { UserService } from '../service/user.service';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  } 
+  }
   otpsende() {
     console.log(this.otpsend.value);
     if (this.otpsend.valid) {
@@ -46,18 +46,16 @@ export class LoginComponent implements OnInit {
   }
 
 
-  showDialog() {
-    this.display = true;
-    document.getElementById("login")?.setAttribute("style", "display:none")
-  }
-
   login() {
     if (this.loginform.valid) {
       this.userservice.loginApi(this.loginform.value).subscribe(res => {
+        console.log(res.data.userId);
+        
+        localStorage.setItem("userId",res.data.userId)
         this.tostr.success("login success")
         if (res.data.role.roleName == 'admin') {
           this.router.navigateByUrl("/admin/dashbord")
-        }else{
+        } else {
           this.router.navigateByUrl("/home")
         }
       }, err => {

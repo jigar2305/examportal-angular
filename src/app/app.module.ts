@@ -17,11 +17,15 @@ import { CourseComponent } from './Admin/course/course.component';
 import { FooterComponent } from './footer/footer.component';
 import { SubjectComponent } from './Admin/subject/subject.component';
 import { QuestionComponent } from './Admin/question/question.component';
-import { PaperComponent } from './student/paper/paper.component';
 import { HeaderComponent } from './student/header/header.component';
 import { StudentComponent } from './student/student/student.component';
 import { StudentdashbordComponent } from './student/studentdashbord/studentdashbord.component';
 import { ExamComponent } from './Admin/exam/exam.component';
+import { PapersecondComponent } from './student/papersecond/papersecond.component';
+import { ResultComponent } from './student/result/result.component';
+import { LogoutComponent } from './logout/logout.component';
+import { CountdownModule } from 'ngx-countdown';
+import { ResultsComponent } from './student/results/results.component';
 
 
  
@@ -38,11 +42,14 @@ import { ExamComponent } from './Admin/exam/exam.component';
     FooterComponent,
     SubjectComponent,
     QuestionComponent,
-    PaperComponent,
     HeaderComponent,
     StudentComponent,
     StudentdashbordComponent,
-    ExamComponent
+    ExamComponent,
+    PapersecondComponent,
+    ResultComponent,
+    LogoutComponent,
+    ResultsComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +60,7 @@ import { ExamComponent } from './Admin/exam/exam.component';
     HttpClientModule,
     ReactiveFormsModule,
     DialogModule,
+    CountdownModule
   ],
   providers: [],
   bootstrap: [AppComponent]

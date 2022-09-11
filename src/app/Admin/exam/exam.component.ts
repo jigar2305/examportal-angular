@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { AdminService } from 'src/app/admin.service';
-import { UserService } from 'src/app/user.service';
+import { AdminService } from 'src/app/service/admin.service';
+
 
 @Component({
   selector: 'app-exam',

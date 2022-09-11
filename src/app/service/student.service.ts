@@ -13,6 +13,17 @@ export class StudentService {
   getexamquestion(examId:any):Observable<any>{
     return this.http.get(environment.url+"eqc/get/"+examId)
   }
+  getquestion(examId:any):Observable<any>{
+    return this.http.get(environment.url+"eqc/getque/"+examId)
+  }
+
+  submitquestion(questionanswer:any):Observable<any>{
+    return this.http.post(environment.url+"eqc/checkanswer",questionanswer)
+  }
+
+  getresults(userId:any):Observable<any>{
+    return this.http.get(environment.url+"result/list/"+userId)
+  }
 
 
 }

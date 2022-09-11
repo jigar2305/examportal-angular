@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { AdminService } from 'src/app/admin.service';
+import { AdminService } from 'src/app/service/admin.service';
 
 @Component({
   selector: 'app-studentdashbord',
