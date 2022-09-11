@@ -61,9 +61,8 @@ export class PapersecondComponent implements OnInit {
   onsubmit() {
     if (this.btnvalue == "submit") {
       this.submit()
-
     }
-
+    
     if (this.que.length == (this.index + 1)) {
       this.btnvalue = "submit"
     } else {
@@ -92,7 +91,7 @@ export class PapersecondComponent implements OnInit {
     this.SService.submitquestion(answers).subscribe(res => {
       this.share.setdata(res.data)
       this.share.setinfo(this.que)
-      this.router.navigateByUrl("/student/result")
+      this.router.navigateByUrl("/student/result/0")
     }, err => {
       console.log(err);
     })

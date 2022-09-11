@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { StudentService } from 'src/app/service/student.service';
 
 @Component({
@@ -10,10 +11,12 @@ export class ResultsComponent implements OnInit {
 
   results:Array<any> = []
   userId:any
+  examId:any
   constructor(private sservice:StudentService) { }
 
   ngOnInit(): void {
     this.getallresults()
+   
   }
   
 

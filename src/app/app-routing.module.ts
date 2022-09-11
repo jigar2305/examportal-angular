@@ -35,7 +35,7 @@ const routes: Routes = [
     {component:PapersecondComponent,path:"paper/:examId"},
     {component:StudentdashbordComponent, path:"dashbord"},
     {component:HeaderComponent,path:"header"},
-    {component:ResultComponent,path:"result"},
+    {component:ResultComponent,path:"result/:examId"},
     {component:ResultsComponent,path:"results"},
   ]},
 
