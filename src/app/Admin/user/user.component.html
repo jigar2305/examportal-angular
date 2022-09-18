@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">user</h5>
+                    <!-- Default Table -->
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">No.</th>
+                                <th scope="col">firstName</th>
+                                <th scope="col">lastName</th>
+                                <th scope="col">email</th>
+                                <th scope="col">gender</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let j of users;let i = index">
+                                <th scope="row">{{i + 1}}</th>
+                                <td>{{j.firstName}}</td>
+                                <td>{{j.lastName}}</td>
+                                <td>{{j.email}}</td>
+                                <td>{{j.gender}}</td>
+                                <td *ngIf="j.role.roleName == 'student'">
+                                    <i class="bi bi-trash" (click) = "delete(j.userId)"></i>
+                                    <i class="bi bi-check-circle" (click) = "userstatus(j.userId)" *ngIf="j.active == false" ></i>
+                                    <i class="bi bi-check-circle-fill" (click) = "userstatus(j.userId)" *ngIf="j.active == true" ></i>
+                                </td>
+                                <td *ngIf="j.role.roleName == 'admin'">
+                                   admin
+                                </td>
+                            </tr> 
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -24,8 +24,11 @@ export class StudentService {
   getresults(userId:any):Observable<any>{
     return this.http.get(environment.url+"result/list/"+userId)
   }
-  getresult(userId:any,examId:any):Observable<any>{
+  getresultquestion(userId:any,examId:any):Observable<any>{
     return this.http.get(environment.url+"result/listresult/"+userId+"/"+examId)
+  }
+  getresult(resultId:any):Observable<any>{
+    return this.http.get(environment.url+"result/get/"+resultId)
   }
 
 

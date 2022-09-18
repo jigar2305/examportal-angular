@@ -91,7 +91,7 @@ export class PapersecondComponent implements OnInit {
     this.SService.submitquestion(answers).subscribe(res => {
       this.share.setdata(res.data)
       this.share.setinfo(this.que)
-      this.router.navigateByUrl("/student/result/0")
+      this.router.navigateByUrl("/student/results")
     }, err => {
       console.log(err);
     })

@@ -26,6 +26,7 @@ import { ResultComponent } from './student/result/result.component';
 import { LogoutComponent } from './logout/logout.component';
 import { CountdownModule } from 'ngx-countdown';
 import { ResultsComponent } from './student/results/results.component';
+import { UserComponent } from './Admin/user/user.component';
 
 
  
@@ -49,7 +50,8 @@ import { ResultsComponent } from './student/results/results.component';
     PapersecondComponent,
     ResultComponent,
     LogoutComponent,
-    ResultsComponent
+    ResultsComponent,
+    UserComponent,
   ],
   imports: [
     BrowserModule,

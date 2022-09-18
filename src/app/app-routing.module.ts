@@ -7,6 +7,7 @@ import { DashbordComponent } from './Admin/dashbord/dashbord.component';
 import { ExamComponent } from './Admin/exam/exam.component';
 import { QuestionComponent } from './Admin/question/question.component';
 import { SubjectComponent } from './Admin/subject/subject.component';
+import { UserComponent } from './Admin/user/user.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
@@ -30,12 +31,14 @@ const routes: Routes = [
     {component:SubjectComponent,path:"subject"},
     {component:QuestionComponent,path:"question"},
     {component:ExamComponent,path:"exam"},
+    {component:UserComponent,path:"user"},
+
   ]},
   {component:StudentComponent, path:"student", children:[
     {component:PapersecondComponent,path:"paper/:examId"},
     {component:StudentdashbordComponent, path:"dashbord"},
     {component:HeaderComponent,path:"header"},
-    {component:ResultComponent,path:"result/:examId"},
+    {component:ResultComponent,path:"result/:examId/:resultId"},
     {component:ResultsComponent,path:"results"},
   ]},
 

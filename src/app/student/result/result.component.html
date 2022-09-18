@@ -3,14 +3,12 @@
         <div class="card-header">
             <h1 class="">{{result.exam.examName}}</h1>
             <div class="row">
-                <h1 class="col-6"><b>Total:</b>{{result.totalMarks}}</h1>
-                <h1 class="col-6"><b>Obtain:</b>{{result.obtainMarks}}</h1>
+                <h2 class="col-6"><b>Total:&nbsp;</b>{{result.totalMarks}}</h2>
+                <h2 class="col-6"><b>Obtain:&nbsp;</b>{{result.obtainMarks}}</h2>
                 <h1 class="col-6" *ngIf="(result.totalMarks*33/100) < result.obtainMarks" >pass</h1>
                 <h1 class="col-6" *ngIf="(result.totalMarks*33/100) > result.obtainMarks" style="color: red;" >fail</h1>
             </div>
         </div>
-      <h5 class="card-title">{{result.exam.examName}}</h5>
-
       <table class="table table-striped">
         <thead>
           <tr>
@@ -28,20 +26,20 @@
         <tbody>
           <tr *ngFor="let q of que; let i = index">
             <th scope="row">{{i+1}}</th>
-            <td>{{q.question}}</td>
-            <td>{{q.a}}</td>
-            <td>{{q.b}}</td>
-            <td>{{q.c}}</td>
-            <td>{{q.d}}</td>
-            <td>{{q.correctAnswer}}</td>
+            <td>{{q.question.question}}</td>
+            <td>{{q.question.a}}</td>
+            <td>{{q.question.b}}</td>
+            <td>{{q.question.c}}</td>
+            <td>{{q.question.d}}</td>
+            <td>{{q.question.correctAnswer}}</td>
             <td>
-                <p *ngIf="q.correctAnswer == q.selected" style="color: green;">
-                    {{q.selected}}
+                <p *ngIf="q.question.correctAnswer == q.selectedOption" style="color: green;">
+                    {{q.selectedOption}}
                 </p>
-                <p *ngIf="q.correctAnswer != q.selected" style="color: red;">
-                    {{q.selected}}
+                <p *ngIf="q.question.correctAnswer != q.selectedOption" style="color: red;">
+                    {{q.selectedOption}}
                 </p>
-                <p *ngIf="q.selected == ''" style="color: red;">
+                <p *ngIf="q.selectedOption == '' " style="color: red;">
                     not selected
                 </p>
             </td>

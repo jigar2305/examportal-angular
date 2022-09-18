@@ -12,18 +12,22 @@ export class QuestionComponent implements OnInit {
   questionform: FormGroup
   subjectform: FormGroup
   submitted = false;
-  subject:any 
-  subjects:Array<any>=[]
-  questions:Array<any>=[]
-  constructor(private formBuilder: FormBuilder,private adminservice:AdminService,private tostr:ToastrService) {
+  subject: any
+  file!: File; 
+  subjects: Array<any> = []
+  questions: Array<any> = []
+  constructor(private formBuilder: FormBuilder, private adminservice: AdminService, private tostr: ToastrService) {
     this.questionform = this.formBuilder.group({
       Numberofquestion: ['', Validators.required],
       question: new FormArray([])
     })
     this.subjectform = new FormGroup({
-      subject: new FormControl( [Validators.required])
+      subject: new FormControl([Validators.required])
     })
-    
+  }
+  
+  onChange(event:any) {
+    this.file = event.target.files[0];
   }
 
   get f() { return this.questionform.controls; }
@@ -35,7 +39,7 @@ export class QuestionComponent implements OnInit {
   ngOnInit(): void {
     this.getallsubject()
   }
-  subjectvalue(){
+  subjectvalue() {
 
     console.log(this.subjectform.value);
 
@@ -46,6 +50,17 @@ export class QuestionComponent implements OnInit {
       this.subjects = res.data
     })
   }
+
+  onUpload() {
+    this.adminservice.addquestionsbyexcel(this.file).subscribe(
+        (event: any) => {
+          console.log(event);
+          
+          this.tostr.success("question added....")
+        }
+    );
+}
+
   onChangequestion(e: any) {
     const numberOfquestions = e.target.value || 0;
     if (this.t.length < numberOfquestions) {
@@ -59,7 +74,7 @@ export class QuestionComponent implements OnInit {
           correctAnswer: ['', Validators.required],
           subject: [this.subjectform.value.subject]
         }))
-       
+
       }
     } else {
       for (let i = this.t.length; i >= numberOfquestions; i--) {
@@ -72,18 +87,18 @@ export class QuestionComponent implements OnInit {
     console.log(JSON.stringify((this.subject)));
     this.submitted = true;
 
-    console.log(this.questionform.value+
+    console.log(this.questionform.value +
       JSON.stringify(this.questionform.value));
-    
+
     if (this.questionform.invalid) {
       return;
     }
-    if(this.questionform.valid){
-      this.adminservice.addquestions(this.questionform.value.question).subscribe(res=>{
+    if (this.questionform.valid) {
+      this.adminservice.addquestions(this.questionform.value.question).subscribe(res => {
         console.log(res);
         this.tostr.success("questions added successfully")
-        
-      },err=>{
+
+      }, err => {
         console.log(err);
         this.tostr.error("somethin went wrong")
       })
@@ -102,8 +117,8 @@ export class QuestionComponent implements OnInit {
     this.submitted = false;
     this.t.reset();
   }
-  getallquestions(){
-    this.adminservice.listquestions().subscribe(res=>{
+  getallquestions() {
+    this.adminservice.listquestions().subscribe(res => {
       this.questions = res.data
     })
   }

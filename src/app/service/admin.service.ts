@@ -35,6 +35,11 @@ export class AdminService {
   addquestions(question:any): Observable<any>{
     return this.http.post(environment.url+"que/add",question)
   }
+  addquestionsbyexcel(file:any): Observable<any>{
+    const formdata = new FormData()
+    formdata.append("file",file)
+    return this.http.post(environment.url+"file/excel",formdata)
+  }
   listquestions(): Observable<any>{
     return this.http.get(environment.url+"que/list")
   }
@@ -52,5 +57,15 @@ export class AdminService {
   addexamquestions(examquestion:any):Observable<any>{
     return this.http.post(environment.url+"eqc/add",examquestion)
   }
+  // ---------------------------------------------------------------
+  listuser():Observable<any>{
+    return this.http.get(environment.url+"admin/userlist")
+  } 
+  deleteuser(userId:number):Observable<any>{
+    return this.http.delete(environment.url+"admin/deleteuser/"+userId)
+  } 
+  userstatus(userId:number):Observable<any>{
+    return this.http.get(environment.url+"admin/updatestatus/"+userId)
+  } 
 
 }
