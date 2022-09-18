@@ -1,0 +1,96 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">results</h5>
+                    <!-- Default Table -->
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">No.</th>
+                                <th scope="col">exam</th>
+                                <th scope="col">view</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr *ngFor="let j of results;let i = index">
+                                <th scope="row">{{i + 1}}</th>
+                                <td>{{j.exam.examName}}</td>
+                                <td>
+                                    <p data-bs-toggle="modal" data-bs-target="#ExtralargeModal"
+                                        (click)="setvalue(j.exam.examId,j.resultId)">view result </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  <div class="modal fade" id="ExtralargeModal" tabindex="-1" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">exam</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-header">
+                        <h1 class="">{{result.exam.examName}}</h1>
+                        <div class="row">
+                            <h2 class="col-6"><b>Total:&nbsp;</b>{{result.totalMarks}}</h2>
+                            <h2 class="col-6"><b>Obtain:&nbsp;</b>{{result.obtainMarks}}</h2>
+                            <h1 class="col-6" *ngIf="(result.totalMarks*33/100) < result.obtainMarks">pass</h1>
+                            <h1 class="col-6" *ngIf="(result.totalMarks*33/100) > result.obtainMarks"
+                                style="color: red;">fail</h1>
+                        </div>
+                    </div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">No.</th>
+                                <th scope="col">question</th>
+                                <th scope="col">A</th>
+                                <th scope="col">B</th>
+                                <th scope="col">C</th>
+                                <th scope="col">D</th>
+                                <th scope="col">correct answer</th>
+                                <th scope="col">Your answer</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let q of que; let i = index">
+                                <th scope="row">{{i+1}}</th>
+                                <td>{{q.question.question}}</td>
+                                <td>{{q.question.a}}</td>
+                                <td>{{q.question.b}}</td>
+                                <td>{{q.question.c}}</td>
+                                <td>{{q.question.d}}</td>
+                                <td>{{q.question.correctAnswer}}</td>
+                                <td>
+                                    <p *ngIf="q.question.correctAnswer == q.selectedOption" style="color: green;">
+                                        {{q.selectedOption}}
+                                    </p>
+                                    <p *ngIf="q.question.correctAnswer != q.selectedOption" style="color: red;">
+                                        {{q.selectedOption}}
+                                    </p>
+                                    <p *ngIf="q.selectedOption == '' " style="color: red;">
+                                        not selected
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>

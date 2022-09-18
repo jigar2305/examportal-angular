@@ -27,6 +27,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { CountdownModule } from 'ngx-countdown';
 import { ResultsComponent } from './student/results/results.component';
 import { UserComponent } from './Admin/user/user.component';
+import { UserExamsComponent } from './Admin/user-exams/user-exams.component';
 
 
  
@@ -52,6 +53,7 @@ import { UserComponent } from './Admin/user/user.component';
     LogoutComponent,
     ResultsComponent,
     UserComponent,
+    UserExamsComponent,
   ],
   imports: [
     BrowserModule,

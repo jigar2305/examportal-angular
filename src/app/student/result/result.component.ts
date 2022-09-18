@@ -17,8 +17,6 @@ export class ResultComponent implements OnInit {
   userId: any
   resultId: any
   ngOnInit(): void {
-    this.result = this.share.getdata()
-    this.que = this.share.getinfo()
     this.examId = this.aRoute.snapshot.params["examId"]
     this.resultId = this.aRoute.snapshot.params["resultId"]
     this.getvalue()

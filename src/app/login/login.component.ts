@@ -49,17 +49,21 @@ export class LoginComponent implements OnInit {
   login() {
     if (this.loginform.valid) {
       this.userservice.loginApi(this.loginform.value).subscribe(res => {
-        console.log(res.data.userId);
-        
-        localStorage.setItem("userId",res.data.userId)
-        this.tostr.success("login success")
-        if (res.data.role.roleName == 'admin') {
-          this.router.navigateByUrl("/admin/dashbord")
+        console.log(res.data.active);
+
+        localStorage.setItem("userId", res.data.userId)
+        if (res.data.active == false) {
+          this.tostr.error("please contact admin", "Your account is deactivate");
         } else {
-          this.router.navigateByUrl("/home")
+          this.tostr.success("login successfully")
+          if (res.data.role.roleName == 'admin') {
+            this.router.navigateByUrl("/admin/dashbord")
+          } else {
+            this.router.navigateByUrl("/student/dashbord")
+          }
         }
       }, err => {
-        this.tostr.error("something went wrong")
+        this.tostr.error("Incoorect email & password")
         console.log(err);
       })
     } else {
