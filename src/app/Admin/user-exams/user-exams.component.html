@@ -3,7 +3,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">results</h5>
+                    <h5 class="card-title">{{results[0].user.firstName}}'s &nbsp;results</h5>
                     <!-- Default Table -->
                     <table class="table">
                         <thead>
@@ -34,14 +34,14 @@
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">exam</h5>
+          <h2 class="modal-title">{{result.exam.examName}}-&nbsp;exam</h2>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
             <div class="card">
                 <div class="card-body">
                     <div class="card-header">
-                        <h1 class="">{{result.exam.examName}}</h1>
+                        <!-- <h1 class="">{{result.exam.examName}}</h1> -->
                         <div class="row">
                             <h2 class="col-6"><b>Total:&nbsp;</b>{{result.totalMarks}}</h2>
                             <h2 class="col-6"><b>Obtain:&nbsp;</b>{{result.obtainMarks}}</h2>

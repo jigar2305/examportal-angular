@@ -24,7 +24,10 @@
                                 <td>{{j.lastName}}</td>
                                 <td>{{j.email}}</td>
                                 <td>{{j.gender}}</td>
-                                <td><a routerLink="/admin/user-exams/{{j.userId}}">view result</a></td>
+                                <td *ngIf="j.role.roleName == 'student'"><a routerLink="/admin/user-exams/{{j.userId}}">view result</a></td>
+                                <td *ngIf="j.role.roleName == 'admin'">
+                                    ----------
+                                 </td>
                                 <td *ngIf="j.role.roleName == 'student'">
                                     <i class="bi bi-trash" (click) = "delete(j.userId)"></i>
                                     &nbsp;

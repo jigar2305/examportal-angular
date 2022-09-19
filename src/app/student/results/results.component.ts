@@ -25,8 +25,6 @@ export class ResultsComponent implements OnInit {
     this.sservice.getresults(this.userId).subscribe(res=>{
       this.results = res.data
       console.log(this.results);
-      
-
     })
 
 
