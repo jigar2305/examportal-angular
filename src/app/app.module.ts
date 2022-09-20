@@ -28,6 +28,8 @@ import { CountdownModule } from 'ngx-countdown';
 import { ResultsComponent } from './student/results/results.component';
 import { UserComponent } from './Admin/user/user.component';
 import { UserExamsComponent } from './Admin/user-exams/user-exams.component';
+import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
+import { DropdownComponent } from './dropdown/dropdown.component';
 
 
  
@@ -54,6 +56,7 @@ import { UserExamsComponent } from './Admin/user-exams/user-exams.component';
     ResultsComponent,
     UserComponent,
     UserExamsComponent,
+    DropdownComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,7 +67,8 @@ import { UserExamsComponent } from './Admin/user-exams/user-exams.component';
     HttpClientModule,
     ReactiveFormsModule,
     DialogModule,
-    CountdownModule
+    CountdownModule,
+    NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

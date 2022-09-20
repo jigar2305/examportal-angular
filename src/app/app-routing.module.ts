@@ -9,6 +9,7 @@ import { QuestionComponent } from './Admin/question/question.component';
 import { SubjectComponent } from './Admin/subject/subject.component';
 import { UserExamsComponent } from './Admin/user-exams/user-exams.component';
 import { UserComponent } from './Admin/user/user.component';
+import { DropdownComponent } from './dropdown/dropdown.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
@@ -25,6 +26,7 @@ const routes: Routes = [
   {component:LoginComponent, path:"login"},
   {component:ForgotpasswordComponent, path:"forgot"},
   {component:LogoutComponent, path:"logout"},
+  {component:DropdownComponent, path:"drop"},
   {component:AdminComponent, path:"admin", children:[
     {component:DashbordComponent, path:"dashbord"},
     {component:CourseComponent,path:"course"},
