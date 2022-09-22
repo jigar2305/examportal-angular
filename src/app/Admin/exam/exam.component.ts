@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from 'src/app/service/admin.service';
 import { IDropdownSettings, } from 'ng-multiselect-dropdown';
@@ -22,7 +22,7 @@ export class ExamComponent implements OnInit {
   userId:Array<number>=[];
 
 
-  constructor(private adminservice: AdminService, private tostr: ToastrService, private fb: FormBuilder) {
+  constructor(private adminservice: AdminService, private tostr: ToastrService) {
     this.examform = new FormGroup({
       subject: new FormControl([Validators.required]),
       examName: new FormControl('', [Validators.required])
@@ -33,8 +33,9 @@ export class ExamComponent implements OnInit {
     }),
     this.enrollexamform = new FormGroup({
       examId: new FormControl(),
-      userId: new FormControl()
+      userId: new FormControl([Validators.required])
     })
+    this.enrollexamform.controls['examId'].setValue(this.examId)
   }
 
   ngOnInit(): void {
@@ -78,8 +79,15 @@ export class ExamComponent implements OnInit {
   }
   addexamquestions() {
     this.adminservice.addexamquestions(this.examquestion.value).subscribe(res => {
-      this.tostr.success("questions added to exam" + this.examquestion.value.exam.examName)
+      if(res.msg == "please add question first"){
+        this.tostr.error("qplease add question first")
+      }else{
+
+        this.tostr.success("questions added to exam" + this.examquestion.value.exam.examName)
+      }
+      
     }, err => {
+      console.log(err);
       this.tostr.error("something went wrong")
     })
   }
@@ -96,6 +104,8 @@ export class ExamComponent implements OnInit {
     this.examId = examId
   }
   enrollexam() {
+    console.log(this.enrollexamform.value);
+    
     this.enrollexamform.value.userId.forEach((element:any) => {
       this.userId.push(element.userId)
     });

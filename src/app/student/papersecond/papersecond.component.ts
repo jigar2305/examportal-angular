@@ -21,18 +21,20 @@ export class PapersecondComponent implements OnInit {
   submitedquestions: Array<any> = []
   btnvalue: string = ""
   que: Array<any> = [];
-  
-  time:number = 0
-  handleEvent(event: CountdownEvent): void {
-    if (event.action === 'notify') {
 
-    
+  time: number = (this.que.length * 30)
+
+
+
+
+  handleEvent(e: CountdownEvent) {
+    if (e.action === 'done') {
+      this.submit()
     }
-    
   }
- 
 
-  constructor(private SService: StudentService, private aRoute: ActivatedRoute,private share:ShareService,private router: Router) {
+
+  constructor(private SService: StudentService, private aRoute: ActivatedRoute, private share: ShareService, private router: Router) {
 
   }
 
@@ -41,17 +43,14 @@ export class PapersecondComponent implements OnInit {
   ngOnInit(): void {
     this.examId = this.aRoute.snapshot.params["examId"]
     this.getque(this.examId)
+    this.time = (this.que.length * 30);
     this.btnvalue = "next"
-    
-    
-    
-  
   }
   getque(examId: any) {
     this.SService.getquestion(examId).subscribe(res => {
       this.que = res.data
-      console.log(this.que); 
-      this.time = (this.que.length*30);
+      console.log(this.que);
+      this.time = (this.que.length * 30);
       this.que.forEach(element => {
         element['selected'] = ""
       });
@@ -62,7 +61,7 @@ export class PapersecondComponent implements OnInit {
     if (this.btnvalue == "submit") {
       this.submit()
     }
-    
+
     if (this.que.length == (this.index + 1)) {
       this.btnvalue = "submit"
     } else {
@@ -79,8 +78,8 @@ export class PapersecondComponent implements OnInit {
       this.btnvalue = "next"
     }
   }
-  submit(){
-    let email =  localStorage.getItem("email")
+  submit() {
+    let email = localStorage.getItem("email")
     let answers = {
       "email": email,
       "questions": this.que,

@@ -10,8 +10,7 @@
                         <div class="col-3 mt-3 ml-0">
                             Remaining Time:
                             <b>
-                                <countdown [config]="{leftTime: time,
-                                    format: 'mm:ss', notify: time}" (event)="handleEvent($event)"></countdown>
+                                <countdown #cd [config]="{ leftTime: this.time, notify: this.time }" (event)="handleEvent($event)"></countdown>
                                 </b>
                         </div>
 
