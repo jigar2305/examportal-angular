@@ -7,6 +7,9 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class AdminService {
+  enrollexam(enroll:any) {
+   return this.http.post(environment.url+"er/add",enroll)
+  }
 
   constructor(private http:HttpClient) { }
 
@@ -50,6 +53,9 @@ export class AdminService {
   }
   listexam(): Observable<any>{
     return this.http.get(environment.url+"exam/list")
+  }
+  listexambyid(userId:number): Observable<any>{
+    return this.http.get(environment.url+"exam/list/"+userId)
   }
   deleteExam(examId:any):Observable<any>{
     return this.http.delete(environment.url+"exam/delete/"+examId)

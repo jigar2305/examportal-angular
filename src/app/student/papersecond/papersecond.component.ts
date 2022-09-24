@@ -4,7 +4,6 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { ActivatedRoute, Router } from '@angular/router';
 import { CountdownEvent } from 'ngx-countdown';
 import { ToastrService } from 'ngx-toastr';
-import { elementAt } from 'rxjs';
 import { ShareService } from 'src/app/service/share.service';
 import { StudentService } from 'src/app/service/student.service';
 
@@ -21,47 +20,49 @@ export class PapersecondComponent implements OnInit {
   submitedquestions: Array<any> = []
   btnvalue: string = ""
   que: Array<any> = [];
-
-  time: number = (this.que.length * 30)
-
-
-
-
+  
+  time:any;
   handleEvent(e: CountdownEvent) {
     if (e.action === 'done') {
-      this.submit()
+     this.submit()
     }
   }
-
-
-  constructor(private SService: StudentService, private aRoute: ActivatedRoute, private share: ShareService, private router: Router) {
-
+  
+  
+  constructor(private SService: StudentService, private aRoute: ActivatedRoute,private share:ShareService,private router: Router) {
+    
   }
-
-
-
+  
+  
+  
   ngOnInit(): void {
     this.examId = this.aRoute.snapshot.params["examId"]
     this.getque(this.examId)
-    this.time = (this.que.length * 30);
-    this.btnvalue = "next"
+    this.btnvalue = "next"  
   }
   getque(examId: any) {
+    this.SService.getexambyid(examId).subscribe(res => {
+    let exam = res.data
+    console.log(exam);
+    
+      this.time = exam.time
+      console.log(this.time);
+    })
     this.SService.getquestion(examId).subscribe(res => {
-      this.que = res.data
-      console.log(this.que);
-      this.time = (this.que.length * 30);
+      this.que = res.data 
       this.que.forEach(element => {
         element['selected'] = ""
       });
     })
   }
+  
+
 
   onsubmit() {
     if (this.btnvalue == "submit") {
       this.submit()
     }
-
+    
     if (this.que.length == (this.index + 1)) {
       this.btnvalue = "submit"
     } else {
@@ -78,8 +79,8 @@ export class PapersecondComponent implements OnInit {
       this.btnvalue = "next"
     }
   }
-  submit() {
-    let email = localStorage.getItem("email")
+  submit(){
+    let email =  localStorage.getItem("email")
     let answers = {
       "email": email,
       "questions": this.que,

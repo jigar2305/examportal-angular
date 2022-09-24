@@ -30,6 +30,9 @@ export class StudentService {
   getresult(resultId:any):Observable<any>{
     return this.http.get(environment.url+"result/get/"+resultId)
   }
+  getexambyid(examId:number): Observable<any>{
+    return this.http.get(environment.url+"exam/get/"+examId)
+  }
 
 
 }

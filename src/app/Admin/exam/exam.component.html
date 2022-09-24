@@ -9,8 +9,8 @@
                         </div>
                         <div class="col-4">
                             <button class="small mt-3 btn-sm btn btn-success" data-bs-toggle="modal"
-                                data-bs-target="#verticalycentered">
-                                add questions</button>
+                                            data-bs-target="#verticalycentered">
+                                            add questions</button>
                         </div>
                     </div>
                     <table class="table">
@@ -18,23 +18,23 @@
                             <tr>
                                 <th scope="col">No.</th>
                                 <th scope="col">exams</th>
-                                <th scope="col">subject</th>
-                                <th scope="col">enroll</th>
+                                <th scope="col">subjects</th>
+                                <th scope="col">Enroll</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let i of exams">
-                                <th scope="row">{{i.examId}}</th>
+                            <tr *ngFor="let i of exams;let q = index">
+                                <th scope="row">{{q+1}}</th>
                                 <td>{{i.examName}}</td>
-                                <td>{{i.subject.subjectName}}</td>
-                                <td>
-                                    <p data-bs-toggle="modal" data-bs-target="#verticalycentered2" (click)="setexamId(i.examId)">
-                                        start</p>
-                                </td>
-                                <td>
+                                <td><p *ngFor="let p of i.subjects">
+                                    {{p.subjectName}}
+                                </p></td>
+                                <td>   <p class="small mb-0" data-bs-toggle="modal" data-bs-target="#verticalycentered2" (click)="setexamId(i.examId)">
+                                    start</p></td>
+                                <td class="row">
                                     <i class="ri-delete-bin-2-fill col-2" (click)="deleteexam(i.examId)"></i>
-
+                                    
                                 </td>
                             </tr>
                         </tbody>
@@ -69,6 +69,7 @@
                         </div>
                     </form>
                 </div>
+                
             </div>
         </div>
     </div>
@@ -106,28 +107,33 @@
         </div>
     </div>
 </div>
+
 <div class="modal fade" id="verticalycentered2" tabindex="-1" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">select student</h5>
+                <h5 class="modal-title">Enroll</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="row g-3 needs-validation" [formGroup]="enrollexamform" (ngSubmit)="enrollexam()"
-                    novalidate>
-                    <div class="row mt-3">
-                        <label class="col-sm-2 col-form-label">students</label>
-                        <div class="col-sm-10">
-                            <ng-multiselect-dropdown [settings]="dropdownSettings" [data]="users" formControlName="userId">
-                            </ng-multiselect-dropdown>
+                <form class="row g-3 needs-validation" [formGroup]="enrollexamform" (ngSubmit)="enroll()" novalidate>
+
+                    <label for="yourEmail" class="form-label">Email:</label>
+                    <div class="col-10">
+                        <div class="input-group has-validation">
+                            <div class="col-sm-10">
+                                <ng-multiselect-dropdown [settings]="dropdownSettings" [data]="users" formControlName="userId">
+                                </ng-multiselect-dropdown>
+                            </div>
                         </div>
+                       
                     </div>
-                    <div style="text-align:right;">
-                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">added</button>
+                    <div class="col-2">
+                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal"
+                            style="width: 100%;">send</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-</div>
+</div><!-- End Vertically centered Modal-->

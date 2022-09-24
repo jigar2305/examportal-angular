@@ -5,11 +5,11 @@ import { AdminheaderComponent } from './Admin/adminheader/adminheader.component'
 import { CourseComponent } from './Admin/course/course.component';
 import { DashbordComponent } from './Admin/dashbord/dashbord.component';
 import { ExamComponent } from './Admin/exam/exam.component';
+import { ListQuestionComponent } from './Admin/list-question/list-question.component';
 import { QuestionComponent } from './Admin/question/question.component';
 import { SubjectComponent } from './Admin/subject/subject.component';
 import { UserExamsComponent } from './Admin/user-exams/user-exams.component';
 import { UserComponent } from './Admin/user/user.component';
-import { DropdownComponent } from './dropdown/dropdown.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
@@ -26,13 +26,13 @@ const routes: Routes = [
   {component:LoginComponent, path:"login"},
   {component:ForgotpasswordComponent, path:"forgot"},
   {component:LogoutComponent, path:"logout"},
-  {component:DropdownComponent, path:"drop"},
   {component:AdminComponent, path:"admin", children:[
     {component:DashbordComponent, path:"dashbord"},
     {component:CourseComponent,path:"course"},
     {component:AdminheaderComponent,path:"header"},
     {component:SubjectComponent,path:"subject"},
     {component:QuestionComponent,path:"question"},
+    {component:ListQuestionComponent,path:"list-question"},
     {component:ExamComponent,path:"exam"},
     {component:UserComponent,path:"user"},
     {component:UserExamsComponent,path:"user-exams/:userId"}

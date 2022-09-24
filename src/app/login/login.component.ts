@@ -52,6 +52,7 @@ export class LoginComponent implements OnInit {
         console.log(res.data.active);
 
         localStorage.setItem("userId", res.data.userId)
+        localStorage.setItem("email", res.data.email)
         if (res.data.active == false) {
           this.tostr.error("please contact admin", "Your account is deactivate");
         } else {

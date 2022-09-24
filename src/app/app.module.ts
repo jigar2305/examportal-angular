@@ -27,9 +27,10 @@ import { LogoutComponent } from './logout/logout.component';
 import { CountdownModule } from 'ngx-countdown';
 import { ResultsComponent } from './student/results/results.component';
 import { UserComponent } from './Admin/user/user.component';
-import { UserExamsComponent } from './Admin/user-exams/user-exams.component';
 import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
-import { DropdownComponent } from './dropdown/dropdown.component';
+import { UserExamsComponent } from './Admin/user-exams/user-exams.component';
+import { ListQuestionComponent } from './Admin/list-question/list-question.component';
+
 
 
  
@@ -56,7 +57,8 @@ import { DropdownComponent } from './dropdown/dropdown.component';
     ResultsComponent,
     UserComponent,
     UserExamsComponent,
-    DropdownComponent,
+    ListQuestionComponent,
+
   ],
   imports: [
     BrowserModule,

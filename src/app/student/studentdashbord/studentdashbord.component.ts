@@ -9,6 +9,7 @@ import { AdminService } from 'src/app/service/admin.service';
 })
 export class StudentdashbordComponent implements OnInit {
   exams: Array<any> = []
+  userId:any
   constructor(private adminservice: AdminService, private tostr: ToastrService) { }
 
   ngOnInit(): void {
@@ -16,7 +17,8 @@ export class StudentdashbordComponent implements OnInit {
 
   }
   getallexam() {
-    this.adminservice.listexam().subscribe(res => {
+    this.userId = localStorage.getItem("userId")
+    this.adminservice.listexambyid(this.userId).subscribe(res => {
       this.exams = res.data
       console.log(this.exams);
 

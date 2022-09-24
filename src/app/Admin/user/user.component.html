@@ -19,24 +19,24 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let j of users;let i = index">
-                                <th scope="row">{{i + 1}}</th>
-                                <td>{{j.firstName}}</td>
-                                <td>{{j.lastName}}</td>
-                                <td>{{j.email}}</td>
-                                <td>{{j.gender}}</td>
+                                <th  *ngIf="j.role.roleName == 'student'" scope="row">{{i + 1}}</th>
+                                <td  *ngIf="j.role.roleName == 'student'">{{j.firstName}}</td>
+                                <td  *ngIf="j.role.roleName == 'student'">{{j.lastName}}</td>
+                                <td  *ngIf="j.role.roleName == 'student'">{{j.email}}</td>
+                                <td  *ngIf="j.role.roleName == 'student'">{{j.gender}}</td>
                                 <td *ngIf="j.role.roleName == 'student'"><a routerLink="/admin/user-exams/{{j.userId}}">view result</a></td>
-                                <td *ngIf="j.role.roleName == 'admin'">
+                                <!-- <td *ngIf="j.role.roleName == 'admin'">
                                     ----------
-                                 </td>
+                                 </td> -->
                                 <td *ngIf="j.role.roleName == 'student'">
                                     <i class="bi bi-trash" (click) = "delete(j.userId)"></i>
                                     &nbsp;
                                     <i class="bi bi-check-circle" (click) = "userstatus(j.userId)" *ngIf="j.active == false" ></i>
                                     <i class="bi bi-check-circle-fill" (click) = "userstatus(j.userId)" *ngIf="j.active == true" ></i>
                                 </td>
-                                <td *ngIf="j.role.roleName == 'admin'">
+                                <!-- <td *ngIf="j.role.roleName == 'admin'">
                                    admin
-                                </td>
+                                </td> -->
                             </tr> 
                         </tbody>
                     </table>
