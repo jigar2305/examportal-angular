@@ -15,8 +15,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let i of subjects">
-                                <th scope="row">{{i.subjectId}}</th>
+                            <tr *ngFor="let i of subjects;let j = index">
+                                <th scope="row">{{j+1}}</th>
                                 <td>{{i.subjectName}}</td>
                                 <td>{{i.course.courseName}}</td>
                                 <td>

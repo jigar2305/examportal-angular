@@ -1,1 +1,41 @@
-<p>list-question works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Subject</h5>
+                    <!-- Default Table -->
+                    <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th scope="col">No.</th>
+                            <th scope="col">question</th>
+                            <th scope="col">A</th>
+                            <th scope="col">B</th>
+                            <th scope="col">C</th>
+                            <th scope="col">D</th>
+                            <th scope="col">correct answer</th>
+                            <th scope="col">level</th>
+                
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let q of questions; let i = index">
+                            <th scope="row">{{i+1}}</th>
+                            <td>{{q.question.question}}</td>
+                            <td>{{q.question.a}}</td>
+                            <td>{{q.question.b}}</td>
+                            <td>{{q.question.c}}</td>
+                            <td>{{q.question.d}}</td>
+                            <td>{{q.question.level}}</td>
+                            <td>
+                                
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

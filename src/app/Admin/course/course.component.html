@@ -14,8 +14,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let i of courses">
-                                <th scope="row">{{i.courseId}}</th>
+                            <tr *ngFor="let i of courses;let j = index">
+                                <th scope="row">{{j + 1}}</th>
                                 <td>{{i.courseName}}</td>
                                 <td>
                                     <i class="ri-delete-bin-2-fill" (click)="deletecourse(i.courseId)"></i>

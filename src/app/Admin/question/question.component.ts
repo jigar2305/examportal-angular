@@ -40,9 +40,7 @@ export class QuestionComponent implements OnInit {
     this.getallsubject()
   }
   subjectvalue() {
-
     console.log(this.subjectform.value);
-
   }
 
   getallsubject() {
@@ -73,7 +71,7 @@ export class QuestionComponent implements OnInit {
           d: ['', Validators.required],
           level: ['', Validators.required],
           correctAnswer: ['', Validators.required],
-          subject: [this.subjectform.value.subject]
+          subject: [this.subject]
         }))
 
       }
@@ -85,22 +83,20 @@ export class QuestionComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(JSON.stringify((this.subject)));
     this.submitted = true;
-
-    console.log(this.questionform.value +
-      JSON.stringify(this.questionform.value));
-
+   
+      if (this.subject == null) {
+        this.tostr.success("please select subject")
+      }
     if (this.questionform.invalid) {
-      return;
+      this.tostr.success("please fill form correctly")
     }
     if (this.questionform.valid) {
       this.adminservice.addquestions(this.questionform.value.question).subscribe(res => {
-        console.log(res);
         this.tostr.success("questions added successfully")
-
+        this.onClear() 
       }, err => {
-        console.log(err);
+        
         this.tostr.error("somethin went wrong")
       })
     }

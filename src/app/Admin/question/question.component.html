@@ -13,22 +13,22 @@
             </div>
             <div class="card-header">
 
-                <form [formGroup]="subjectform" (ngSubmit)="subjectvalue()">
+                <!-- <form [formGroup]="subjectform" (ngSubmit)="subjectvalue()"> -->
                     <div class="row">
                         <div class="col-1">
                             <label>subject</label>
                         </div>
                         <div class="col-2">
-                            <select aria-label="Default select example" formControlName="subject">
+                            <select aria-label="Default select example" [(ngModel)]="subject">
                                 <option selected="" [ngValue]="null">plese select subject</option>
                                 <option *ngFor="let i of subjects" [ngValue]="i">{{i.subjectName}}</option>
                             </select>
                         </div>
-                        <div class="col-2">
+                        <!-- <div class="col-2">
                             <button class="btn btn-primary btn-sm">select</button>
-                        </div>
+                        </div> -->
                     </div>
-                </form>
+                <!-- </form> -->
             </div>
 
             <form [formGroup]="questionform" (ngSubmit)="onSubmit()">
