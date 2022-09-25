@@ -81,16 +81,54 @@
                                 <div class="row mb-3">
                                     <label for="inputEmail3" class="col-sm-2 col-form-label">Answer</label>
                                     <div class="col-sm-10">
-                                        <select class="form-select" aria-label="Default select example"
-                                            formControlName="correctAnswer">
-                                            <option selected="">plese select answer</option>
-                                            <option value="a">a</option>
-                                            <option value="b">b</option>
-                                            <option value="c">c</option>
-                                            <option value="d">d</option>
-                                        </select>
+                                        <div class="row">
+                                            <div class="col-3">
+                                                A. &nbsp;
+                                                <input class="form-check-input" type="radio"
+                                                    formControlName="correctAnswer" value="a">
+                                            </div>
+                                            <div class="col-3">
+                                                B. &nbsp;
+                                                <input class="form-check-input" type="radio"
+                                                    formControlName="correctAnswer" value="b">
+                                            </div>
+                                            <div class="col-3">
+                                                c. &nbsp;
+                                                <input class="form-check-input" type="radio"
+                                                    formControlName="correctAnswer" value="c">
+                                            </div>
+                                            <div class="col-3">
+                                                D.&nbsp;
+                                                <input class="form-check-input" type="radio"
+                                                    formControlName="correctAnswer" value="d">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="row mb-3">
+                                    <label for="inputEmail3" class="col-sm-2 col-form-label">level</label>
+                                    <div class="col-sm-4">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                hard. &nbsp;
+                                                <input class="form-check-input" type="radio"
+                                                formControlName="level" value="hard">
+                                            </div>
+                                            <div class="col-4">
+                                                mideum. &nbsp;
+                                                <input class="form-check-input" type="radio"
+                                                formControlName="level" value="mideum">
+                                            </div>
+                                            <div class="col-4">
+                                                easy. &nbsp;
+                                                <input class="form-check-input" type="radio"
+                                                formControlName="level" value="easy">
+                                            </div>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>

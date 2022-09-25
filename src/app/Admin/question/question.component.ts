@@ -71,6 +71,7 @@ export class QuestionComponent implements OnInit {
           b: ['', Validators.required],
           c: ['', Validators.required],
           d: ['', Validators.required],
+          level: ['', Validators.required],
           correctAnswer: ['', Validators.required],
           subject: [this.subjectform.value.subject]
         }))

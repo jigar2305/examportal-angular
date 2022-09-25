@@ -63,6 +63,9 @@ export class AdminService {
   addexamquestions(examquestion:any):Observable<any>{
     return this.http.post(environment.url+"eqc/add",examquestion)
   }
+  addexamquestionsbymanysubjects(examquestion:any):Observable<any>{
+    return this.http.post(environment.url+"eqc/add/many",examquestion)
+  }
   // ---------------------------------------------------------------
   listuser():Observable<any>{
     return this.http.get(environment.url+"admin/userlist")
