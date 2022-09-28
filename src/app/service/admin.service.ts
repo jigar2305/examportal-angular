@@ -38,6 +38,9 @@ export class AdminService {
   addquestions(question:any): Observable<any>{
     return this.http.post(environment.url+"que/add",question)
   }
+  updatequestions(question:any): Observable<any>{
+    return this.http.put(environment.url+"que/update",question)
+  }
   addquestionsbyexcel(file:any): Observable<any>{
     const formdata = new FormData()
     formdata.append("file",file)
