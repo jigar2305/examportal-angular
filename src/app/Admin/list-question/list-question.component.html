@@ -1,3 +1,4 @@
+
 <div class="container">
     <div class="row">
         <div class="col-12">
@@ -5,17 +6,17 @@
                 <div class="card-body">
                     <h5 class="card-title">{{p.subjectName}}</h5>
                     <!-- Default Table -->
-                    <table class="table table-striped">
+                    <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col">question</th>
-                                <th scope="col">A</th>
-                                <th scope="col">B</th>
-                                <th scope="col">C</th>
-                                <th scope="col">D</th>
-                                <th scope="col">correct answer</th>
-                                <th scope="col">level</th>
-                                <th scope="col">action</th>
+                                <th scope="col" style="width: 34%;">question</th>
+                                <th scope="col" style="width: 10%;">A</th>
+                                <th scope="col" style="width: 10%;">B</th>
+                                <th scope="col" style="width: 10%;">C</th>
+                                <th scope="col"style="width: 10%;">D</th>
+                                <th scope="col"style="width: 10%;">correct answer</th>
+                                <th scope="col"style="width: 8%;">level</th>
+                                <th scope="col"style="width: 8%;">action</th>
                             </tr>
                         </thead>
                         <tbody *ngFor="let q of questions; let i = index">
@@ -29,6 +30,8 @@
                                 <td>{{q.level}}</td>
                                 <td><i class="bi bi-pencil-square" data-bs-toggle="modal"
                                         data-bs-target="#verticalycentered" (click)="updatequestion(q)"></i>
+                                    &nbsp;
+                                    <i class="bi bi-trash-fill" (click)="deletequestion(q.questionId)"></i>
                                 </td>
                             </tr>
                         </tbody>
@@ -124,4 +127,3 @@
         </div>
     </div>
 </div>
-<!--  -->

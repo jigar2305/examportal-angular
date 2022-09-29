@@ -58,6 +58,14 @@ export class ListQuestionComponent implements OnInit {
 
 
   }
+  deletequestion(questionId:number){
+    this.aservice.deletquestion(questionId).subscribe((res)=>{
+      this.tostr.success("question deleted")
+    },(err)=>{
+      this.tostr.error("something went wrong")
+    })
+
+  }
 
   ngOnInit(): void {
     this.getallquestions()
