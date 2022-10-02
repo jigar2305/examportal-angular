@@ -13,7 +13,6 @@ import { IDropdownSettings, } from 'ng-multiselect-dropdown';
 export class ExamComponent implements OnInit {
   subjects: Array<any> = []
   examform: FormGroup
-  // examquestion: FormGroup
   exams: Array<any> = []
   users: any = []
   examId: number = 0;
@@ -40,21 +39,17 @@ export class ExamComponent implements OnInit {
     console.log(this.examselected);
     this.subjectIds.forEach((element: any) => {
       element["number"] = 0;
-      element["level"] = '';
     });
     console.log(this.subjectIds);
   }
-  onItemSelect(item: any) {
-    console.log(item);
-  }
-  onSelectAll(items: any) {
 
-  }
   addexamquestions() {
     let addquestion = {
       "exam": this.examselected,
       "subjects": this.subjectIds
     }
+    console.log(addquestion);
+
     if (this.examselected == null || this.subjectIds.length == 0) {
       this.tostr.error("please fill form correctly")
     }else{
@@ -62,7 +57,7 @@ export class ExamComponent implements OnInit {
         console.log(res);
         this.tostr.success("questions added to exam" + this.examselected.examName)
       },(err)=>{
-        console.log(err);    
+        console.log(err);
       })
     }
   }
@@ -112,15 +107,7 @@ export class ExamComponent implements OnInit {
       this.tostr.error("something went wrong")
     })
   }
-  // addexamquestions() {
-  //   console.log(this.examquestion.value);
 
-  //   this.adminservice.addexamquestions(this.examquestion.value).subscribe(res => {
-  //     this.tostr.success("questions added to exam" + this.examquestion.value.exam.examName)
-  //   }, err => {
-  //     this.tostr.error("something went wrong")
-  //   })
-  // }
   getuser() {
     this.adminservice.listuser().subscribe(res => {
       this.users = res.data

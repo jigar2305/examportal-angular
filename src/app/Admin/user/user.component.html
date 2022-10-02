@@ -1,10 +1,11 @@
-<div class="container">
+
+<!-- <div class="container">
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">user</h5>
-                    <!-- Default Table -->
+
                     <table class="table">
                         <thead>
                             <tr>
@@ -25,23 +26,33 @@
                                 <td  *ngIf="j.role.roleName == 'student'">{{j.email}}</td>
                                 <td  *ngIf="j.role.roleName == 'student'">{{j.gender}}</td>
                                 <td *ngIf="j.role.roleName == 'student'"><a routerLink="/admin/user-exams/{{j.userId}}">view result</a></td>
-                                <!-- <td *ngIf="j.role.roleName == 'admin'">
-                                    ----------
-                                 </td> -->
+
                                 <td *ngIf="j.role.roleName == 'student'">
                                     <i class="bi bi-trash" (click) = "delete(j.userId)"></i>
                                     &nbsp;
                                     <i class="bi bi-check-circle" (click) = "userstatus(j.userId)" *ngIf="j.active == false" ></i>
                                     <i class="bi bi-check-circle-fill" (click) = "userstatus(j.userId)" *ngIf="j.active == true" ></i>
                                 </td>
-                                <!-- <td *ngIf="j.role.roleName == 'admin'">
-                                   admin
-                                </td> -->
-                            </tr> 
+
+                            </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</div> -->
+<ag-grid-angular
+style="height:  600px; width: 100%;"
+class="ag-theme-alpine"
+[defaultColDef]="defaultColDef"
+[rowData]="users"
+[columnDefs]="colDefs"
+    [defaultColDef]="defaultColDef"
+    [suppressRowClickSelection]="true"
+    [groupSelectsChildren]="true"
+    [rowSelection]="rowSelection"
+    [rowGroupPanelShow]="rowGroupPanelShow"
+    [pagination]="true"
+></ag-grid-angular>
+

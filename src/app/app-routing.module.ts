@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { ChildrenOutletContexts, RouterModule, Routes } from '@angular/router';
+import { AddCourseComponent } from './Admin/add-course/add-course.component';
+import { AddExamComponent } from './Admin/add-exam/add-exam.component';
 import { AdminComponent } from './Admin/admin/admin.component';
 import { AdminheaderComponent } from './Admin/adminheader/adminheader.component';
 import { CourseComponent } from './Admin/course/course.component';
@@ -26,14 +28,17 @@ const routes: Routes = [
   {component:LoginComponent, path:"login"},
   {component:ForgotpasswordComponent, path:"forgot"},
   {component:LogoutComponent, path:"logout"},
+
   {component:AdminComponent, path:"admin", children:[
     {component:DashbordComponent, path:"dashbord"},
     {component:CourseComponent,path:"course"},
+    {component:AddCourseComponent,path:"addcourse"},
     {component:AdminheaderComponent,path:"header"},
     {component:SubjectComponent,path:"subject"},
     {component:QuestionComponent,path:"question"},
     {component:ListQuestionComponent,path:"list-question"},
     {component:ExamComponent,path:"exam"},
+    {component:AddExamComponent,path:"addexam"},
     {component:UserComponent,path:"user"},
     {component:UserExamsComponent,path:"user-exams/:userId"}
 

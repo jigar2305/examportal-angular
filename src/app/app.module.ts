@@ -30,10 +30,12 @@ import { UserComponent } from './Admin/user/user.component';
 import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
 import { UserExamsComponent } from './Admin/user-exams/user-exams.component';
 import { ListQuestionComponent } from './Admin/list-question/list-question.component';
+import { AgGridModule } from 'ag-grid-angular';
+import { AddCourseComponent } from './Admin/add-course/add-course.component';
+import { AddExamComponent } from './Admin/add-exam/add-exam.component';
 
 
 
- 
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,7 +60,9 @@ import { ListQuestionComponent } from './Admin/list-question/list-question.compo
     UserComponent,
     UserExamsComponent,
     ListQuestionComponent,
-   
+    AddCourseComponent,
+    AddExamComponent,
+
 
   ],
   imports: [
@@ -71,7 +75,8 @@ import { ListQuestionComponent } from './Admin/list-question/list-question.compo
     ReactiveFormsModule,
     DialogModule,
     CountdownModule,
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    AgGridModule
   ],
   providers: [],
   bootstrap: [AppComponent]
