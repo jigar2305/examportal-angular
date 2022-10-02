@@ -52,15 +52,18 @@ export class ListQuestionComponent implements OnInit {
       })
     }
   }
-  questions: any = []
+  questions: Array<any> = []
   subjects: any = []
   constructor(private aservice: AdminService, private tostr: ToastrService) {
 
 
   }
   deletequestion(questionId:number){
+    alert("do you want to delete question")
+
     this.aservice.deletquestion(questionId).subscribe((res)=>{
       this.tostr.success("question deleted")
+      this.questions = this.questions.filter(r => r.questionId != questionId)
     },(err)=>{
       this.tostr.error("something went wrong")
     })
