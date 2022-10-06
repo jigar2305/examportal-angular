@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { ChildrenOutletContexts, RouterModule, Routes } from '@angular/router';
 import { AddCourseComponent } from './Admin/add-course/add-course.component';
 import { AddExamComponent } from './Admin/add-exam/add-exam.component';
+import { AddSubjectComponent } from './Admin/add-subject/add-subject.component';
 import { AdminComponent } from './Admin/admin/admin.component';
 import { AdminheaderComponent } from './Admin/adminheader/adminheader.component';
 import { CourseComponent } from './Admin/course/course.component';
@@ -35,6 +36,7 @@ const routes: Routes = [
     {component:AddCourseComponent,path:"addcourse"},
     {component:AdminheaderComponent,path:"header"},
     {component:SubjectComponent,path:"subject"},
+    {component:AddSubjectComponent,path:"addsubject"},
     {component:QuestionComponent,path:"question"},
     {component:ListQuestionComponent,path:"list-question"},
     {component:ExamComponent,path:"exam"},

@@ -33,6 +33,7 @@ import { ListQuestionComponent } from './Admin/list-question/list-question.compo
 import { AgGridModule } from 'ag-grid-angular';
 import { AddCourseComponent } from './Admin/add-course/add-course.component';
 import { AddExamComponent } from './Admin/add-exam/add-exam.component';
+import { AddSubjectComponent } from './Admin/add-subject/add-subject.component';
 
 
 
@@ -62,6 +63,7 @@ import { AddExamComponent } from './Admin/add-exam/add-exam.component';
     ListQuestionComponent,
     AddCourseComponent,
     AddExamComponent,
+    AddSubjectComponent,
 
 
   ],
