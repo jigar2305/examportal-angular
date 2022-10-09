@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from 'src/app/service/admin.service';
 
@@ -8,21 +9,15 @@ import { AdminService } from 'src/app/service/admin.service';
   styleUrls: ['./studentdashbord.component.css']
 })
 export class StudentdashbordComponent implements OnInit {
-  exams: Array<any> = []
-  userId:any
-  constructor(private adminservice: AdminService, private tostr: ToastrService) { }
 
+  constructor(private adminservice: AdminService, private tostr: ToastrService,private sanitizer:DomSanitizer) { }
+  fileUrl:any
+  
   ngOnInit(): void {
-    this.getallexam()
+    const data = 'some text';
+    const blob = new Blob([data], { type: 'application/octet-stream' });
 
-  }
-  getallexam() {
-    this.userId = localStorage.getItem("userId")
-    this.adminservice.listexambyid(this.userId).subscribe(res => {
-      this.exams = res.data
-      console.log(this.exams);
-
-    })
+    this.fileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(blob));
   }
 
 }

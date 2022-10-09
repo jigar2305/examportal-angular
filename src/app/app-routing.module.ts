@@ -3,6 +3,7 @@ import { ChildrenOutletContexts, RouterModule, Routes } from '@angular/router';
 import { AddCourseComponent } from './Admin/add-course/add-course.component';
 import { AddExamComponent } from './Admin/add-exam/add-exam.component';
 import { AddSubjectComponent } from './Admin/add-subject/add-subject.component';
+import { AddUserComponent } from './Admin/add-user/add-user.component';
 import { AdminComponent } from './Admin/admin/admin.component';
 import { AdminheaderComponent } from './Admin/adminheader/adminheader.component';
 import { CourseComponent } from './Admin/course/course.component';
@@ -23,8 +24,16 @@ import { ResultComponent } from './student/result/result.component';
 import { ResultsComponent } from './student/results/results.component';
 import { StudentComponent } from './student/student/student.component';
 import { StudentdashbordComponent } from './student/studentdashbord/studentdashbord.component';
+import { StudentexamComponent } from './student/studentexam/studentexam.component';
 
 const routes: Routes = [
+  {
+
+      path:'',
+      redirectTo:'/login',
+      pathMatch:'full'
+
+  },
   {component:SignupComponent, path:"signup"},
   {component:LoginComponent, path:"login"},
   {component:ForgotpasswordComponent, path:"forgot"},
@@ -42,11 +51,13 @@ const routes: Routes = [
     {component:ExamComponent,path:"exam"},
     {component:AddExamComponent,path:"addexam"},
     {component:UserComponent,path:"user"},
+    {component:AddUserComponent,path:"adduser"},
     {component:UserExamsComponent,path:"user-exams/:userId"}
 
   ]},
   {component:StudentComponent, path:"student", children:[
     {component:PapersecondComponent,path:"paper/:examId"},
+    {component:StudentexamComponent,path:"exam"},
     {component:StudentdashbordComponent, path:"dashbord"},
     {component:HeaderComponent,path:"header"},
     {component:ResultComponent,path:"result/:examId/:resultId"},

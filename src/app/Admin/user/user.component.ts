@@ -8,15 +8,18 @@ import {
 import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from 'src/app/service/admin.service';
+import { ButtoncomponentComponent } from 'src/app/buttoncomponent/buttoncomponent.component';
+import { DeleteuserbuttonComponent } from 'src/app/buttoncomponent/deleteuserbutton.component';
+import { UserstatusbuttonComponent } from 'src/app/buttoncomponent/userstatusbutton.component';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css'],
 })
-export class UserComponent implements OnInit,ICellRendererAngularComp {
+export class UserComponent implements OnInit, ICellRendererAngularComp {
   users: Array<any> = [];
-  userId:number = 0
+  userId: number = 0;
 
   colDefs: ColDef[] = [
     { field: 'firstName' },
@@ -26,26 +29,21 @@ export class UserComponent implements OnInit,ICellRendererAngularComp {
     {
       headerName: 'results',
       field: 'userId',
-      cellRenderer: function(params:any) {
-        return '<a  routerLink="/admin/dashbord" >'+ params.value+'</a>'
-      }
+      cellRenderer: ButtoncomponentComponent,
     },
     {
       headerName: 'action',
       field: 'userId',
-      cellRenderer: function (params: any) {
-        return (
-          '<button (click) = "delete(' +
-          params.value +
-          ')"><i class="bi bi-trash" ></i></button>'
-        );
-      },
+      cellRenderer: DeleteuserbuttonComponent,
+    },
+    {
+      headerName: 'activate',
+      field: 'userId',
+      cellRenderer: UserstatusbuttonComponent,
+
     },
   ];
-  customCellRendererFunc(params: any): string {
-    const cellContent = `<a [routerLink]="['/leverance/detail', 13]">A new link</a>`;
-    return cellContent;
-  }
+
   defaultColDef: ColDef = {
     enableRowGroup: true,
     enablePivot: true,
@@ -72,31 +70,11 @@ export class UserComponent implements OnInit,ICellRendererAngularComp {
   };
 
   agInit(params: ICellRendererParams<any, any>): void {
-    this.userId = params.value
+    this.userId = params.value;
   }
   refresh(params: ICellRendererParams<any, any>): boolean {
-    return false;
+    return true;
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   constructor(private aservice: AdminService, private tostr: ToastrService) {}
 
@@ -107,7 +85,7 @@ export class UserComponent implements OnInit,ICellRendererAngularComp {
     this.aservice.listuser().subscribe(
       (res) => {
         this.users = res.data;
-        console.log(this.users);
+        this.users = this.users.filter((u) => u.role.roleName != "admin");
       },
       (err) => {
         this.tostr.error('sonething went wrong');
@@ -125,19 +103,5 @@ export class UserComponent implements OnInit,ICellRendererAngularComp {
       }
     );
   }
-  userstatus(userId: number) {
-    this.aservice.userstatus(userId).subscribe(
-      (res) => {
-        this.getuser();
-        if (res.data == true) {
-          this.tostr.success('user activated..');
-        } else {
-          this.tostr.success('user Deactivated..');
-        }
-      },
-      (err) => {
-        this.tostr.error('something went wrong');
-      }
-    );
-  }
+
 }

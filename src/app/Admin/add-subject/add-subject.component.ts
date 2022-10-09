@@ -13,6 +13,10 @@ export class AddSubjectComponent implements OnInit {
   courses: Array<any> = [];
   myFiles: Array<File> = [];
   index:number= 0
+  file!: File;
+  course:any
+  subject!:string
+
 
   constructor(
     private adminservice: AdminService,
@@ -31,17 +35,20 @@ export class AddSubjectComponent implements OnInit {
 
   ngOnInit(): void {
     this.getallcourses();
+
+
   }
   addsubject() {
-    // console.log(this.subjectform.value);
-    if (this.subjectform.valid) {
-      // let subjectform = {
-      //   "subject": this.subjectform.value,
-      //   "files": this.myFiles,
-      // };
-      // console.log(subjectform);
+    // if (this.subjectform.valid) {
+      let subjectform = {
+        "subjectName": this.subject,
+        "course":this.course
+      };
+      console.log(subjectform);
+      this.myFiles.push(this.file)
 
-      this.adminservice.addsubject(this.subjectform.value,this.myFiles).subscribe(
+
+      this.adminservice.addsubject(subjectform,this.myFiles).subscribe(
         (res) => {
           this.toster.success('subject Added..');
         },
@@ -49,7 +56,7 @@ export class AddSubjectComponent implements OnInit {
           this.toster.error('something went wrong');
         }
       );
-    }
+    // }
   }
   onFileChange(event: any) {
     for (var i = 0; i < event.target.files.length; i++) {

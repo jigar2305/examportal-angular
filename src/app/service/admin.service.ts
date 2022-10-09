@@ -31,12 +31,12 @@ export class AdminService {
     return this.http.delete(environment.url + 'subject/delete/' + subjectId);
   }
   addsubject(subject: any, files: any): Observable<any> {
-    let subjects = { subject, files };
-    var formdata = new FormData();
-    formdata.append('subject', subject);
-    formdata.append('files', files);
+    let subjects = { "subject": subject, "files": files };
+    const formdata = new FormData();
+    formdata.append("subject",subject)
+    formdata.append("files",files)
     let header = new HttpHeaders();
-    // header = header.append('content-type', 'multipart/form-data');
+    header = header.append('content-type', 'multipart/form-data;');
     return this.http.post(environment.url + 'subject/add2', subjects, {
       headers: header,
     });
@@ -83,6 +83,9 @@ export class AdminService {
   // ---------------------------------------------------------------
   listuser(): Observable<any> {
     return this.http.get(environment.url + 'admin/userlist');
+  }
+  finduser(userId:number): Observable<any> {
+    return this.http.get(environment.url + 'admin/user/'+userId);
   }
   deleteuser(userId: number): Observable<any> {
     return this.http.delete(environment.url + 'admin/deleteuser/' + userId);

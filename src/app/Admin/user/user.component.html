@@ -1,58 +1,35 @@
-
-<!-- <div class="container">
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">user</h5>
-
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">No.</th>
-                                <th scope="col">firstName</th>
-                                <th scope="col">lastName</th>
-                                <th scope="col">email</th>
-                                <th scope="col">gender</th>
-                                <th scope="col">results</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let j of users;let i = index">
-                                <th  *ngIf="j.role.roleName == 'student'" scope="row">{{i + 1}}</th>
-                                <td  *ngIf="j.role.roleName == 'student'">{{j.firstName}}</td>
-                                <td  *ngIf="j.role.roleName == 'student'">{{j.lastName}}</td>
-                                <td  *ngIf="j.role.roleName == 'student'">{{j.email}}</td>
-                                <td  *ngIf="j.role.roleName == 'student'">{{j.gender}}</td>
-                                <td *ngIf="j.role.roleName == 'student'"><a routerLink="/admin/user-exams/{{j.userId}}">view result</a></td>
-
-                                <td *ngIf="j.role.roleName == 'student'">
-                                    <i class="bi bi-trash" (click) = "delete(j.userId)"></i>
-                                    &nbsp;
-                                    <i class="bi bi-check-circle" (click) = "userstatus(j.userId)" *ngIf="j.active == false" ></i>
-                                    <i class="bi bi-check-circle-fill" (click) = "userstatus(j.userId)" *ngIf="j.active == true" ></i>
-                                </td>
-
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+<div class="container">
+  <div class="row">
+      <div class="col-12">
+        <div style="text-align: end;">
+          <a routerLink="/admin/adduser">
+            <h1 class="ri-add-circle-fill"></h1>
+          </a>
         </div>
-    </div>
-</div> -->
-<ag-grid-angular
-style="height:  600px; width: 100%;"
-class="ag-theme-alpine"
-[defaultColDef]="defaultColDef"
-[rowData]="users"
-[columnDefs]="colDefs"
-    [defaultColDef]="defaultColDef"
-    [suppressRowClickSelection]="true"
-    [groupSelectsChildren]="true"
-    [rowSelection]="rowSelection"
-    [rowGroupPanelShow]="rowGroupPanelShow"
-    [pagination]="true"
-></ag-grid-angular>
+          <div class="card">
+              <div class="card-body">
+                  <div class="row">
+                      <div class="col-8">
+                          <h5 class="card-title">users</h5>
+                      </div>
+                  </div>
+                  <ag-grid-angular
+                  style="height:  600px; width: 100%;"
+                  class="ag-theme-alpine"
+                  [defaultColDef]="defaultColDef"
+                  [rowData]="users"
+                  [columnDefs]="colDefs"
+                      [defaultColDef]="defaultColDef"
+                      [suppressRowClickSelection]="true"
+                      [groupSelectsChildren]="true"
+                      [rowSelection]="rowSelection"
+                      [rowGroupPanelShow]="rowGroupPanelShow"
+                      [pagination]="true"
+                  ></ag-grid-angular>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
 

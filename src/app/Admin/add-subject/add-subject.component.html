@@ -4,11 +4,11 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Add subject</h5>
-          <form [formGroup]="subjectform" (ngSubmit)="addsubject()">
+          <!-- <form [formGroup]="subjectform" (ngSubmit)="addsubject()"> -->
             <div class="row mb-3">
               <label for="inputEmail" class="col-sm-1 col-form-label">course</label>
               <div class="col-sm-6">
-                <select class="form-select" aria-label="Default select example" formControlName="course">
+                <select class="form-select" aria-label="Default select example" [(ngModel)]="course">
                   <option selected="" [ngValue]="null">plese select course</option>
                   <option *ngFor="let i of courses" [ngValue]="i">{{i.courseName}}</option>
                 </select>
@@ -17,25 +17,23 @@
             <div class="row mb-3">
               <label for="inputEmail3" class="col-sm-1 col-form-label">subject</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" formControlName="subjectName" id="inputText">
+                <input type="text" class="form-control" [(ngModel)]="subject" id="inputText">
               </div>
             </div>
-            <div class="row mb-3" *ngFor="let i in myFiles">
+            <div class="row mb-3">
               <label for="inputEmail3" class="col-sm-1 col-form-label">select files</label>
               <div class="col-sm-6">
-                <input type="file" [(ngModel)]="myFiles[i]"
+                <input type="file"
                 type="file"
                 multiple
                 class="form-control"
                 (change)="onFileChange($event)">
               </div>
             </div>
-
             <div class="ml-5">
-              <button type="submit" class="btn btn-primary mr-2">Add</button>&nbsp;
-              <button type="reset" class="btn btn-secondary ml-2">Reset</button>
+              <button type="submit" class="btn btn-primary mr-2" (click)="addsubject()">Add</button>
             </div>
-          </form>
+          <!-- </form> -->
         </div>
       </div>
     </div>

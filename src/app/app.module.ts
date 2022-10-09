@@ -34,6 +34,11 @@ import { AgGridModule } from 'ag-grid-angular';
 import { AddCourseComponent } from './Admin/add-course/add-course.component';
 import { AddExamComponent } from './Admin/add-exam/add-exam.component';
 import { AddSubjectComponent } from './Admin/add-subject/add-subject.component';
+import { StudentexamComponent } from './student/studentexam/studentexam.component';
+import { ButtoncomponentComponent } from './buttoncomponent/buttoncomponent.component';
+import { DeleteuserbuttonComponent } from './buttoncomponent/deleteuserbutton.component';
+import { UserstatusbuttonComponent } from './buttoncomponent/userstatusbutton.component';
+import { AddUserComponent } from './Admin/add-user/add-user.component';
 
 
 
@@ -64,6 +69,11 @@ import { AddSubjectComponent } from './Admin/add-subject/add-subject.component';
     AddCourseComponent,
     AddExamComponent,
     AddSubjectComponent,
+    StudentexamComponent,
+    ButtoncomponentComponent,
+    DeleteuserbuttonComponent,
+    UserstatusbuttonComponent,
+    AddUserComponent,
 
 
   ],
