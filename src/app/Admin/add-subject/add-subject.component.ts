@@ -13,10 +13,11 @@ export class AddSubjectComponent implements OnInit {
   subjectform: FormGroup;
   courses: Array<any> = [];
   index: number = 0;
-  uploadfile!: Observable<any>;
+  // uploadfile!: Observable<any>;
   course: any;
   subject!: string;
-  files:Array<string> = []
+  files: Array<any> = [];
+  filename!: string;
 
   constructor(
     private adminservice: AdminService,
@@ -37,37 +38,52 @@ export class AddSubjectComponent implements OnInit {
     this.getallcourses();
   }
   addsubject() {
+    if(this.course == null || this.subject == null || this.subject.length == 0){
+      this.toster.info("please fill form correctly")
+    }else{
     let subjectform = {
-      subjectName: this.subject,
-      course: this.course,
-
+      subject: {
+        subjectName: this.subject,
+        course: this.course,
+      },
+      files: this.files,
     };
-
-    // this.adminservice.addsubject(subjectform, this.myFiles).subscribe(
-    //   (res) => {
-    //     this.toster.success('subject Added..');
-    //   },
-    //   (err) => {
-    //     this.toster.error('something went wrong');
-    //   }
-    // );
+    this.adminservice.addsubject(subjectform).subscribe(
+      (res) => {
+        this.toster.success('subject Added..');
+      },
+      (err) => {
+        this.toster.error('something went wrong');
+      }
+    );
   }
-  convertToBase64(file: File) {
+
+  }
+  convertToBase64(file: File, filename: string) {
     const observable = new Observable((subscriber: Subscriber<any>) => {
       this.readFile(file, subscriber);
     });
-    observable.subscribe((d)=>{
-      this.uploadfile = d
-      console.log(this.uploadfile);
-    })
-
+    observable.subscribe((d) => {
+      let file = { fileString: d, fileName: filename };
+      this.files.push(file);
+    });
   }
   onChange($event: Event) {
     const files = ($event.target as HTMLInputElement).files;
     if (files) {
       const file = files[0];
-      this.convertToBase64(file);
-      console.log(this.uploadfile);
+      let filesize = file.size;
+      console.log(filesize);
+
+      if (file.type != 'application/pdf') {
+        this.toster.info('only accept pdf');
+      }
+      // if(filesize > (1024*20)) {
+      //   this.toster.info('pdf size should be less than 20Mb');
+      // }
+      if (file.type == 'application/pdf') {
+        this.convertToBase64(file, file.name);
+      }
     }
   }
   readFile(file: File, subscriber: Subscriber<any>) {
@@ -82,5 +98,8 @@ export class AddSubjectComponent implements OnInit {
       subscriber.error(error);
       subscriber.complete();
     };
+  }
+  removefile(fileName: string) {
+    this.files = this.files.filter((u) => u.fileName != fileName);
   }
 }

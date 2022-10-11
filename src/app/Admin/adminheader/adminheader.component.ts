@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminheaderComponent implements OnInit {
   today: number = Date.now();
+  firstName: any;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.firstName = localStorage.getItem("firstName")
   }
 }

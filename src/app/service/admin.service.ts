@@ -30,16 +30,8 @@ export class AdminService {
   deletesubject(subjectId: any): Observable<any> {
     return this.http.delete(environment.url + 'subject/delete/' + subjectId);
   }
-  addsubject(subject: any, files: any): Observable<any> {
-    let subjects = { "subject": subject, "files": files };
-    const formdata = new FormData();
-    formdata.append("subject",subject)
-    formdata.append("files",files)
-    let header = new HttpHeaders();
-    header = header.append('content-type', 'multipart/form-data;');
-    return this.http.post(environment.url + 'subject/add2', subjects, {
-      headers: header,
-    });
+  addsubject(subjectform: any): Observable<any> {
+    return this.http.post(environment.url + 'subject/add2', subjectform);
   }
   // -----------------------------------------------------------------------------------------------
 

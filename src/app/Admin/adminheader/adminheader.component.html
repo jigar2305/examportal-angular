@@ -1,15 +1,17 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
 
   <div class="d-flex align-items-center justify-content-between">
-    <a  routerLink="/admin/dashbord" class="logo d-flex align-items-center">
+    <a routerLink="/admin/dashbord" class="logo d-flex align-items-center">
       <img src="assets/img/logo.png" alt="">
       <span class="d-none d-lg-block">Exam Portal</span>
     </a>
   </div><!-- End Logo -->
   <nav class="header-nav ms-auto">
     <ul class="d-flex align-items-center">
-      <li class="nav-item" style="background-color: black; padding-left: 20px;padding-right: 20px;  border-radius: 30px;">
-        <h3 class="mt-2" style=" color: white;">{{today | date:'h:mm a'}}</h3>
+      <!-- <li class="nav-item" style="background-color: black; padding-left: 20px;padding-right: 20px;  border-radius: 30px;"> -->
+      <!-- <h3 class="mt-2" style=" color: white;">{{today | date:'h:mm a'}}</h3> -->
+      <li class="nav-item">
+        <h4> <b>Welcome,{{firstName}}</b></h4>
       </li>
       <li class="nav-item">
         &nbsp;
@@ -64,7 +66,7 @@
     <li class="nav-item">
       <a class="nav-link " routerLink="/logout">
         <i class="bi bi-box-arrow-right"></i>
-      <span>Sign Out</span>
+        <span>Sign Out</span>
       </a>
     </li>
   </ul>
