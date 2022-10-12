@@ -53,6 +53,8 @@ export class AddSubjectComponent implements OnInit {
         this.toster.success('subject Added..');
       },
       (err) => {
+        console.log(err);
+
         this.toster.error('something went wrong');
       }
     );
