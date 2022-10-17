@@ -17,7 +17,7 @@ import { UserstatusbuttonComponent } from 'src/app/buttoncomponent/userstatusbut
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css'],
 })
-export class UserComponent implements OnInit, ICellRendererAngularComp {
+export class UserComponent implements OnInit {
   users: Array<any> = [];
   userId: number = 0;
 
@@ -68,20 +68,22 @@ export class UserComponent implements OnInit, ICellRendererAngularComp {
     // we put checkbox on the name if we are not doing grouping
     return params.columnApi.getRowGroupColumns().length === 0;
   };
+  gridApActive: any;
+  searchText: any;
 
-  agInit(params: ICellRendererParams<any, any>): void {
-    this.userId = params.value;
-  }
-  refresh(params: ICellRendererParams<any, any>): boolean {
-    return true;
-  }
+
 
   constructor(private aservice: AdminService, private tostr: ToastrService) {}
 
   ngOnInit(): void {
-    this.getuser();
   }
-  getuser() {
+
+  onFilterBoxChange() {
+    this.gridApActive.setQuickFilter(this.searchText);
+  }
+
+  onGridReady(params: any) {
+    this.gridApActive = params.api;
     this.aservice.listuser().subscribe(
       (res) => {
         this.users = res.data;
@@ -89,17 +91,6 @@ export class UserComponent implements OnInit, ICellRendererAngularComp {
       },
       (err) => {
         this.tostr.error('sonething went wrong');
-      }
-    );
-  }
-  delete(userId: number) {
-    this.aservice.deleteuser(userId).subscribe(
-      (res) => {
-        this.users = this.users.filter((u) => u.userId != userId);
-        this.tostr.success('user deleted..');
-      },
-      (err) => {
-        this.tostr.error('something went wrong');
       }
     );
   }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ColDef, Grid, GridOptions } from 'ag-grid-community';
+import { ColDef, Grid, GridOptions, GridReadyEvent } from 'ag-grid-community';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from 'src/app/service/admin.service';
 import { CourseactionComponent } from './courseaction.component';
@@ -8,35 +8,31 @@ import { CourseactionComponent } from './courseaction.component';
 @Component({
   selector: 'app-course',
   templateUrl: './course.component.html',
-  styleUrls: ['./course.component.css']
+  styleUrls: ['./course.component.css'],
 })
 export class CourseComponent implements OnInit {
-  courses: Array<any> = []
+  courses: Array<any> = [];
+  searchText: any;
+  gridApActive: any;
 
-
-
-  constructor(private adminservice: AdminService, private toster: ToastrService) {
-
-  }
-  onFilterTextBoxChanged() {
-    this.gridOptions.api!.setQuickFilter(
-      (document.getElementById('filter-text-box') as HTMLInputElement).value
-    );
-  }
+  constructor(
+    private adminservice: AdminService,
+    private toster: ToastrService
+  ) {}
 
   ngOnInit(): void {
-    this.getallcourses()
+
   }
-  gridOptions: GridOptions = {
-    columnDefs: [
+
+  colDefs: ColDef[] = [
     { field: 'courseName' },
     {
       headerName: 'Delete',
       field: 'courseId',
       cellRenderer: CourseactionComponent,
-    }
-  ],
-  defaultColDef: {
+    },
+  ];
+  defaultColDef: ColDef = {
     enableRowGroup: true,
     enablePivot: true,
     enableValue: true,
@@ -45,21 +41,14 @@ export class CourseComponent implements OnInit {
     filter: true,
     flex: 1,
     minWidth: 100,
-  },
-  rowData :this.courses,
-  cacheQuickFilter: true,
-}
-
-
-  getallcourses() {
-    this.adminservice.Listcourse().subscribe(res => {
-      console.log(res);
-      this.courses = res.data
-    })
+  };
+  onFilterBoxChange() {
+    this.gridApActive.setQuickFilter(this.searchText);
   }
-
-  // new Grid(this.gridDiv, this.gridOptions);
-  // gridDiv = document.querySelector<HTMLElement>('#myGrid')!;
-
-
+  onGridReady(params: any) {
+    this.gridApActive = params.api;
+    this.adminservice.Listcourse().subscribe((res: { data: any }) => {
+      this.courses = res.data;
+    });
+  }
 }

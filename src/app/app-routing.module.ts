@@ -7,6 +7,7 @@ import { AddUserComponent } from './Admin/add-user/add-user.component';
 import { AdminComponent } from './Admin/admin/admin.component';
 import { AdminheaderComponent } from './Admin/adminheader/adminheader.component';
 import { CourseComponent } from './Admin/course/course.component';
+import { EditComponent } from './Admin/course/edit.component';
 import { DashbordComponent } from './Admin/dashbord/dashbord.component';
 import { ExamComponent } from './Admin/exam/exam.component';
 import { ListQuestionComponent } from './Admin/list-question/list-question.component';
@@ -41,13 +42,12 @@ const routes: Routes = [
 
   {component:AdminComponent, path:"admin", children:[
     {component:DashbordComponent, path:"dashbord"},
-    {component:CourseComponent,path:"course",children:[
-      {component:CourseComponent,path:"edit"},
-      {component:AddCourseComponent,path:"add"},
-    ]},
+    {component:CourseComponent,path:"course"},
+    {component:EditComponent,path:"course/edit/:courseId"},
+    {component:AddCourseComponent,path:"course/add"},
     {component:AdminheaderComponent,path:"header"},
     {component:SubjectComponent,path:"subject"},
-    {component:AddSubjectComponent,path:"addsubject"},
+    {component:AddSubjectComponent,path:"subject/add"},
     {component:QuestionComponent,path:"question"},
     {component:ListQuestionComponent,path:"list-question"},
     {component:ExamComponent,path:"exam"},

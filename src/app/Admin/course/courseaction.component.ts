@@ -8,7 +8,7 @@ import { AdminService } from 'src/app/service/admin.service';
   selector: 'app-courseaction',
   template: `
     <i class="bi bi-trash" (click) = "deletecourse(value)"></i>
-    <a  routerLink="/admin/course/edit" ><i class="ri-edit-2-fill"></i></a>
+    <a  routerLink="/admin/course/edit/{{value}}" ><i class="ri-edit-2-fill"></i></a>
   `,
   styles: [
     `

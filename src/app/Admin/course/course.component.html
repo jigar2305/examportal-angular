@@ -11,16 +11,16 @@
           <h5 class="card-title">Courses</h5>
           <!-- Default Table -->
         </div>
-        <input
-      type="text"
-      id="filter-text-box"
-      placeholder="Filter..."
-      oninput="onFilterTextBoxChanged()"
-    />
-    <div id="myGrid" class="ag-theme-alpine"></div>
-        <!-- <ag-grid-angular style="height:  600px; width: 100%;" class="ag-theme-alpine" [defaultColDef]="defaultColDef"
-          [rowData]="courses" [columnDefs]="colDefs" [defaultColDef]="defaultColDef" [suppressRowClickSelection]="true"
-          [groupSelectsChildren]="true" [pagination]="true"></ag-grid-angular> -->
+        <div class="row">
+          <label for="search" class="col-sm-1">&nbsp; search</label>
+          <div class="col-sm-3">
+            <input type="text" id="filter-text-box" placeholder="Filter..." [(ngModel)]="searchText"
+              (ngModelChange)="onFilterBoxChange()" />
+          </div>
+        </div>
+        <ag-grid-angular style="height: 500px; " class="ag-theme-alpine m-3" [defaultColDef]="defaultColDef"
+          [rowData]="courses" [columnDefs]="colDefs" [suppressRowClickSelection]="true" [groupSelectsChildren]="true" [pagination]="true"
+          (gridReady)="onGridReady($event)"></ag-grid-angular>
       </div>
     </div>
   </div>

@@ -7,20 +7,24 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class AdminService {
+  constructor(private http: HttpClient) {}
   enrollexam(enroll: any) {
     return this.http.post(environment.url + 'er/add', enroll);
   }
 
-  constructor(private http: HttpClient) {}
 
   Listcourse(): Observable<any> {
     return this.http.get(environment.url + 'course/list');
   }
+
   deletecourse(courseId: any): Observable<any> {
     return this.http.delete(environment.url + 'course/delete/' + courseId);
   }
   addcourse(course: any): Observable<any> {
     return this.http.post(environment.url + 'course/add', course);
+  }
+  getcourse(courseId:number): Observable<any> {
+    return this.http.get(environment.url + 'course/coursebyId/'+courseId);
   }
   // -----------------------------------------------------------------------------------------
 

@@ -2,34 +2,24 @@
   <div class="row">
     <div class="col-12">
       <div style="text-align: end;">
-        <a routerLink="/admin/addsubject">
+        <a routerLink="/admin/subject/add">
           <h1 class="ri-add-circle-fill"></h1>
         </a>
       </div>
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Subject</h5>
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">No.</th>
-                <th scope="col">subject</th>
-                <th scope="col">course</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let i of subjects;let j = index">
-                <th scope="row">{{j+1}}</th>
-                <td>{{i.subjectName}}</td>
-                <td>{{i.course.courseName}}</td>
-                <td>
-                  <i class="ri-delete-bin-2-fill" (click)="deletesubject(i.subjectId)"></i>
-                </td>
-              </tr>
-            </tbody>
-          </table>
         </div>
+        <div class="row">
+          <label for="search" class="col-sm-1">&nbsp; search</label>
+          <div class="col-sm-3">
+            <input type="text" id="filter-text-box" placeholder="Filter..." [(ngModel)]="searchText"
+              (ngModelChange)="onFilterBoxChange()" />
+          </div>
+        </div>
+        <ag-grid-angular style="height: 500px; " class="ag-theme-alpine m-3" [defaultColDef]="defaultColDef"
+          [rowData]="subjects" [columnDefs]="colDefs" [suppressRowClickSelection]="true" [groupSelectsChildren]="true"
+          [pagination]="true" (gridReady)="onGridReady($event)"></ag-grid-angular>
       </div>
     </div>
   </div>

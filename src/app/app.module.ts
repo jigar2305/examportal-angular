@@ -42,6 +42,7 @@ import { AddUserComponent } from './Admin/add-user/add-user.component';
 import { TooltipModule } from '@cesarbr/angular-tooltip';
 import { CourseactionComponent } from './Admin/course/courseaction.component';
 import { EditComponent } from './Admin/course/edit.component';
+import { SubjectactionComponent } from './Admin/subject/subjectaction.component';
 
 
 
@@ -80,6 +81,7 @@ import { EditComponent } from './Admin/course/edit.component';
     AddUserComponent,
     CourseactionComponent,
     EditComponent,
+    SubjectactionComponent,
   ],
   imports: [
     BrowserModule,
