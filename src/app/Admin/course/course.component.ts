@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ColDef, Grid, GridOptions } from 'ag-grid-community';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from 'src/app/service/admin.service';
+import { CourseactionComponent } from './courseaction.component';
 
 @Component({
   selector: 'app-course',
@@ -10,18 +12,44 @@ import { AdminService } from 'src/app/service/admin.service';
 })
 export class CourseComponent implements OnInit {
   courses: Array<any> = []
-  courseform: FormGroup
+
 
 
   constructor(private adminservice: AdminService, private toster: ToastrService) {
-    this.courseform = new FormGroup({
-      courseName: new FormControl('', [Validators.required])
-    })
+
+  }
+  onFilterTextBoxChanged() {
+    this.gridOptions.api!.setQuickFilter(
+      (document.getElementById('filter-text-box') as HTMLInputElement).value
+    );
   }
 
   ngOnInit(): void {
     this.getallcourses()
   }
+  gridOptions: GridOptions = {
+    columnDefs: [
+    { field: 'courseName' },
+    {
+      headerName: 'Delete',
+      field: 'courseId',
+      cellRenderer: CourseactionComponent,
+    }
+  ],
+  defaultColDef: {
+    enableRowGroup: true,
+    enablePivot: true,
+    enableValue: true,
+    sortable: true,
+    resizable: true,
+    filter: true,
+    flex: 1,
+    minWidth: 100,
+  },
+  rowData :this.courses,
+  cacheQuickFilter: true,
+}
+
 
   getallcourses() {
     this.adminservice.Listcourse().subscribe(res => {
@@ -29,27 +57,9 @@ export class CourseComponent implements OnInit {
       this.courses = res.data
     })
   }
-  deletecourse(courseId: any) {
-    this.adminservice.deletecourse(courseId).subscribe(res => {
-      this.toster.success("course deleted..")
-      this.courses = this.courses.filter(r => r.courseId != courseId)
-    }, err => {
-      this.toster.error("something went wrong")
-    
-    })
 
-  }
-  addcourse() {
-    if (this.courseform.valid) {
-      this.adminservice.addcourse(this.courseform.value).subscribe(res => {
-        this.toster.success("course Added..")
-        this.getallcourses()
-      }, err => {
-        this.toster.error("something went wrong")
-      }
-      )
-    }
-  }
+  // new Grid(this.gridDiv, this.gridOptions);
+  // gridDiv = document.querySelector<HTMLElement>('#myGrid')!;
 
 
 }

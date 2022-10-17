@@ -2,36 +2,25 @@
   <div class="row">
     <div class="col-12">
       <div style="text-align: end;">
-        <a routerLink="/admin/addcourse">
+        <a routerLink="/admin/course/add">
           <h1 class="ri-add-circle-fill"></h1>
         </a>
       </div>
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Course</h5>
+          <h5 class="card-title">Courses</h5>
           <!-- Default Table -->
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">No.</th>
-                <th scope="col">Name</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let i of courses; let j = index">
-                <th scope="row">{{ j + 1 }}</th>
-                <td>{{ i.courseName }}</td>
-                <td>
-                  <i
-                    class="ri-delete-bin-2-fill"
-                    (click)="deletecourse(i.courseId)"
-                  ></i>
-                </td>
-              </tr>
-            </tbody>
-          </table>
         </div>
+        <input
+      type="text"
+      id="filter-text-box"
+      placeholder="Filter..."
+      oninput="onFilterTextBoxChanged()"
+    />
+    <div id="myGrid" class="ag-theme-alpine"></div>
+        <!-- <ag-grid-angular style="height:  600px; width: 100%;" class="ag-theme-alpine" [defaultColDef]="defaultColDef"
+          [rowData]="courses" [columnDefs]="colDefs" [defaultColDef]="defaultColDef" [suppressRowClickSelection]="true"
+          [groupSelectsChildren]="true" [pagination]="true"></ag-grid-angular> -->
       </div>
     </div>
   </div>

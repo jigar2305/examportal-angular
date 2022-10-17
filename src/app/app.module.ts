@@ -39,6 +39,10 @@ import { ButtoncomponentComponent } from './buttoncomponent/buttoncomponent.comp
 import { DeleteuserbuttonComponent } from './buttoncomponent/deleteuserbutton.component';
 import { UserstatusbuttonComponent } from './buttoncomponent/userstatusbutton.component';
 import { AddUserComponent } from './Admin/add-user/add-user.component';
+import { TooltipModule } from '@cesarbr/angular-tooltip';
+import { CourseactionComponent } from './Admin/course/courseaction.component';
+import { EditComponent } from './Admin/course/edit.component';
+
 
 
 
@@ -74,8 +78,8 @@ import { AddUserComponent } from './Admin/add-user/add-user.component';
     DeleteuserbuttonComponent,
     UserstatusbuttonComponent,
     AddUserComponent,
-
-
+    CourseactionComponent,
+    EditComponent,
   ],
   imports: [
     BrowserModule,
@@ -88,7 +92,8 @@ import { AddUserComponent } from './Admin/add-user/add-user.component';
     DialogModule,
     CountdownModule,
     NgMultiSelectDropDownModule.forRoot(),
-    AgGridModule
+    AgGridModule,
+    TooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]

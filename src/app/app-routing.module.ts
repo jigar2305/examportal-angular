@@ -41,8 +41,10 @@ const routes: Routes = [
 
   {component:AdminComponent, path:"admin", children:[
     {component:DashbordComponent, path:"dashbord"},
-    {component:CourseComponent,path:"course"},
-    {component:AddCourseComponent,path:"addcourse"},
+    {component:CourseComponent,path:"course",children:[
+      {component:CourseComponent,path:"edit"},
+      {component:AddCourseComponent,path:"add"},
+    ]},
     {component:AdminheaderComponent,path:"header"},
     {component:SubjectComponent,path:"subject"},
     {component:AddSubjectComponent,path:"addsubject"},

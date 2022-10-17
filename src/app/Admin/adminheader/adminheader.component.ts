@@ -9,7 +9,9 @@ export class AdminheaderComponent implements OnInit {
   today: number = Date.now();
   firstName: any;
 
-  constructor() { }
+  constructor() {
+    
+   }
 
   ngOnInit(): void {
     this.firstName = localStorage.getItem("firstName")
