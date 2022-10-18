@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators, Form } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from 'src/app/service/admin.service';
 import { IDropdownSettings, } from 'ng-multiselect-dropdown';
+import { ColDef } from 'ag-grid-community';
+import { ExamactionComponent } from './examaction.component';
 
 
 @Component({
@@ -20,7 +22,6 @@ export class ExamComponent implements OnInit {
   dropdownSettingsforsubject: IDropdownSettings = {};
   userId: Array<number> = [];
   enrollexamform: FormGroup;
-
   subjectIds: Array<any> = []
   examselected: any
 
@@ -35,6 +36,73 @@ export class ExamComponent implements OnInit {
       userId: new FormControl([Validators.required])
     })
   }
+
+  colDefs: ColDef[] = [
+    { field: 'examName' },
+    {
+      headerName: 'isshow',
+      field: 'isshow',
+    },
+    {
+      headerName: 'level',
+      field: 'level',
+    },
+    {
+      headerName: 'time',
+      field: 'time',
+    },
+    {
+      headerName: 'enroll',
+      field: 'examId',
+      cellRenderer : function(params:any){
+        return '<b styles="cursor:pointer;"  data-bs-toggle="modal" data-bs-target="#verticalycentered2" (click)="setexamId(i.examId)">start</b>'
+    }
+    },
+    {
+      headerName: 'Action',
+      field: 'examId',
+      cellRenderer:ExamactionComponent
+    },
+  ];
+  defaultColDef: ColDef = {
+    enableRowGroup: true,
+    enablePivot: true,
+    enableValue: true,
+    sortable: true,
+    resizable: true,
+    filter: true,
+    flex: 1,
+    minWidth: 100,
+  };
+  gridApActive: any;
+  searchText: any;
+  onFilterBoxChange() {
+    this.gridApActive.setQuickFilter(this.searchText);
+  }
+  onGridReady(params: any) {
+    this.gridApActive = params.api;
+    this.adminservice.listexam().subscribe((res) => {
+      this.exams = res.data;
+    });
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   select() {
     console.log(this.examselected);
     this.subjectIds.forEach((element: any) => {

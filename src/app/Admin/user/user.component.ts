@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {
   CheckboxSelectionCallbackParams,
   ColDef,
+  GridApi,
   HeaderCheckboxSelectionCallbackParams,
   ICellRendererParams,
 } from 'ag-grid-community';
@@ -94,5 +95,7 @@ export class UserComponent implements OnInit {
       }
     );
   }
-
+  updateondelete(userId:any){
+    this.users = this.users.filter((u) => u.userId == userId);
+  }
 }

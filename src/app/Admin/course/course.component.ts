@@ -51,4 +51,7 @@ export class CourseComponent implements OnInit {
       this.courses = res.data;
     });
   }
+  deletecourse(courseId: any) {
+    this.courses = this.courses.filter(r => r.courseId != courseId)
+  }
 }

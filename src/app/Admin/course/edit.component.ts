@@ -11,7 +11,7 @@ import { AdminService } from 'src/app/service/admin.service';
     <div class="col-12">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Add Course</h5>
+          <h5 class="card-title">Update Course</h5>
             <div class="row mb-3">
               <label for="inputEmail3" class="col-sm-1 col-form-label">course</label>
               <div class="col-sm-6">

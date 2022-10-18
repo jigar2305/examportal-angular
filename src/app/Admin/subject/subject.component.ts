@@ -22,17 +22,6 @@ export class SubjectComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  deletesubject(subjectId: any) {
-    this.adminservice.deletesubject(subjectId).subscribe(
-      (res) => {
-        this.toster.success('subject deleted..');
-        this.subjects = this.subjects.filter((r) => r.subjectId != subjectId);
-      },
-      (err) => {
-        this.toster.error('something went wrong');
-      }
-    );
-  }
   colDefs: ColDef[] = [
     { field: 'subjectName' },
     {
@@ -68,5 +57,8 @@ export class SubjectComponent implements OnInit {
     this.adminservice.Listsubject().subscribe((res) => {
       this.subjects = res.data;
     });
+  }
+  updateondelete(subjectId:number){
+    this.subjects = this.subjects.filter((r) => r.subjectId != subjectId);
   }
 }

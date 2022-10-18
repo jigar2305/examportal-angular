@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { ICellRendererParams } from 'ag-grid-community';
 import { ToastrService } from 'ngx-toastr';
+import { UserComponent } from '../Admin/user/user.component';
 import { AdminService } from '../service/admin.service';
 
 @Component({
@@ -20,15 +21,17 @@ export class UserstatusbuttonComponent
   user: any;
   value: any;
   str: string = '';
-  constructor(private aservise: AdminService, private tostr: ToastrService,private router: Router) {}
+  constructor(private aservise: AdminService, private tostr: ToastrService,private router: Router,private ucomponent:UserComponent) {}
   userstatus(userId: number) {
     this.aservise.userstatus(userId).subscribe(
       (res) => {
         if (res.data == true) {
           this.tostr.success('user activated..');
+          // this.ucomponent.changestatus(userId)
           this.setstatus()
         } else {
           this.tostr.success('user Deactivated..');
+          this.setstatus()
         }
       },
       (err) => {

@@ -1,19 +1,19 @@
 <div class="container">
   <div class="row">
       <div class="col-12">
-        <div style="text-align: end;">
-          <a routerLink="/admin/adduser">
-            <h1 class="ri-add-circle-fill"></h1>
-          </a>
+        <div class="row mb-2">
+          <div style="text-align: start;" class="col-6 p-2">
+            <h4 style="font-weight: bolder; color: blue; margin-left: 10px;">users</h4>
+          </div>
+          <div style="text-align: end;" class="col-6">
+            <a routerLink="/admin/adduser">
+              <h1 class="ri-add-circle-fill"></h1>
+            </a>
+          </div>
         </div>
           <div class="card">
               <div class="card-body">
-                  <div class="row">
-                      <div class="col-8">
-                          <h5 class="card-title">users</h5>
-                      </div>
-                  </div>
-                  <div class="row mb-3">
+                  <div class="row mb-3 mt-3">
                     <label for="search" class="col-sm-1">&nbsp; search</label>
                     <div class="col-sm-3">
                       <input type="text" id="filter-text-box" placeholder="Filter..." [(ngModel)]="searchText"

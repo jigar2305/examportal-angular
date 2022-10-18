@@ -10,10 +10,11 @@ import { SubjectComponent } from './subject.component';
   template: `
     <p>
     <i class="bi bi-trash" (click) = "deletesubject(value)"></i>
+    &nbsp;&nbsp;
     <a  routerLink="/admin/course/edit" ><i class="ri-edit-2-fill"></i></a>
     </p>
   `,
-  styles: [
+  styles: [``
   ]
 })
 export class SubjectactionComponent implements OnInit,ICellRendererAngularComp {
@@ -38,7 +39,7 @@ export class SubjectactionComponent implements OnInit,ICellRendererAngularComp {
     this.adminservice.deletesubject(subjectId).subscribe(
       (res) => {
         this.toster.success('subject deleted..');
-        this.subj.updateAllRow()
+        this.subj.updateondelete(subjectId)
       },
       (err) => {
         this.toster.error('something went wrong');

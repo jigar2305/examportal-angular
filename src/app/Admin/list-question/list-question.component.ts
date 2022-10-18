@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ColDef, RowGroupingDisplayType } from 'ag-grid-community';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from 'src/app/service/admin.service';
 
@@ -18,6 +19,98 @@ export class ListQuestionComponent implements OnInit {
   correctAnswer: string = ''
   level: string = ''
   questionobj: any
+
+
+  ngOnInit(): void {
+
+  }
+  gridApActive: any;
+  searchText: any;
+  public groupDisplayType: RowGroupingDisplayType = 'groupRows';
+
+  colDefs: ColDef[] = [
+    { headerName: 'subjectName',
+      field: 'subject.subjectName',
+      rowGroup: true, hide: true
+  },
+    {
+      headerName: 'question',
+      field: 'question',
+    },
+    {
+      headerName: 'A',
+      field: 'a',
+    },
+    {
+      headerName: 'B',
+      field: 'b',
+    },
+    {
+      headerName: 'C',
+      field: 'c',
+    },
+    {
+      headerName: 'D',
+      field: 'd',
+    },
+    {
+      headerName: 'CorrectAnswer',
+      field: 'correctAnswer',
+    },
+    {
+      headerName: 'level',
+      field: 'level',
+    },
+    {
+      headerName: 'Action',
+      field: 'quesrionId',
+    },
+  ];
+  defaultColDef: ColDef = {
+    enableRowGroup: true,
+    enablePivot: true,
+    enableValue: true,
+    sortable: true,
+    resizable: true,
+    filter: true,
+    flex: 1,
+    minWidth: 100,
+  };
+  onFilterBoxChange() {
+    this.gridApActive.setQuickFilter(this.searchText);
+  }
+  onGridReady(params: any) {
+    this.gridApActive = params.api;
+    this.aservice.listquestions().subscribe((res) => {
+      this.questions = res.data;
+      console.log(this.questions);
+    });
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -69,16 +162,10 @@ export class ListQuestionComponent implements OnInit {
     })
 
   }
-
-  ngOnInit(): void {
-    this.getallquestions()
-    this.getallsubject()
-  }
   getallquestions() {
     this.aservice.listquestions().subscribe((res) => {
       this.questions = res.data
       console.log(this.questions);
-
     }, (err) => {
       this.tostr.error("something went wrong")
     })
