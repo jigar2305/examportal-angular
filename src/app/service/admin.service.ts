@@ -53,6 +53,9 @@ export class AdminService {
   listquestions(): Observable<any> {
     return this.http.get(environment.url + 'que/list');
   }
+  getquestion(questionId: number): Observable<any> {
+    return this.http.get(environment.url + 'que/get/'+questionId);
+  }
   deletquestion(questionId: number): Observable<any> {
     return this.http.delete(environment.url + 'que/delete/' + questionId);
   }

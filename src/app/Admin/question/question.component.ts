@@ -13,7 +13,7 @@ export class QuestionComponent implements OnInit {
   subjectform: FormGroup
   submitted = false;
   subject: any
-  file!: File; 
+  file!: File;
   subjects: Array<any> = []
   questions: Array<any> = []
   constructor(private formBuilder: FormBuilder, private adminservice: AdminService, private tostr: ToastrService) {
@@ -25,7 +25,7 @@ export class QuestionComponent implements OnInit {
       subject: new FormControl([Validators.required])
     })
   }
-  
+
   onChange(event:any) {
     this.file = event.target.files[0];
   }
@@ -53,7 +53,7 @@ export class QuestionComponent implements OnInit {
     this.adminservice.addquestionsbyexcel(this.file).subscribe(
         (event: any) => {
           console.log(event);
-          
+
           this.tostr.success("question added....")
         }
     );
@@ -84,19 +84,19 @@ export class QuestionComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-   
+
       if (this.subject == null) {
-        this.tostr.success("please select subject")
+        this.tostr.warning("please select subject")
       }
     if (this.questionform.invalid) {
-      this.tostr.success("please fill form correctly")
+      this.tostr.warning("please fill form correctly")
     }
     if (this.questionform.valid) {
       this.adminservice.addquestions(this.questionform.value.question).subscribe(res => {
         this.tostr.success("questions added successfully")
-        this.onClear() 
+        this.onClear()
       }, err => {
-        
+
         this.tostr.error("somethin went wrong")
       })
     }

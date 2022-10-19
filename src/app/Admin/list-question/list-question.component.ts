@@ -3,36 +3,35 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ColDef, RowGroupingDisplayType } from 'ag-grid-community';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from 'src/app/service/admin.service';
+import { QuestionactionComponent } from '../question/questionaction.component';
 
 @Component({
   selector: 'app-list-question',
   templateUrl: './list-question.component.html',
-  styleUrls: ['./list-question.component.css']
+  styleUrls: ['./list-question.component.css'],
 })
 export class ListQuestionComponent implements OnInit {
+  question: string = '';
+  a: string = '';
+  b: string = '';
+  c: string = '';
+  d: string = '';
+  correctAnswer: string = '';
+  level: string = '';
+  questionobj: any;
 
-  question: string = ''
-  a: string = ''
-  b: string = ''
-  c: string = ''
-  d: string = ''
-  correctAnswer: string = ''
-  level: string = ''
-  questionobj: any
-
-
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
   gridApActive: any;
   searchText: any;
   public groupDisplayType: RowGroupingDisplayType = 'groupRows';
 
   colDefs: ColDef[] = [
-    { headerName: 'subjectName',
+    {
+      headerName: 'subjectName',
       field: 'subject.subjectName',
-      rowGroup: true, hide: true
-  },
+      rowGroup: true,
+      hide: true,
+    },
     {
       headerName: 'question',
       field: 'question',
@@ -63,7 +62,8 @@ export class ListQuestionComponent implements OnInit {
     },
     {
       headerName: 'Action',
-      field: 'quesrionId',
+      field: 'questionId',
+      cellRenderer: QuestionactionComponent,
     },
   ];
   defaultColDef: ColDef = {
@@ -87,97 +87,73 @@ export class ListQuestionComponent implements OnInit {
     });
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   updatequestion(q: any) {
-    this.question = q.question
-    this.a = q.a
-    this.b = q.b
-    this.c = q.c
-    this.d = q.d
-    this.correctAnswer = q.correctAnswer
-    this.level = q.level
-    this.questionobj = q
+    this.question = q.question;
+    this.a = q.a;
+    this.b = q.b;
+    this.c = q.c;
+    this.d = q.d;
+    this.correctAnswer = q.correctAnswer;
+    this.level = q.level;
+    this.questionobj = q;
   }
   onupdate() {
-    this.questionobj.question = this.question
-    this.questionobj.a = this.a
-    this.questionobj.b = this.b
-    this.questionobj.c = this.c
-    this.questionobj.d = this.d
-    this.questionobj.correctAnswer = this.correctAnswer
-    this.questionobj.level = this.level
-    if (this.question.length == 0 || this.a.length == 0 || this.b.length == 0 || this.c.length == 0 || this.d.length == 0 || this.correctAnswer.length == 0 || this.level.length == 0) {
-      this.tostr.error("blank field not accepted..")
+    this.questionobj.question = this.question;
+    this.questionobj.a = this.a;
+    this.questionobj.b = this.b;
+    this.questionobj.c = this.c;
+    this.questionobj.d = this.d;
+    this.questionobj.correctAnswer = this.correctAnswer;
+    this.questionobj.level = this.level;
+    if (
+      this.question.length == 0 ||
+      this.a.length == 0 ||
+      this.b.length == 0 ||
+      this.c.length == 0 ||
+      this.d.length == 0 ||
+      this.correctAnswer.length == 0 ||
+      this.level.length == 0
+    ) {
+      this.tostr.error('blank field not accepted..');
     } else {
-
-      this.aservice.updatequestions(this.questionobj).subscribe((res) => {
-        this.tostr.success("qiestion updated..")
-      }, (err) => {
-        this.tostr.error("something went wrong")
-      })
+      this.aservice.updatequestions(this.questionobj).subscribe(
+        (res) => {
+          this.tostr.success('qiestion updated..');
+        },
+        (err) => {
+          this.tostr.error('something went wrong');
+        }
+      );
     }
   }
-  questions: Array<any> = []
-  subjects: any = []
-  constructor(private aservice: AdminService, private tostr: ToastrService) {
+  questions: Array<any> = [];
+  subjects: any = [];
+  constructor(private aservice: AdminService, private tostr: ToastrService) {}
 
-
+  updateondelete(questionId: number) {
+    this.questions = this.questions.filter((r) => r.questionId != questionId);
   }
-  deletequestion(questionId:number){
-    alert("do you want to delete question")
 
-    this.aservice.deletquestion(questionId).subscribe((res)=>{
-      this.tostr.success("question deleted")
-      this.questions = this.questions.filter(r => r.questionId != questionId)
-    },(err)=>{
-      this.tostr.error("something went wrong")
-    })
-
-  }
   getallquestions() {
-    this.aservice.listquestions().subscribe((res) => {
-      this.questions = res.data
-      console.log(this.questions);
-    }, (err) => {
-      this.tostr.error("something went wrong")
-    })
+    this.aservice.listquestions().subscribe(
+      (res) => {
+        this.questions = res.data;
+        console.log(this.questions);
+      },
+      (err) => {
+        this.tostr.error('something went wrong');
+      }
+    );
   }
   getallsubject() {
-    this.aservice.Listsubject().subscribe((res) => {
-      this.subjects = res.data
-      console.log(this.subjects);
-
-    }, (err) => {
-      this.tostr.error("something went wrong")
-    })
+    this.aservice.Listsubject().subscribe(
+      (res) => {
+        this.subjects = res.data;
+        console.log(this.subjects);
+      },
+      (err) => {
+        this.tostr.error('something went wrong');
+      }
+    );
   }
-
 }

@@ -44,6 +44,8 @@ import { CourseactionComponent } from './Admin/course/courseaction.component';
 import { EditComponent } from './Admin/course/edit.component';
 import { SubjectactionComponent } from './Admin/subject/subjectaction.component';
 import { ExamactionComponent } from './Admin/exam/examaction.component';
+import { EditquestionComponent } from './Admin/question/editquestion.component';
+import { QuestionactionComponent } from './Admin/question/questionaction.component';
 
 
 
@@ -84,6 +86,8 @@ import { ExamactionComponent } from './Admin/exam/examaction.component';
     EditComponent,
     SubjectactionComponent,
     ExamactionComponent,
+    EditquestionComponent,
+    QuestionactionComponent,
   ],
   imports: [
     BrowserModule,
