@@ -7,7 +7,8 @@ export class ShareService {
 
   info: any;
   info2:any;
-
+  examId!:number
+  resultId!:number
   constructor() { }
 
   getdata() {
@@ -21,6 +22,18 @@ export class ShareService {
   }
   setinfo(data: any) {
     this.info2 = data
+  }
+  getexamId() {
+    return this.examId
+  }
+  setexamId(examId: number) {
+    this.examId = examId
+  }
+  getresultId() {
+    return this.resultId
+  }
+  setresultId(resultId: number) {
+    this.resultId = resultId
   }
 
 }

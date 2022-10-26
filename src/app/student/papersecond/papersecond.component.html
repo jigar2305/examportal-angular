@@ -1,63 +1,58 @@
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-9">
-                            <h5 class="card-title">exams</h5>
-                        </div>
-                        <div class="col-3 mt-3 ml-0">
-                            Remaining Time:
-                            <b>
-                                <countdown #cd [config]="{ leftTime: this.time, notify: this.time }" (event)="handleEvent($event)"></countdown>
-                                </b>
-                        </div>
-
-                    </div>
-                    <div class="card mb-3">
-                        <div class="row g-0">
-                            <div class="col-md-12">
-                                <div class="card-body">
-                                    <p><b>Q {{index +1}})</b> {{que[index].question}}</p>
-                                    <div class="row">
-
-                                        <div class="col-6"> <input class="form-check-input" type="radio"
-                                                [(ngModel)]="que[index].selected" value="a">
-                                            A. &nbsp; {{que[index].a}}
-                                        </div>
-                                        <div class="col-6">
-                                            <input class="form-check-input" type="radio"
-                                                [(ngModel)]="que[index].selected" value="b">
-                                            B. &nbsp;{{que[index].b}}
-                                        </div>
-                                        <div class="col-6">
-                                            <input class="form-check-input" type="radio"
-                                                [(ngModel)]="que[index].selected" value="c">
-                                            c. &nbsp; {{que[index].c}}
-                                        </div>
-                                        <div class="col-6">
-                                            <input class="form-check-input" type="radio"
-                                                [(ngModel)]="que[index].selected" value="d">
-                                            D. &nbsp;{{que[index].d}}
-                                        </div>
-                                    </div>
-                                    <div class="row mt-5">
-                                        <div class="col-10">
-                                            <button class="btn btn-secondary" (click)="previous(index)"
-                                                type="button">privious</button>
-                                        </div>
-                                        <div class="col-2">
-                                            <button class="btn btn-secondary"  (click)="onsubmit()"
-                                                type="submit">{{btnvalue}}</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-9">
+              <h5 class="card-title">exams</h5>
             </div>
+            <div class="col-3 mt-3 ml-0">
+              Remaining Time:
+              <b>
+                <countdown #cd [config]="{ leftTime: this.time, notify: this.time }" (event)="handleEvent($event)">
+                </countdown>
+              </b>
+            </div>
+          </div>
+          <div class="card mb-3">
+            <div class="row g-0">
+              <div class="col-md-12">
+                <div class="card-body">
+                  <p><b>Q {{index +1}})</b> {{que[index].question}}</p>
+                  <div class="row">
+
+                    <div class="col-6"> <input class="form-check-input" type="radio" [(ngModel)]="que[index].selected"
+                        value="a">
+                      A. &nbsp; {{que[index].a}}
+                    </div>
+                    <div class="col-6">
+                      <input class="form-check-input" type="radio" [(ngModel)]="que[index].selected" value="b">
+                      B. &nbsp;{{que[index].b}}
+                    </div>
+                    <div class="col-6">
+                      <input class="form-check-input" type="radio" [(ngModel)]="que[index].selected" value="c">
+                      c. &nbsp; {{que[index].c}}
+                    </div>
+                    <div class="col-6">
+                      <input class="form-check-input" type="radio" [(ngModel)]="que[index].selected" value="d">
+                      D. &nbsp;{{que[index].d}}
+                    </div>
+                  </div>
+                  <div class="row mt-5">
+                    <div class="col-10">
+                      <button class="btn btn-secondary" (click)="previous(index)" type="button">privious</button>
+                    </div>
+                    <div class="col-2">
+                      <button class="btn btn-secondary" (click)="onsubmit()" type="submit">{{btnvalue}}</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>

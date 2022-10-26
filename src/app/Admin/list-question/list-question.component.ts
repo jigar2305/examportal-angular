@@ -23,18 +23,18 @@ export class ListQuestionComponent implements OnInit {
   ngOnInit(): void {}
   gridApActive: any;
   searchText: any;
-  public groupDisplayType: RowGroupingDisplayType = 'groupRows';
+  // public groupDisplayType: RowGroupingDisplayType = 'groupRows';
 
   colDefs: ColDef[] = [
     {
       headerName: 'subjectName',
       field: 'subject.subjectName',
-      rowGroup: true,
-      hide: true,
+      minWidth:200,
     },
     {
       headerName: 'question',
       field: 'question',
+      minWidth:400
     },
     {
       headerName: 'A',
@@ -67,12 +67,13 @@ export class ListQuestionComponent implements OnInit {
     },
   ];
   defaultColDef: ColDef = {
-    enableRowGroup: true,
     enablePivot: true,
     enableValue: true,
     sortable: true,
     resizable: true,
     filter: true,
+    wrapText: true,
+    autoHeight: true,
     flex: 1,
     minWidth: 100,
   };
@@ -83,77 +84,17 @@ export class ListQuestionComponent implements OnInit {
     this.gridApActive = params.api;
     this.aservice.listquestions().subscribe((res) => {
       this.questions = res.data;
-      console.log(this.questions);
+
     });
   }
 
-  updatequestion(q: any) {
-    this.question = q.question;
-    this.a = q.a;
-    this.b = q.b;
-    this.c = q.c;
-    this.d = q.d;
-    this.correctAnswer = q.correctAnswer;
-    this.level = q.level;
-    this.questionobj = q;
-  }
-  onupdate() {
-    this.questionobj.question = this.question;
-    this.questionobj.a = this.a;
-    this.questionobj.b = this.b;
-    this.questionobj.c = this.c;
-    this.questionobj.d = this.d;
-    this.questionobj.correctAnswer = this.correctAnswer;
-    this.questionobj.level = this.level;
-    if (
-      this.question.length == 0 ||
-      this.a.length == 0 ||
-      this.b.length == 0 ||
-      this.c.length == 0 ||
-      this.d.length == 0 ||
-      this.correctAnswer.length == 0 ||
-      this.level.length == 0
-    ) {
-      this.tostr.error('blank field not accepted..');
-    } else {
-      this.aservice.updatequestions(this.questionobj).subscribe(
-        (res) => {
-          this.tostr.success('qiestion updated..');
-        },
-        (err) => {
-          this.tostr.error('something went wrong');
-        }
-      );
-    }
-  }
+
+
   questions: Array<any> = [];
   subjects: any = [];
   constructor(private aservice: AdminService, private tostr: ToastrService) {}
 
   updateondelete(questionId: number) {
     this.questions = this.questions.filter((r) => r.questionId != questionId);
-  }
-
-  getallquestions() {
-    this.aservice.listquestions().subscribe(
-      (res) => {
-        this.questions = res.data;
-        console.log(this.questions);
-      },
-      (err) => {
-        this.tostr.error('something went wrong');
-      }
-    );
-  }
-  getallsubject() {
-    this.aservice.Listsubject().subscribe(
-      (res) => {
-        this.subjects = res.data;
-        console.log(this.subjects);
-      },
-      (err) => {
-        this.tostr.error('something went wrong');
-      }
-    );
   }
 }

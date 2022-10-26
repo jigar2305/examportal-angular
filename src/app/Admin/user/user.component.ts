@@ -55,24 +55,9 @@ export class UserComponent implements OnInit {
     flex: 1,
     minWidth: 100,
   };
-  public rowSelection: 'single' | 'multiple' = 'multiple';
-  public rowGroupPanelShow = 'always';
-  public pivotPanelShow = 'always';
 
-  checkboxSelection = function (params: CheckboxSelectionCallbackParams) {
-    // we put checkbox on the name if we are not doing grouping
-    return params.columnApi.getRowGroupColumns().length === 0;
-  };
-  headerCheckboxSelection = function (
-    params: HeaderCheckboxSelectionCallbackParams
-  ) {
-    // we put checkbox on the name if we are not doing grouping
-    return params.columnApi.getRowGroupColumns().length === 0;
-  };
   gridApActive: any;
   searchText: any;
-
-
 
   constructor(private aservice: AdminService, private tostr: ToastrService) {}
 
@@ -96,6 +81,6 @@ export class UserComponent implements OnInit {
     );
   }
   updateondelete(userId:any){
-    this.users = this.users.filter((u) => u.userId == userId);
+    this.users = this.users.filter((u) => u.userId != userId);
   }
 }

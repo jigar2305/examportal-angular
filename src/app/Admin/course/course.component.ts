@@ -27,8 +27,10 @@ export class CourseComponent implements OnInit {
   colDefs: ColDef[] = [
     { field: 'courseName' },
     {
-      headerName: 'Delete',
+      headerName: 'Action',
       field: 'courseId',
+      maxWidth:200,
+      minWidth:100,
       cellRenderer: CourseactionComponent,
     },
   ];

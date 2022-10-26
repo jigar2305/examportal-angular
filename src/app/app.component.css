@@ -1,0 +1,7 @@
+::ng-deep .ag-cell-focus,.ag-cell-no-focus{
+  border:none !important;
+  }
+  ::ng-deep .no-border.ag-cell:focus{
+  border:none !important;
+  outline: none;
+  }

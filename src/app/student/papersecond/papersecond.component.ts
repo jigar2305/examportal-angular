@@ -19,50 +19,50 @@ export class PapersecondComponent implements OnInit {
   index = 0;
   submitedquestions: Array<any> = []
   btnvalue: string = ""
-  que: Array<any> = [];
-  
+  que: Array<question> = [];
+
   time:any;
   handleEvent(e: CountdownEvent) {
     if (e.action === 'done') {
      this.submit()
     }
   }
-  
-  
+
+
   constructor(private SService: StudentService, private aRoute: ActivatedRoute,private share:ShareService,private router: Router) {
-    
+
   }
-  
-  
-  
+
+
+
   ngOnInit(): void {
     this.examId = this.aRoute.snapshot.params["examId"]
     this.getque(this.examId)
-    this.btnvalue = "next"  
+    this.btnvalue = "next"
   }
   getque(examId: any) {
     this.SService.getexambyid(examId).subscribe(res => {
     let exam = res.data
-    console.log(exam);
-    
-      this.time = exam.time
-      console.log(this.time);
+    this.time = exam.time
+
     })
     this.SService.getquestion(examId).subscribe(res => {
-      this.que = res.data 
+      this.que = res.data
+      console.log(this.que);
+
       this.que.forEach(element => {
         element['selected'] = ""
       });
     })
   }
-  
+
 
 
   onsubmit() {
     if (this.btnvalue == "submit") {
       this.submit()
     }
-    
+
     if (this.que.length == (this.index + 1)) {
       this.btnvalue = "submit"
     } else {
@@ -89,15 +89,21 @@ export class PapersecondComponent implements OnInit {
       }
     }
     this.SService.submitquestion(answers).subscribe(res => {
-      this.share.setdata(res.data)
-      this.share.setinfo(this.que)
       this.router.navigateByUrl("/student/results")
     }, err => {
       console.log(err);
     })
   }
-
-
-
-
+}
+class question{
+  a!:string
+  b!:string
+  c!:string
+  correctAnswer!:string
+  d!:string
+  level!:string
+  question!:string
+  questionId!:number
+  selected!:string
+  subject!:any
 }

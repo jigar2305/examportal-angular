@@ -1,0 +1,12 @@
+.cut-text{
+  width: auto;
+  overflow:hidden;
+  display:inline-block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.file-div{
+  padding-bottom: 50%;
+  padding-top: 50%;
+  text-align: left;
+}

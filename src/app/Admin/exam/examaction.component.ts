@@ -8,11 +8,13 @@ import { ExamComponent } from './exam.component';
 @Component({
   selector: 'app-examaction',
   template: `
-    <h4>
+
       <i class="bi bi-trash" (click)="deleteexam()"></i>
       &nbsp;&nbsp;
       <a routerLink="/admin/course/edit"><i class="ri-edit-2-fill"></i></a>
-    </h4>
+      &nbsp;&nbsp;
+      <i styles="cursor:pointer;"  class="ri-user-add-line"  data-bs-toggle="modal" data-bs-target="#verticalycentered2" (click)="setexam(value)"></i>
+
   `,
   styles: [],
 })
@@ -31,6 +33,9 @@ export class ExamactionComponent implements OnInit, ICellRendererAngularComp {
   ) {}
   deleteexam() {
     this.examcomponent.deleteexam(this.value);
+  }
+  setexam(examId:number){
+    this.examcomponent.setexamId(examId)
   }
 
   ngOnInit(): void {}

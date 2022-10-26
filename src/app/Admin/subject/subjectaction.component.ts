@@ -8,13 +8,15 @@ import { SubjectComponent } from './subject.component';
 @Component({
   selector: 'app-subjectaction',
   template: `
-    <p>
+
     <i class="bi bi-trash" (click) = "deletesubject(value)"></i>
     &nbsp;&nbsp;
-    <a  routerLink="/admin/course/edit" ><i class="ri-edit-2-fill"></i></a>
-    </p>
+    <a  routerLink="/admin/subject/edit/{{value}}" ><i class="ri-edit-2-fill"></i></a>
+    &nbsp;&nbsp;
+    <i routerLink="/admin/subject/pdf/list/{{value}}" class="bi bi-file-earmark-pdf-fill"></i>
   `,
-  styles: [``
+  styles: [`
+  `
   ]
 })
 export class SubjectactionComponent implements OnInit,ICellRendererAngularComp {

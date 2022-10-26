@@ -1,0 +1,24 @@
+<div class="container-fluid">
+  <div class="card p-3" *ngFor="let subject of subjects">
+    <div class="row">
+      <h3> <b>subject:</b> {{subject}}</h3>
+      <div *ngFor="let pdf of pdffiles">
+        <div class="col-2" *ngIf="pdf.subject.subjectName == subject">
+          <div class="card">
+            <img src="assets/img/pdf_cover_page.JPG" class="card-img-top" alt="..."
+              style="height: 100px; cursor: pointer;" (click)="onview(pdf.subjectfileId)">
+            <div class="card-body" style="height: 70px; margin-top: 0;">
+              <div class="cut-text" style="height: 40px;">
+                <h6 class="mt-3">{{pdf.fileName}}</h6>
+              </div>
+              <div style="text-align: center; height: 20px; margin: 0; width: 100%; cursor: pointer; "
+                (click)="onCdownload(pdf.subjectfileId)">
+                <i class="bi bi-download "></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

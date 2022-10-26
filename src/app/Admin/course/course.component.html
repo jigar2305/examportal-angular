@@ -1,14 +1,14 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row">
     <div class="col-12">
       <div class="row mb-2">
         <div style="text-align: start;" class="col-6 p-2">
           <h4 style="font-weight: bolder; color: blue; margin-left: 10px;">Courses</h4>
         </div>
-        <div style="text-align: end;" class="col-6">
-          <a routerLink="/admin/course/add">
-            <h1 class="ri-add-circle-fill"></h1>
-          </a>
+        <div style="text-align: end;" class="col-6 row">
+          <div class="col-11"></div>
+            <h1 style="color: blue; cursor: pointer;" tooltip="Add course" placement="bottom" backgroundColor="white"
+            textColor="black" routerLink="/admin/course/add" class="ri-add-circle-fill col-1"></h1>
         </div>
       </div>
       <div class="card">

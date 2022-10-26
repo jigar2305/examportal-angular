@@ -55,7 +55,8 @@ export class AddUserComponent implements OnInit {
       this.userservice.signupApi(this.userform.value).subscribe(
         (res) => {
           this.tostr.success("User Added");
-          this.router.navigateByUrl('/user');
+          this.userform.reset();
+          // this.router.navigateByUrl('/user');
         },
         (err) => {
           this.tostr.error('something went wrong');

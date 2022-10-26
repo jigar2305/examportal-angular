@@ -46,6 +46,13 @@ import { SubjectactionComponent } from './Admin/subject/subjectaction.component'
 import { ExamactionComponent } from './Admin/exam/examaction.component';
 import { EditquestionComponent } from './Admin/question/editquestion.component';
 import { QuestionactionComponent } from './Admin/question/questionaction.component';
+import { EditsubjectComponent } from './Admin/subject/editsubject.component';
+import { DeletefileComponent } from './Admin/subject/deletefile.component';
+import { PdfviewadminComponent } from './Admin/subject/pdfviewadmin.component';
+import { PdfviewactionComponent } from './Admin/subject/pdfviewaction.component';
+import { StudentFilesComponent } from './student/student-files/student-files.component';
+import { StudentexamactionComponent } from './student/studentexam/studentexamaction.component';
+import { ResultsactionComponent } from './student/results/resultsaction.component';
 
 
 
@@ -88,6 +95,13 @@ import { QuestionactionComponent } from './Admin/question/questionaction.compone
     ExamactionComponent,
     EditquestionComponent,
     QuestionactionComponent,
+    EditsubjectComponent,
+    DeletefileComponent,
+    PdfviewadminComponent,
+    PdfviewactionComponent,
+    StudentFilesComponent,
+    StudentexamactionComponent,
+    ResultsactionComponent,
   ],
   imports: [
     BrowserModule,

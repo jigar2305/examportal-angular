@@ -1,58 +1,11 @@
-<!-- <div class="container">
+<div class="container-fluid">
   <div class="row">
     <div class="col-12">
-      <div style="text-align: end; margin-left: 95%;">
-        <a routerLink="/admin/question">
-          <h1 class="ri-add-circle-fill"></h1>
-        </a>
-      </div>
-      <div class="card" *ngFor="let p of subjects">
-        <div class="card-body">
-          <h5 class="card-title">{{p.subjectName}}</h5>
-
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col" style="width: 34%;">question</th>
-                <th scope="col" style="width: 10%;">A</th>
-                <th scope="col" style="width: 10%;">B</th>
-                <th scope="col" style="width: 10%;">C</th>
-                <th scope="col" style="width: 10%;">D</th>
-                <th scope="col" style="width: 10%;">correct answer</th>
-                <th scope="col" style="width: 8%;">level</th>
-                <th scope="col" style="width: 8%;">action</th>
-              </tr>
-            </thead>
-            <tbody *ngFor="let q of questions; let i = index">
-              <tr *ngIf="p.subjectId==q.subject.subjectId">
-                <td>{{q.question}}</td>
-                <td>{{q.a}}</td>
-                <td>{{q.b}}</td>
-                <td>{{q.c}}</td>
-                <td>{{q.d}}</td>
-                <td>{{q.correctAnswer}}</td>
-                <td>{{q.level}}</td>
-                <td><i class="bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#verticalycentered"
-                    (click)="updatequestion(q)"></i>
-                  &nbsp;
-                  <i class="bi bi-trash-fill" (click)="deletequestion(q.questionId)"></i>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-      <div class="row mb-2">
-        <div style="text-align: start;" class="col-6 p-2">
+      <div class="row mb-1">
+        <div style="text-align: start;" class="col-11 p-2">
           <h4 style="font-weight: bolder; color: blue; margin-left: 10px;">Questions</h4>
         </div>
-        <div style="text-align: end;" class="col-6">
+        <div style="text-align: end;" class="col-1">
           <a routerLink="/admin/question">
             <h1 class="ri-add-circle-fill"></h1>
           </a>
@@ -69,94 +22,8 @@
           </div>
           <ag-grid-angular style="height: 500px; " class="ag-theme-alpine" [defaultColDef]="defaultColDef"
             [rowData]="questions" [columnDefs]="colDefs" [suppressRowClickSelection]="true"
-            [groupSelectsChildren]="true" [groupDisplayType]="groupDisplayType" [animateRows]="true" [pagination]="true"
+            [groupSelectsChildren]="true" [animateRows]="true" [pagination]="true"
             (gridReady)="onGridReady($event)"></ag-grid-angular>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="verticalycentered" tabindex="-1" style="display: none;" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Add questions</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="row mb-3">
-          <label for="inputEmail3" class="col-sm-2 col-form-label">question</label>
-          <div class="col-sm-10">
-            <textarea type="text" class="form-control" [(ngModel)]="question"></textarea>
-          </div>
-        </div>
-        <div class="row mb-3">
-          <label for="inputEmail3" class="col-sm-2 col-form-label">A</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" [(ngModel)]="a" id="inputText">
-          </div>
-        </div>
-        <div class="row mb-3">
-          <label for="inputEmail3" class="col-sm-2 col-form-label">B</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" [(ngModel)]="b" id="inputText">
-          </div>
-        </div>
-        <div class="row mb-3">
-          <label for="inputEmail3" class="col-sm-2 col-form-label">C</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" [(ngModel)]="c" id="inputText">
-          </div>
-        </div>
-        <div class="row mb-3">
-          <label for="inputEmail3" class="col-sm-2 col-form-label">D</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" [(ngModel)]="d" id="inputText">
-          </div>
-        </div>
-        <div class="row mb-3">
-          <label for="inputEmail3" class="col-sm-2 col-form-label">Answer</label>
-          <div class="col-sm-10">
-            <div class="row">
-              <div class="col-3">
-                A. &nbsp;
-                <input class="form-check-input" type="radio" [(ngModel)]="correctAnswer" value="a">
-              </div>
-              <div class="col-3">
-                B. &nbsp;
-                <input class="form-check-input" type="radio" [(ngModel)]="correctAnswer" value="b">
-              </div>
-              <div class="col-3">
-                c. &nbsp;
-                <input class="form-check-input" type="radio" [(ngModel)]="correctAnswer" value="c">
-              </div>
-              <div class="col-3">
-                D.&nbsp;
-                <input class="form-check-input" type="radio" [(ngModel)]="correctAnswer" value="d">
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row mb-3">
-          <label for="inputEmail3" class="col-sm-2 col-form-label">level</label>
-          <div class="col-sm-10">
-            <div class="row">
-              <div class="col-4">
-                hard. &nbsp;
-                <input class="form-check-input" type="radio" [(ngModel)]="level" value="hard">
-              </div>
-              <div class="col-4">
-                mideum. &nbsp;
-                <input class="form-check-input" type="radio" [(ngModel)]="level" value="mideum">
-              </div>
-              <div class="col-4">
-                easy. &nbsp;
-                <input class="form-check-input" type="radio" [(ngModel)]="level" value="easy">
-              </div>
-            </div>
-          </div>
-          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" (click)="onupdate()">added</button>
         </div>
       </div>
     </div>

@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   today: number = Date.now();
-  constructor() { }
+  firstName: any;
+
+  constructor() {
+
+   }
 
   ngOnInit(): void {
+    this.firstName = localStorage.getItem("firstName")
   }
 
 }

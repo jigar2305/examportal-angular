@@ -16,7 +16,6 @@ export class StudentService {
   getquestion(examId:any):Observable<any>{
     return this.http.get(environment.url+"eqc/getque/"+examId)
   }
-
   submitquestion(questionanswer:any):Observable<any>{
     return this.http.post(environment.url+"eqc/checkanswer",questionanswer)
   }
@@ -33,6 +32,13 @@ export class StudentService {
   getexambyid(examId:number): Observable<any>{
     return this.http.get(environment.url+"exam/get/"+examId)
   }
-
-
+  getsubjectfiles(userId:number): Observable<any>{
+    return this.http.get(environment.url+"subjectfile/get/"+userId)
+  }
+  // getfile(subjectfileId:number): Observable<any>{
+  //   return this.http.get(environment.url+"subjectfile/getfiles/"+subjectfileId,{observe:'body',responseType:'blob'})
+  // }
+  getfile(subjectfileId:number): Observable<any> {
+    return this.http.get(environment.url + 'subjectfile/getfile/'+subjectfileId);
+  }
 }

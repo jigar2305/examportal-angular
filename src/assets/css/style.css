@@ -41,14 +41,14 @@ h6 {
 # Main
 --------------------------------------------------------------*/
 #main {
-  margin-top: 60px;
-  padding: 20px 30px;
+  margin-top: 45px;
+  padding: 10px 10px;
   transition: all 0.3s;
 }
 
 @media (max-width: 1199px) {
   #main {
-    padding: 20px;
+    padding: 10px;
   }
 }
 
@@ -395,7 +395,7 @@ h6 {
 .header {
   transition: all 0.5s;
   z-index: 997;
-  height: 60px;
+  height: 45px;
   box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);
   background-color: #fff;
   padding-left: 20px;
@@ -615,7 +615,7 @@ h6 {
 --------------------------------------------------------------*/
 .sidebar {
   position: fixed;
-  top: 50px;
+  top: 45px;
   left: 0;
   bottom: 0;
   width: 80px;
@@ -629,11 +629,6 @@ h6 {
   background-color: #fff;
 }
 
-@media (max-width: 1199px) {
-  .sidebar {
-    left: -300px;
-  }
-}
 
 .sidebar::-webkit-scrollbar {
   width: 5px;
@@ -650,24 +645,6 @@ h6 {
   #main,
   #footer {
     margin-left: 80px;
-  }
-}
-
-@media (max-width: 1199px) {
-  .toggle-sidebar .sidebar {
-    left: 0;
-  }
-}
-
-@media (min-width: 1200px) {
-
-  .toggle-sidebar #main,
-  .toggle-sidebar #footer {
-    margin-left: 0;
-  }
-
-  .toggle-sidebar .sidebar {
-    left: -300px;
   }
 }
 

@@ -13,7 +13,7 @@ export class AddSubjectComponent implements OnInit {
   subjectform: FormGroup;
   courses: Array<any> = [];
   index: number = 0;
-  // uploadfile!: Observable<any>;
+ 
   course: any;
   subject!: string;
   files: Array<any> = [];

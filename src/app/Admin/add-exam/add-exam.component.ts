@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from 'src/app/service/admin.service';
@@ -23,7 +24,8 @@ export class AddExamComponent implements OnInit {
   course: any;
   constructor(
     private adminservice: AdminService,
-    private tostr: ToastrService
+    private tostr: ToastrService,
+    private router:Router
   ) {}
   ngOnInit(): void {
     this.getallsubject();
@@ -42,20 +44,18 @@ export class AddExamComponent implements OnInit {
   getallsubject() {
     this.adminservice.Listsubject().subscribe((res) => {
       this.subjects = res.data;
-
     });
   }
   getallcourse() {
     this.adminservice.Listcourse().subscribe((res) => {
       this.courses = res.data;
-
     });
   }
-  courseselect(){
-    this.subjectsshow = []
-    this.subjects.forEach(element => {
-      if(element.course.courseId == this.course.courseId){
-        this.subjectsshow.push(element)
+  courseselect() {
+    this.subjectsshow = [];
+    this.subjects.forEach((element) => {
+      if (element.course.courseId == this.course.courseId) {
+        this.subjectsshow.push(element);
         console.log(element);
       }
     });
@@ -73,6 +73,7 @@ export class AddExamComponent implements OnInit {
       examName: this.examName,
       level: this.level,
       time: this.time,
+      isshow: this.isshow,
       subjects: this.subjectIds,
     };
     console.log(addquestion);
@@ -90,6 +91,7 @@ export class AddExamComponent implements OnInit {
       this.level == null ||
       this.time == null ||
       this.time == 0 ||
+      this.isshow == null ||
       flag == 1
     ) {
       this.tostr.info('please fill form correctly');
@@ -97,13 +99,16 @@ export class AddExamComponent implements OnInit {
       this.adminservice.addexam(addquestion).subscribe(
         (res) => {
           console.log(res);
+          this.router.navigateByUrl("/admin/exam")
           this.tostr.success(this.examName + ' added susseccfully..');
         },
         (err) => {
           if (err.error.msg == 'exam alredy added...') {
             this.tostr.error(this.examName + ' ' + 'is already exist');
+          } else if (err.error.msg == 'please add questions first') {
+            this.tostr.error('please add questions first');
           } else {
-            this.tostr.error('something went wrong...');
+            this.tostr.error('please try again', 'Technical error occurred');
           }
         }
       );

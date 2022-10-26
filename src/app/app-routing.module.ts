@@ -13,6 +13,8 @@ import { ExamComponent } from './Admin/exam/exam.component';
 import { ListQuestionComponent } from './Admin/list-question/list-question.component';
 import { EditquestionComponent } from './Admin/question/editquestion.component';
 import { QuestionComponent } from './Admin/question/question.component';
+import { EditsubjectComponent } from './Admin/subject/editsubject.component';
+import { PdfviewadminComponent } from './Admin/subject/pdfviewadmin.component';
 import { SubjectComponent } from './Admin/subject/subject.component';
 import { UserExamsComponent } from './Admin/user-exams/user-exams.component';
 import { UserComponent } from './Admin/user/user.component';
@@ -24,6 +26,7 @@ import { HeaderComponent } from './student/header/header.component';
 import { PapersecondComponent } from './student/papersecond/papersecond.component';
 import { ResultComponent } from './student/result/result.component';
 import { ResultsComponent } from './student/results/results.component';
+import { StudentFilesComponent } from './student/student-files/student-files.component';
 import { StudentComponent } from './student/student/student.component';
 import { StudentdashbordComponent } from './student/studentdashbord/studentdashbord.component';
 import { StudentexamComponent } from './student/studentexam/studentexam.component';
@@ -51,6 +54,8 @@ const routes: Routes = [
 
     {component:SubjectComponent,path:"subject"},
     {component:AddSubjectComponent,path:"subject/add"},
+    {component:EditsubjectComponent,path:"subject/edit/:subjectId"},
+    {component:PdfviewadminComponent,path:"subject/pdf/list/:subjectId"},
 
     {component:QuestionComponent,path:"question"},
     {component:ListQuestionComponent,path:"list-question"},
@@ -73,6 +78,7 @@ const routes: Routes = [
     {component:HeaderComponent,path:"header"},
     {component:ResultComponent,path:"result/:examId/:resultId"},
     {component:ResultsComponent,path:"results"},
+    {component:StudentFilesComponent,path:"subject-pdf"},
   ]},
 
 

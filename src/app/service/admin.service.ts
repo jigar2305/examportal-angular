@@ -8,6 +8,9 @@ import { environment } from 'src/environments/environment';
 })
 export class AdminService {
   constructor(private http: HttpClient) {}
+
+
+  // API call
   enrollexam(enroll: any) {
     return this.http.post(environment.url + 'er/add', enroll);
   }
@@ -35,7 +38,25 @@ export class AdminService {
     return this.http.delete(environment.url + 'subject/delete/' + subjectId);
   }
   addsubject(subjectform: any): Observable<any> {
-    return this.http.post(environment.url + 'subject/add2', subjectform);
+    return this.http.post(environment.url + 'subject/add', subjectform);
+  }
+  updatesubject(subjectform: any): Observable<any> {
+    return this.http.post(environment.url + 'subject/update', subjectform);
+  }
+  getsubject(subjectId:number): Observable<any> {
+    return this.http.get(environment.url + 'subject/get/'+subjectId);
+  }
+  getsubjectfile(subjectId:number): Observable<any> {
+    return this.http.get(environment.url + 'subject/getfiles/'+subjectId);
+  }
+  getfile(subjectfileId:number): Observable<any> {
+    return this.http.get(environment.url + 'subjectfile/getfile/'+subjectfileId);
+  }
+  enrolesubjectfiles(enrollsubjectfile: any): Observable<any> {
+    return this.http.post(environment.url + 'subjectfile/add', enrollsubjectfile);
+  }
+  deletesubjectfile(subjectfileId: number): Observable<any> {
+    return this.http.delete(environment.url + 'subject/deletefile/' + subjectfileId);
   }
   // -----------------------------------------------------------------------------------------------
 
