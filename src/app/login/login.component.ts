@@ -30,7 +30,6 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
   otpsende() {
-    console.log(this.otpsend.value);
     if (this.otpsend.valid) {
       this.userservice.emailsend(this.otpsend.value).subscribe(res => {
         this.tostr.success("otp send successfully")
@@ -38,7 +37,7 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl("/forgot")
       }, err => {
         this.tostr.error("something went wrong")
-        console.log(err);
+
       })
     } else {
       this.tostr.error("please check email")
@@ -64,7 +63,7 @@ export class LoginComponent implements OnInit {
         }
       }, err => {
         this.tostr.error("Incoorect email & password")
-        console.log(err);
+
       })
     } else {
       this.tostr.error("please fill form correctly")

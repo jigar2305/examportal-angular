@@ -40,7 +40,6 @@ export class QuestionComponent implements OnInit {
     this.getallsubject()
   }
   subjectvalue() {
-    console.log(this.subjectform.value);
   }
 
   getallsubject() {
@@ -52,8 +51,6 @@ export class QuestionComponent implements OnInit {
   onUpload() {
     this.adminservice.addquestionsbyexcel(this.file).subscribe(
         (event: any) => {
-          console.log(event);
-
           this.tostr.success("question added....")
         }
     );

@@ -47,7 +47,6 @@ export class UserstatusbuttonComponent
       }else{
         this.str = "Deactive"
       }
-      console.log(this.user);
     });
   }
 

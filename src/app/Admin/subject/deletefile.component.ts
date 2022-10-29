@@ -28,7 +28,6 @@ export class DeletefileComponent implements OnInit,ICellRendererAngularComp {
     private editfile:EditsubjectComponent
   ) {}
   deletefile(subjectfileId: number) {
-    console.log(subjectfileId);
     this.adminservice.deletesubjectfile(subjectfileId).subscribe(
       (res) => {
         this.editfile.deletefileremove(subjectfileId)

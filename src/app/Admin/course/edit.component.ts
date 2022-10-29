@@ -39,7 +39,7 @@ export class EditComponent implements OnInit {
   ngOnInit(): void {
     this.adminservice.getcourse(this.aRoute.snapshot.params["courseId"]).subscribe(res=>{
       this.course = res.data
-      console.log(this.course);
+      this.course);
 
     },err=>{
       this.toster.error("This course Not found")

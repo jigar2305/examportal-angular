@@ -21,10 +21,10 @@ export class SignupComponent implements OnInit {
       gender: new FormControl('', [Validators.required]),
     })
   }
-  
+
 get email() {
   return this.userform.get('email');
-} 
+}
 
   ngOnInit(): void {
   }
@@ -35,7 +35,7 @@ get email() {
         this.router.navigateByUrl("/login")
       }, err => {
         this.tostr.error("something went wrong")
-        console.log(err);
+
       })
     }else{
       this.tostr.error("please fill form correctly")
@@ -72,5 +72,5 @@ get email() {
     else
       return { "strongPassword": true }
   }
- 
+
 }

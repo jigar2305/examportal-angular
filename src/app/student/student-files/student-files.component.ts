@@ -33,7 +33,6 @@ export class StudentFilesComponent implements OnInit {
         }
       });
     }
-    console.log(this.subjects);
 
   }
 
@@ -55,7 +54,7 @@ export class StudentFilesComponent implements OnInit {
         this.downloadpdf(res.data);
       },
       (err) => {
-        console.log(err);
+
         if (err.error.msg == 'file not found') {
           this.tostr.error('file not found');
         } else {
@@ -70,7 +69,7 @@ export class StudentFilesComponent implements OnInit {
         this.openpdf(res.data);
       },
       (err) => {
-        console.log(err);
+
         if (err.error.msg == 'file not found') {
           this.tostr.error('file not found');
         } else {

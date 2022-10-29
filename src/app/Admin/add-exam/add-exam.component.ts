@@ -56,7 +56,6 @@ export class AddExamComponent implements OnInit {
     this.subjects.forEach((element) => {
       if (element.course.courseId == this.course.courseId) {
         this.subjectsshow.push(element);
-        console.log(element);
       }
     });
   }
@@ -64,10 +63,8 @@ export class AddExamComponent implements OnInit {
     this.subjectIds.forEach((element: any) => {
       element['number'] = 0;
     });
-    console.log(this.subjectIds);
   }
   addexamquestions() {
-    console.log(this.course);
 
     let addquestion = {
       examName: this.examName,
@@ -76,7 +73,6 @@ export class AddExamComponent implements OnInit {
       isshow: this.isshow,
       subjects: this.subjectIds,
     };
-    console.log(addquestion);
     let flag = 0;
     this.subjectIds.forEach((element) => {
       if (element.number == 0 || element.number == null) {
@@ -98,7 +94,6 @@ export class AddExamComponent implements OnInit {
     } else {
       this.adminservice.addexam(addquestion).subscribe(
         (res) => {
-          console.log(res);
           this.router.navigateByUrl("/admin/exam")
           this.tostr.success(this.examName + ' added susseccfully..');
         },

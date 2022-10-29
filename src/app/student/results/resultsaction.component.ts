@@ -19,7 +19,6 @@ export class ResultsactionComponent implements OnInit,ICellRendererAngularComp {
     this.value = params.value;
     this.examId = params.value.examId
     this.resultId = params.value.resultId
-    console.log(this.value);
 
   }
   refresh(params: ICellRendererParams<any, any>): boolean {

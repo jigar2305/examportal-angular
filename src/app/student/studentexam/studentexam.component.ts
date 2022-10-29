@@ -42,9 +42,7 @@ export class StudentexamComponent implements OnInit {
     this.userId = localStorage.getItem("userId")
     this.adminservice.listexambyid(this.userId).subscribe(res => {
       this.exams = res.data
-      console.log(res);
 
-      console.log(this.exams);
     })
   }
 

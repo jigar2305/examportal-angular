@@ -60,7 +60,6 @@ export class AddUserComponent implements OnInit {
         },
         (err) => {
           this.tostr.error('something went wrong');
-          console.log(err);
         }
       );
     } else {

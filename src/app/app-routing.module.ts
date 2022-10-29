@@ -10,6 +10,8 @@ import { CourseComponent } from './Admin/course/course.component';
 import { EditComponent } from './Admin/course/edit.component';
 import { DashbordComponent } from './Admin/dashbord/dashbord.component';
 import { ExamComponent } from './Admin/exam/exam.component';
+import { ExamresultpdfComponent } from './Admin/exam/examresultpdf.component';
+import { ExamwaitingComponent } from './Admin/exam/examwaiting/examwaiting.component';
 import { ListQuestionComponent } from './Admin/list-question/list-question.component';
 import { EditquestionComponent } from './Admin/question/editquestion.component';
 import { QuestionComponent } from './Admin/question/question.component';
@@ -63,6 +65,9 @@ const routes: Routes = [
 
     {component:ExamComponent,path:"exam"},
     {component:AddExamComponent,path:"addexam"},
+    {component:ExamresultpdfComponent,path:"exam/examresult/:examId"},
+    {component:ExamwaitingComponent,path:"exam/waiting/:examId"},
+
 
     {component:UserComponent,path:"user"},
     {component:AddUserComponent,path:"adduser"},

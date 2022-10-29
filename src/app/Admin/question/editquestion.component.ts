@@ -218,7 +218,6 @@ export class EditquestionComponent implements OnInit {
           this.questionObj=res.data
         },
         (err) => {
-          console.log(err.error.msg);
           if (err.error.data == "question not found"){
             this.tostr.error('question Not found');
           }else{

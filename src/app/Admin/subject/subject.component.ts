@@ -32,7 +32,6 @@ export class SubjectComponent implements OnInit {
   ngOnInit(): void {
     this.adminservice.listuser().subscribe(res => {
       this.users = res.data
-      console.log(this.users);
     }, err => {
       this.toster.error("sonething went wrong");
     })

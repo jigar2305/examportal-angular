@@ -51,7 +51,6 @@ export class ResultsComponent implements OnInit {
     this.userId = localStorage.getItem("userId")
     this.sservice.getresults(this.userId).subscribe(res=>{
       this.results = res.data
-      console.log(this.results);
     })
   }
 

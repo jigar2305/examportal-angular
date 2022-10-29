@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators, Form } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from 'src/app/service/admin.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { ColDef } from 'ag-grid-community';
+import { ColDef, ICellRendererParams } from 'ag-grid-community';
 import { ExamactionComponent } from './examaction.component';
 
 @Component({
@@ -35,8 +35,15 @@ export class ExamComponent implements OnInit {
   colDefs: ColDef[] = [
     { field: 'examName' },
     {
-      headerName: 'isshow',
+      headerName: 'Is Answer Show',
       field: 'isshow',
+      cellRenderer:(params: ICellRendererParams) => {
+        if(params.value == true){
+          return "yes";
+        }else{
+          return "false";
+        }
+    }
     },
     {
       headerName: 'level',
@@ -49,6 +56,8 @@ export class ExamComponent implements OnInit {
     {
       headerName: 'Action',
       field: 'examId',
+      maxWidth:300,
+      minWidth:100,
       cellRenderer: ExamactionComponent,
     },
   ];
@@ -93,7 +102,6 @@ export class ExamComponent implements OnInit {
   getallexam() {
     this.adminservice.listexam().subscribe((res) => {
       this.exams = res.data;
-      console.log(this.exams);
     });
   }
   deleteexam(examId: any) {
@@ -137,11 +145,9 @@ export class ExamComponent implements OnInit {
 
       this.adminservice.enrollexam(enroll).subscribe(
         (res) => {
-          console.log(res);
           this.tostr.success('exam enroll successfully');
         },
         (err) => {
-          console.log(err);
           this.tostr.error('sonething went wrong');
         }
       );

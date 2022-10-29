@@ -48,7 +48,6 @@ export class PapersecondComponent implements OnInit {
     })
     this.SService.getquestion(examId).subscribe(res => {
       this.que = res.data
-      console.log(this.que);
 
       this.que.forEach(element => {
         element['selected'] = ""
@@ -73,7 +72,6 @@ export class PapersecondComponent implements OnInit {
   }
 
   previous(index: number) {
-    console.log(index);
     if (index != 0) {
       this.index = index - 1
       this.btnvalue = "next"
@@ -91,7 +89,7 @@ export class PapersecondComponent implements OnInit {
     this.SService.submitquestion(answers).subscribe(res => {
       this.router.navigateByUrl("/student/results")
     }, err => {
-      console.log(err);
+
     })
   }
 }

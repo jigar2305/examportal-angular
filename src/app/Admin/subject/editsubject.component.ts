@@ -176,7 +176,6 @@ export class EditsubjectComponent implements OnInit {
         subject: this.subject,
         files: this.files,
       };
-      console.log(subjectform);
       this.adminservice.updatesubject(subjectform).subscribe(
         (res) => {
           this.getfiles()
@@ -184,7 +183,6 @@ export class EditsubjectComponent implements OnInit {
           this.toster.success('subject updated..');
         },
         (err) => {
-          console.log(err);
           this.toster.error('something went wrong');
         }
       );
@@ -204,7 +202,6 @@ export class EditsubjectComponent implements OnInit {
     if (files) {
       const file = files[0];
       let filesize = file.size;
-      console.log(filesize);
 
       if (file.type != 'application/pdf') {
         this.toster.info('only accept pdf');

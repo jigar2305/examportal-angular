@@ -1,6 +1,8 @@
 .cut-text{
+  text-align: center;
   width: auto;
   overflow:hidden;
+  overflow-x: hidden;
   display:inline-block;
   text-overflow: ellipsis;
   white-space: nowrap;

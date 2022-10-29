@@ -13,7 +13,7 @@ export class AddSubjectComponent implements OnInit {
   subjectform: FormGroup;
   courses: Array<any> = [];
   index: number = 0;
- 
+
   course: any;
   subject!: string;
   files: Array<any> = [];
@@ -53,8 +53,6 @@ export class AddSubjectComponent implements OnInit {
         this.toster.success('subject Added..');
       },
       (err) => {
-        console.log(err);
-
         this.toster.error('something went wrong');
       }
     );
@@ -75,7 +73,6 @@ export class AddSubjectComponent implements OnInit {
     if (files) {
       const file = files[0];
       let filesize = file.size;
-      console.log(filesize);
 
       if (file.type != 'application/pdf') {
         this.toster.info('only accept pdf');

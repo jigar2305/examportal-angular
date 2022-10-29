@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class AdminService {
+
   constructor(private http: HttpClient) {}
 
 
@@ -14,6 +15,7 @@ export class AdminService {
   enrollexam(enroll: any) {
     return this.http.post(environment.url + 'er/add', enroll);
   }
+
 
 
   Listcourse(): Observable<any> {
@@ -99,6 +101,12 @@ export class AdminService {
   }
   addexamquestionsbymanysubjects(examquestion: any): Observable<any> {
     return this.http.post(environment.url + 'eqc/add/many', examquestion);
+  }
+  listresults(examId: number): Observable<any> {
+    return this.http.get(environment.url + 'result/listresult/' + examId);
+  }
+  listwatching(examId: number) : Observable<any> {
+    return this.http.get(environment.url + 'exam/statusofexam/' + examId);
   }
   // ---------------------------------------------------------------
   listuser(): Observable<any> {

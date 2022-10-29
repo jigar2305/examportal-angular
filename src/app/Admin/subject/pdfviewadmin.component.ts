@@ -53,7 +53,7 @@ export class PdfviewadminComponent implements OnInit {
         this.downloadpdf(res.data);
       },
       (err) => {
-        console.log(err);
+
         if (err.error.msg == 'file not found') {
           this.toster.error('file not found');
         } else {
@@ -69,7 +69,7 @@ export class PdfviewadminComponent implements OnInit {
         this.openpdf(res.data);
       },
       (err) => {
-        console.log(err);
+
         if (err.error.msg == 'file not found') {
           this.toster.error('file not found');
         } else {
@@ -126,7 +126,6 @@ export class PdfviewadminComponent implements OnInit {
       .subscribe((res) => {
         this.showfiles = res.data;
         this.subject = this.showfiles[0].subject.subjectName;
-        console.log(this.showfiles);
       });
   }
   downloadpdf(File: any) {

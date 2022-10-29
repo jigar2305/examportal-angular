@@ -53,6 +53,8 @@ import { PdfviewactionComponent } from './Admin/subject/pdfviewaction.component'
 import { StudentFilesComponent } from './student/student-files/student-files.component';
 import { StudentexamactionComponent } from './student/studentexam/studentexamaction.component';
 import { ResultsactionComponent } from './student/results/resultsaction.component';
+import { ExamresultpdfComponent } from './Admin/exam/examresultpdf.component';
+import { ExamwaitingComponent } from './Admin/exam/examwaiting/examwaiting.component';
 
 
 
@@ -102,6 +104,8 @@ import { ResultsactionComponent } from './student/results/resultsaction.componen
     StudentFilesComponent,
     StudentexamactionComponent,
     ResultsactionComponent,
+    ExamresultpdfComponent,
+    ExamwaitingComponent,
   ],
   imports: [
     BrowserModule,

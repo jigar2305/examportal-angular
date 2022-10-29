@@ -41,28 +41,24 @@ export class ForgotpasswordComponent implements OnInit {
 
   }
   emailvarify() {
-    console.log(this.emailform.value);
     if (this.emailform.valid) {
       this.userservice.checkotp(this.emailform.value).subscribe(res => {
-        console.log(res);
         this.tostr.success(res)
         this.showDialog()
       }, err => {
-        console.log(err);
+
         this.tostr.error(err);
       })
     }
   }
   resetpassword() {
-    console.log(this.resetform.value);
     if (this.resetform.valid) {
       this.userservice.resetpassword(this.resetform.value).subscribe(res => {
-        console.log(res);
         this.tostr.success(res)
     document.getElementById("body")?.setAttribute("style","background-color:white")
         this.router.navigateByUrl("/login")
       }, err => {
-        console.log(err);
+
         this.tostr.error(err);
       })
     }
