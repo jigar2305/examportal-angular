@@ -33,12 +33,7 @@ export class CourseactionComponent implements OnInit,ICellRendererAngularComp {
   ngOnInit(): void {
   }
   deletecourse(courseId: any) {
-    this.aservice.deletecourse(courseId).subscribe(res => {
-      this.ccomponent.deletecourse(courseId);
-      this.tostr.success("course deleted..")
-    }, err => {
-      this.tostr.error("something went wrong")
-    })
+    this.ccomponent.checkfordelete(courseId);
   }
 
 }

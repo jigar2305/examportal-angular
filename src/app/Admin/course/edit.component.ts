@@ -6,7 +6,7 @@ import { AdminService } from 'src/app/service/admin.service';
 @Component({
   selector: 'app-edit',
   template: `
-   <div class="container">
+   <div class="container-fluid">
   <div class="row">
     <div class="col-12">
       <div class="card">
@@ -39,7 +39,8 @@ export class EditComponent implements OnInit {
   ngOnInit(): void {
     this.adminservice.getcourse(this.aRoute.snapshot.params["courseId"]).subscribe(res=>{
       this.course = res.data
-      this.course;
+      console.log(this.course);
+
 
     },err=>{
       this.toster.error("This course Not found")

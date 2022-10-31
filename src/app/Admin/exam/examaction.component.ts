@@ -11,8 +11,8 @@ import { ExamComponent } from './exam.component';
 
       <i class="bi bi-trash" (click)="deleteexam()"></i>
       &nbsp;&nbsp;
-      <a routerLink="/admin/course/edit"><i class="ri-edit-2-fill"></i></a>
-      &nbsp;&nbsp;
+      <!-- <a routerLink="/admin/course/edit"><i class="ri-edit-2-fill"></i></a>
+      &nbsp;&nbsp; -->
       <i styles="cursor:pointer;"  class="ri-user-add-line"  data-bs-toggle="modal" data-bs-target="#verticalycentered2" (click)="setexam(value)"></i>
       &nbsp;&nbsp;
       <a routerLink="/admin/exam/examresult/{{value}}">result</a>

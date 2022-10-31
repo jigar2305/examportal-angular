@@ -14,10 +14,12 @@ export class CourseComponent implements OnInit {
   courses: Array<any> = [];
   searchText: any;
   gridApActive: any;
+  subject:Array<any> = []
+  courseId!:number
 
   constructor(
     private adminservice: AdminService,
-    private toster: ToastrService
+    private tostr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -35,9 +37,6 @@ export class CourseComponent implements OnInit {
     },
   ];
   defaultColDef: ColDef = {
-    enableRowGroup: true,
-    enablePivot: true,
-    enableValue: true,
     sortable: true,
     resizable: true,
     filter: true,
@@ -51,9 +50,26 @@ export class CourseComponent implements OnInit {
     this.gridApActive = params.api;
     this.adminservice.Listcourse().subscribe((res: { data: any }) => {
       this.courses = res.data;
+      console.log(this.courses);
     });
   }
-  deletecourse(courseId: any) {
-    this.courses = this.courses.filter(r => r.courseId != courseId)
+  checkfordelete(courseId: any){
+    let e = document.getElementById("model")
+    e?.click()
+    console.log(e);
+    this.adminservice.iscontainsubject(courseId).subscribe((res)=>{
+      this.subject = res.data
+      console.log(this.subject);
+      this.courseId = courseId
+    })
+
+  }
+  deletecourse() {
+    this.adminservice.deletecourse(this.courseId).subscribe(res => {
+      this.courses = this.courses.filter(r => r.courseId != this.courseId)
+      this.tostr.success("course deleted..")
+    }, err => {
+      this.tostr.error("something went wrong")
+    })
   }
 }

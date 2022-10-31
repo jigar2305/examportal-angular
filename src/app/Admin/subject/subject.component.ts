@@ -13,12 +13,14 @@ import { SubjectactionComponent } from './subjectaction.component';
 })
 export class SubjectComponent implements OnInit {
   subjects: Array<any> = [];
+  quetion!:number
   gridApActive: any;
   searchText: any;
   users:Array<any> = [];
   dropdownSettingsforuser: IDropdownSettings = {};
   dropdownSettingsforsubject: IDropdownSettings = {};
   enrollsubjectform: FormGroup;
+  subjectId!: number;
   constructor(
     private adminservice: AdminService,
     private toster: ToastrService
@@ -81,8 +83,27 @@ export class SubjectComponent implements OnInit {
       this.subjects = res.data;
     });
   }
-  updateondelete(subjectId: number) {
-    this.subjects = this.subjects.filter((r) => r.subjectId != subjectId);
+  checkfordelete(subjectId: any){
+    let e = document.getElementById("model")
+    e?.click()
+    console.log(e);
+    this.adminservice.iscontainquestion(subjectId).subscribe((res)=>{
+      this.quetion = res.data
+      this.subjectId = subjectId
+    },(err)=>{
+
+    })
+  }
+  delete() {
+    this.adminservice.deletesubject(this.subjectId).subscribe(
+      (res) => {
+        this.subjects = this.subjects.filter((r) => r.subjectId != this.subjectId);
+        this.toster.success('subject deleted..');
+      },
+      (err) => {
+        this.toster.error('something went wrong');
+      }
+    );
   }
   enroll(){
     let subjectIds:Array<number> = []

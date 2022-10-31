@@ -38,15 +38,8 @@ export class SubjectactionComponent implements OnInit,ICellRendererAngularComp {
 
   }
   deletesubject(subjectId: any) {
-    this.adminservice.deletesubject(subjectId).subscribe(
-      (res) => {
-        this.toster.success('subject deleted..');
-        this.subj.updateondelete(subjectId)
-      },
-      (err) => {
-        this.toster.error('something went wrong');
-      }
-    );
+    this.subj.checkfordelete(subjectId)
+
   }
 
 }

@@ -12,11 +12,6 @@ export class AdminService {
 
 
   // API call
-  enrollexam(enroll: any) {
-    return this.http.post(environment.url + 'er/add', enroll);
-  }
-
-
 
   Listcourse(): Observable<any> {
     return this.http.get(environment.url + 'course/list');
@@ -30,6 +25,9 @@ export class AdminService {
   }
   getcourse(courseId:number): Observable<any> {
     return this.http.get(environment.url + 'course/coursebyId/'+courseId);
+  }
+  iscontainsubject(courseId:number): Observable<any> {
+    return this.http.get(environment.url + 'course/child/'+courseId);
   }
   // -----------------------------------------------------------------------------------------
 
@@ -59,6 +57,9 @@ export class AdminService {
   }
   deletesubjectfile(subjectfileId: number): Observable<any> {
     return this.http.delete(environment.url + 'subject/deletefile/' + subjectfileId);
+  }
+  iscontainquestion(courseId:number): Observable<any> {
+    return this.http.get(environment.url + 'subject/child/'+courseId);
   }
   // -----------------------------------------------------------------------------------------------
 
@@ -107,6 +108,12 @@ export class AdminService {
   }
   listwatching(examId: number) : Observable<any> {
     return this.http.get(environment.url + 'exam/statusofexam/' + examId);
+  }
+  enrollexam(enroll: any) {
+    return this.http.post(environment.url + 'er/add', enroll);
+  }
+  getexam(examId: number): Observable<any> {
+    return this.http.get(environment.url + 'exam/get/' + examId);
   }
   // ---------------------------------------------------------------
   listuser(): Observable<any> {
