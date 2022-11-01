@@ -35,7 +35,7 @@ export class ExamactionComponent implements OnInit, ICellRendererAngularComp {
     private examcomponent: ExamComponent
   ) {}
   deleteexam() {
-    this.examcomponent.deleteexam(this.value);
+    this.examcomponent.checkfordelete(this.value);
   }
   setexam(examId:number){
     this.examcomponent.setexamId(examId)

@@ -83,6 +83,9 @@ export class AdminService {
   deletquestion(questionId: number): Observable<any> {
     return this.http.delete(environment.url + 'que/delete/' + questionId);
   }
+  iscontainexamquestion(questionId:number): Observable<any> {
+    return this.http.get(environment.url + 'que/child/'+questionId);
+  }
   // ---------------------------------------------------------------------------------------------
 
   addexam(exam: any): Observable<any> {
@@ -96,6 +99,9 @@ export class AdminService {
   }
   deleteExam(examId: any): Observable<any> {
     return this.http.delete(environment.url + 'exam/delete/' + examId);
+  }
+  isenroll(examId:number): Observable<any> {
+    return this.http.get(environment.url + 'exam/child/'+examId);
   }
   addexamquestions(examquestion: any): Observable<any> {
     return this.http.post(environment.url + 'eqc/add', examquestion);

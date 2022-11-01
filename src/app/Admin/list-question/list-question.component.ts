@@ -11,14 +11,12 @@ import { QuestionactionComponent } from '../question/questionaction.component';
   styleUrls: ['./list-question.component.css'],
 })
 export class ListQuestionComponent implements OnInit {
-  question: string = '';
-  a: string = '';
-  b: string = '';
-  c: string = '';
-  d: string = '';
-  correctAnswer: string = '';
-  level: string = '';
-  questionobj: any;
+
+  questions: Array<any> = [];
+  subjects: Array<any> = [];
+  questionId!: number;
+  count!:number
+  constructor(private aservice: AdminService, private tostr: ToastrService) {}
 
   ngOnInit(): void {}
   gridApActive: any;
@@ -67,8 +65,6 @@ export class ListQuestionComponent implements OnInit {
     },
   ];
   defaultColDef: ColDef = {
-    enablePivot: true,
-    enableValue: true,
     sortable: true,
     resizable: true,
     filter: true,
@@ -84,17 +80,30 @@ export class ListQuestionComponent implements OnInit {
     this.gridApActive = params.api;
     this.aservice.listquestions().subscribe((res) => {
       this.questions = res.data;
-
+      console.log(this.questions);
     });
   }
+  checkfordelete(questionId: any){
+    let e = document.getElementById("model")
+    e?.click()
+    console.log(e);
+    this.aservice.iscontainexamquestion(questionId).subscribe((res)=>{
+      this.count = res.data
+      this.questionId = questionId
+    },(err)=>{
+      this.tostr.error('question Not found');
+    })
+  }
 
-
-
-  questions: Array<any> = [];
-  subjects: any = [];
-  constructor(private aservice: AdminService, private tostr: ToastrService) {}
-
-  updateondelete(questionId: number) {
-    this.questions = this.questions.filter((r) => r.questionId != questionId);
+  delete() {
+      this.aservice.deletquestion(this.questionId).subscribe(
+        (res) => {
+          this.tostr.success('question deleted');
+          this.questions = this.questions.filter((r) => r.questionId != this.questionId);
+        },
+        (err) => {
+          this.tostr.error('something went wrong');
+        }
+      );
   }
 }

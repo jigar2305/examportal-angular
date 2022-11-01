@@ -21,40 +21,59 @@
             </div>
           </div>
           <ag-grid-angular style="height: 500px; " class="ag-theme-alpine" [defaultColDef]="defaultColDef"
-          [rowData]="exams" [columnDefs]="colDefs" [suppressRowClickSelection]="true" [groupSelectsChildren]="true"
-          [pagination]="true" (gridReady)="onGridReady($event)"></ag-grid-angular>
+            [rowData]="exams" [columnDefs]="colDefs" [suppressRowClickSelection]="true" [pagination]="true"
+            (gridReady)="onGridReady($event)"></ag-grid-angular>
         </div>
       </div>
     </div>
   </div>
 </div>
 <div class="modal fade" id="verticalycentered2" tabindex="-1" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Enroll</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form class="row g-3 needs-validation" [formGroup]="enrollexamform" (ngSubmit)="enroll()" novalidate>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Enroll</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="row g-3 needs-validation" [formGroup]="enrollexamform" (ngSubmit)="enroll()" novalidate>
 
-                    <label class="form-label">students:</label>
-                    <div class="col-10">
-                        <div class="input-group has-validation">
-                            <div class="col-sm-10">
-                                <ng-multiselect-dropdown [settings]="dropdownSettings" [data]="users"
-                                    formControlName="userId">
-                                </ng-multiselect-dropdown>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="col-2">
-                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal"
-                            style="width: 100%;">send</button>
-                    </div>
-                </form>
+          <label class="form-label">students:</label>
+          <div class="col-10">
+            <div class="input-group has-validation">
+              <div class="col-sm-10">
+                <ng-multiselect-dropdown [settings]="dropdownSettings" [data]="users" formControlName="userId">
+                </ng-multiselect-dropdown>
+              </div>
             </div>
-        </div>
+
+          </div>
+          <div class="col-2">
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" style="width: 100%;">send</button>
+          </div>
+        </form>
+      </div>
     </div>
+  </div>
 </div>
+<div class="modal fade" id="smallModal" tabindex="-1" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Conform</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete</p>
+        <p *ngIf="count > 0" style="color: red;">
+         this exam is live 
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="delete()">delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+<button type="button" data-bs-toggle="modal" data-bs-target="#smallModal" id="model" hidden="true"></button>

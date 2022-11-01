@@ -8,7 +8,6 @@
             <label for="inputEmail" class="col-sm-1 col-form-label">course</label>
             <div class="col-sm-6">
               <select class="form-select" aria-label="Default select example" [(ngModel)]="course">
-                <option selected="" [ngValue]="null">plese select course</option>
                 <option *ngFor="let i of courses" [ngValue]="i">{{i.courseName}}</option>
               </select>
             </div>

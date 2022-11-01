@@ -5,6 +5,7 @@ import { AdminService } from 'src/app/service/admin.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { ColDef, ICellRendererParams } from 'ag-grid-community';
 import { ExamactionComponent } from './examaction.component';
+import { count } from 'rxjs';
 
 @Component({
   selector: 'app-exam',
@@ -22,6 +23,7 @@ export class ExamComponent implements OnInit {
   enrollexamform: FormGroup;
   subjectIds: Array<any> = [];
   examselected: any;
+  count!:number
 
   constructor(
     private adminservice: AdminService,
@@ -104,11 +106,20 @@ export class ExamComponent implements OnInit {
       this.exams = res.data;
     });
   }
-  deleteexam(examId: any) {
-    this.adminservice.deleteExam(examId).subscribe(
+  checkfordelete(examId: any){
+    document.getElementById("model")?.click()
+    this.adminservice.isenroll(examId).subscribe((res)=>{
+      this.count = res.data
+      this.examId = examId
+    },(err)=>{
+      this.tostr.error("Technical error accoured")
+    })
+  }
+  delete() {
+    this.adminservice.deleteExam(this.examId).subscribe(
       (res) => {
         this.tostr.success('exam deleted..');
-        this.exams = this.exams.filter((r) => r.examId != examId);
+        this.exams = this.exams.filter((r) => r.examId != this.examId);
       },
       (err) => {
         this.tostr.error('something went wrong');

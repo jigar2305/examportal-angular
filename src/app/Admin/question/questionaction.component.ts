@@ -33,16 +33,6 @@ export class QuestionactionComponent
   ) {}
   ngOnInit(): void {}
   deletequestion(questionId:number) {
-    if (confirm('Are you sure to delete ')) {
-      this.aservice.deletquestion(questionId).subscribe(
-        (res) => {
-          this.tostr.success('question deleted');
-          this.quecomponent.updateondelete(questionId);
-        },
-        (err) => {
-          this.tostr.error('something went wrong');
-        }
-      );
-    }
+    this.quecomponent.checkfordelete(questionId);
   }
 }

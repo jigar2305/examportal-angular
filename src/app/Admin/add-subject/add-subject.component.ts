@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from 'src/app/service/admin.service';
 import { async, Observable, Subscriber } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-subject',
@@ -21,7 +22,8 @@ export class AddSubjectComponent implements OnInit {
 
   constructor(
     private adminservice: AdminService,
-    private toster: ToastrService
+    private toster: ToastrService,
+    private rout:Router
   ) {
     this.subjectform = new FormGroup({
       course: new FormControl(),
@@ -50,6 +52,7 @@ export class AddSubjectComponent implements OnInit {
     };
     this.adminservice.addsubject(subjectform).subscribe(
       (res) => {
+        this.rout.navigateByUrl('admin/subject')
         this.toster.success('subject Added..');
       },
       (err) => {
