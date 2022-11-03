@@ -55,6 +55,7 @@ import { StudentexamactionComponent } from './student/studentexam/studentexamact
 import { ResultsactionComponent } from './student/results/resultsaction.component';
 import { ExamresultpdfComponent } from './Admin/exam/examresultpdf.component';
 import { ExamwaitingComponent } from './Admin/exam/examwaiting/examwaiting.component';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -121,7 +122,7 @@ import { ExamwaitingComponent } from './Admin/exam/examwaiting/examwaiting.compo
     AgGridModule,
     TooltipModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

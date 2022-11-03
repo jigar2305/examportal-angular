@@ -1,3 +1,4 @@
+import { Time } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -19,6 +20,8 @@ export class AddExamComponent implements OnInit {
   time: number = 0;
   examName: string = '';
   level: string = '';
+  date!:String
+  start!:String
   isshow: boolean = false;
   courses: Array<any> = [];
   course: any;
@@ -65,6 +68,11 @@ export class AddExamComponent implements OnInit {
     });
   }
   addexamquestions() {
+   this.date = this.date.replace("-","/")
+   this.date = this.date.replace("-","/")
+    console.log(this.start);
+    console.log(this.date);
+
 
     let addquestion = {
       examName: this.examName,
@@ -72,6 +80,8 @@ export class AddExamComponent implements OnInit {
       time: this.time,
       isshow: this.isshow,
       subjects: this.subjectIds,
+      date: this.date,
+      startAt:this.start
     };
     let flag = 0;
     this.subjectIds.forEach((element) => {
@@ -80,18 +90,26 @@ export class AddExamComponent implements OnInit {
       }
     });
 
-    if (
-      this.subjectIds.length == 0 ||
-      this.examName.length == 0 ||
-      this.examName == null ||
-      this.level == null ||
-      this.time == null ||
-      this.time == 0 ||
-      this.isshow == null ||
-      flag == 1
-    ) {
-      this.tostr.info('please fill form correctly');
-    } else {
+    // if (
+    //   this.subjectIds.length == 0 ||
+    //   this.examName.length == 0 ||
+    //   this.examName == null ||
+    //   this.level == null ||
+    //   this.time == null ||
+    //   this.time == 0 ||
+    //   this.isshow == null ||
+    //   this.start == null ||
+    //   this.date == null ||
+    //   flag == 1
+    // ) {
+    //   this.tostr.info('please fill form correctly');
+    // } else {
+
+
+
+
+
+
       this.adminservice.addexam(addquestion).subscribe(
         (res) => {
           this.router.navigateByUrl("/admin/exam")
@@ -107,6 +125,6 @@ export class AddExamComponent implements OnInit {
           }
         }
       );
-    }
+    // }
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ColDef } from 'ag-grid-community';
+import { ColDef, ValueGetterParams } from 'ag-grid-community';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from 'src/app/service/admin.service';
 import { StudentexamactionComponent } from './studentexamaction.component';
@@ -21,10 +21,14 @@ export class StudentexamComponent implements OnInit {
     { field: 'examName' },
     {
       headerName: 'Action',
-      field: 'examId',
+      valueGetter: this.examdetail,
       cellRenderer: StudentexamactionComponent,
     },
   ];
+
+  examdetail(params: ValueGetterParams) {
+    return params.data;
+  }
   defaultColDef: ColDef = {
     sortable: true,
     resizable: true,

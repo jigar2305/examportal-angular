@@ -23,7 +23,7 @@ export class ExamComponent implements OnInit {
   enrollexamform: FormGroup;
   subjectIds: Array<any> = [];
   examselected: any;
-  count!:number
+  count!: number;
 
   constructor(
     private adminservice: AdminService,
@@ -39,27 +39,59 @@ export class ExamComponent implements OnInit {
     {
       headerName: 'Is Answer Show',
       field: 'isshow',
-      cellRenderer:(params: ICellRendererParams) => {
-        if(params.value == true){
-          return "yes";
-        }else{
-          return "false";
+      cellRenderer: (params: ICellRendererParams) => {
+        if (params.value == true) {
+          return 'yes';
+        } else {
+          return 'false';
         }
-    }
+      },
+    },
+    {
+      headerName: 'Date',
+      field: 'date',
+      cellRenderer: (params: ICellRendererParams) => {
+        let date = params.value as string;
+        return date.substring(0, 10);
+      },
+    },
+    {
+      headerName: 'StartAt',
+      field: 'startAt',
+      cellRenderer: (params: ICellRendererParams) => {
+        let timeString = params.value as string;
+        const [hourString, minute] = timeString.split(':');
+        const hour = +hourString % 24;
+        return (
+          (hour % 12 || 12) + ':' + minute + ' ' + (hour < 12 ? 'AM' : 'PM')
+        );
+      },
     },
     {
       headerName: 'level',
       field: 'level',
     },
+
     {
-      headerName: 'time',
+      headerName: 'Time',
       field: 'time',
+      cellRenderer: (params: ICellRendererParams) => {
+        if(params.value < 60){
+          return params.value+" "+"minute"
+        }else if(params.value == 60){
+          return "1 hour";
+        }else{
+          let time = Math.trunc((params.value / 60))
+          let minute = params.value % 60
+          return time+" : "+minute+" minute"
+        }
+      },
     },
     {
       headerName: 'Action',
       field: 'examId',
-      maxWidth:300,
-      minWidth:100,
+      maxWidth: 300,
+      minWidth: 100,
       cellRenderer: ExamactionComponent,
     },
   ];
@@ -104,16 +136,20 @@ export class ExamComponent implements OnInit {
   getallexam() {
     this.adminservice.listexam().subscribe((res) => {
       this.exams = res.data;
+      console.log(this.exams);
     });
   }
-  checkfordelete(examId: any){
-    document.getElementById("model")?.click()
-    this.adminservice.isenroll(examId).subscribe((res)=>{
-      this.count = res.data
-      this.examId = examId
-    },(err)=>{
-      this.tostr.error("Technical error accoured")
-    })
+  checkfordelete(examId: any) {
+    document.getElementById('model')?.click();
+    this.adminservice.isenroll(examId).subscribe(
+      (res) => {
+        this.count = res.data;
+        this.examId = examId;
+      },
+      (err) => {
+        this.tostr.error('Technical error accoured');
+      }
+    );
   }
   delete() {
     this.adminservice.deleteExam(this.examId).subscribe(
@@ -144,7 +180,7 @@ export class ExamComponent implements OnInit {
   enroll() {
     if (this.enrollexamform.valid) {
       this.enrollexamform.value.userId.forEach((element: any) => {
-        if(element.userId){
+        if (element.userId) {
           this.userId.push(element.userId);
         }
       });
@@ -152,7 +188,6 @@ export class ExamComponent implements OnInit {
         examId: this.examId,
         userId: this.userId,
       };
-
 
       this.adminservice.enrollexam(enroll).subscribe(
         (res) => {
@@ -163,7 +198,7 @@ export class ExamComponent implements OnInit {
         }
       );
 
-      this.userId = []
+      this.userId = [];
     } else {
       this.tostr.error('At least one', 'please select');
     }
