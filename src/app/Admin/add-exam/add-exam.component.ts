@@ -1,4 +1,4 @@
-import { Time } from '@angular/common';
+import { DatePipe, Time } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -20,15 +20,17 @@ export class AddExamComponent implements OnInit {
   time: number = 0;
   examName: string = '';
   level: string = '';
-  date!:String
-  start!:String
+  date!: String;
+  startAt!: String;
+  endAt!: String;
   isshow: boolean = false;
   courses: Array<any> = [];
   course: any;
   constructor(
     private adminservice: AdminService,
     private tostr: ToastrService,
-    private router:Router
+    private router: Router,
+    private datePipe: DatePipe
   ) {}
   ngOnInit(): void {
     this.getallsubject();
@@ -68,51 +70,46 @@ export class AddExamComponent implements OnInit {
     });
   }
   addexamquestions() {
-   this.date = this.date.replace("-","/")
-   this.date = this.date.replace("-","/")
-    console.log(this.start);
+    this.date = this.date.replace('-', '/');
+    this.date = this.date.replace('-', '/');
+    let flag = 0;
     console.log(this.date);
 
-
-    let addquestion = {
-      examName: this.examName,
-      level: this.level,
-      time: this.time,
-      isshow: this.isshow,
-      subjects: this.subjectIds,
-      date: this.date,
-      startAt:this.start
-    };
-    let flag = 0;
     this.subjectIds.forEach((element) => {
       if (element.number == 0 || element.number == null) {
         flag = 1;
       }
     });
-
-    // if (
-    //   this.subjectIds.length == 0 ||
-    //   this.examName.length == 0 ||
-    //   this.examName == null ||
-    //   this.level == null ||
-    //   this.time == null ||
-    //   this.time == 0 ||
-    //   this.isshow == null ||
-    //   this.start == null ||
-    //   this.date == null ||
-    //   flag == 1
-    // ) {
-    //   this.tostr.info('please fill form correctly');
-    // } else {
-
-
-
-
-
-
+    if (
+      this.subjectIds.length == 0 ||
+      this.examName.length == 0 ||
+      this.examName == null ||
+      this.level == null ||
+      this.time == null ||
+      this.time == 0 ||
+      this.isshow == null ||
+      this.startAt == null ||
+      this.endAt == null ||
+      this.date == null ||
+      flag == 1
+    ) {
+      this.tostr.info('please fill form correctly');
+    } else if(this.endAt < this.startAt){
+      this.tostr.info('end time is more than start time');
+    } else{
+      let addquestion = {
+        examName: this.examName,
+        level: this.level,
+        time: this.time,
+        isshow: this.isshow,
+        subjects: this.subjectIds,
+        date: this.date,
+        startAt: this.startAt,
+        endAt: this.endAt,
+      };
       this.adminservice.addexam(addquestion).subscribe(
         (res) => {
-          this.router.navigateByUrl("/admin/exam")
+          this.router.navigateByUrl('/admin/exam');
           this.tostr.success(this.examName + ' added susseccfully..');
         },
         (err) => {
@@ -125,6 +122,6 @@ export class AddExamComponent implements OnInit {
           }
         }
       );
-    // }
+    }
   }
 }

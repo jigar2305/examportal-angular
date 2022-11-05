@@ -2,49 +2,86 @@ import { DatePipe, formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { ICellRendererParams } from 'ag-grid-community';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-studentexamaction',
   template: `
-  <a routerLink="/student/paper/{{examId}}">start</a>
+    <button
+      class="btn btn-sm"
+      *ngIf="isshow == 'start'"
+      routerLink="/student/paper/{{ examId }}"
+    >
+      start
+    </button>
+    <button class="btn btn-sm" *ngIf="isshow == 'wait'">Wait</button>
+    <button class="btn btn-sm" *ngIf="isshow == 'end'">end</button>
   `,
   styles: [
-  ]
+    `
+      button {
+        color: black;
+        border: 1px solid black;
+        background-color: gainsboro;
+      }
+    `,
+  ],
 })
-export class StudentexamactionComponent implements OnInit,ICellRendererAngularComp {
-  examId!:number
-  date!:string
-  startAt!:string
-  today!: string
-  isshow:boolean = false;
-
+export class StudentexamactionComponent
+  implements OnInit, ICellRendererAngularComp
+{
+  examId!: number;
+  date!: string;
+  startAt!: string;
+  today!: string;
+  endAt!: string;
+  isshow!: string;
   agInit(params: ICellRendererParams<any, any>): void {
-    this.examId = params.value.examId
-    console.log(params.value.date);
-
+    this.examId = params.value.examId;
     this.date = params.value.date.substring(0, 10);
-    this.startAt = params.value.startAt
-    this.check()
+    this.startAt = params.value.startAt;
+    this.endAt = params.value.endAt;
+    this.check();
   }
   refresh(params: ICellRendererParams<any, any>): boolean {
     return true;
   }
-  constructor(private datePipe:DatePipe) {
+  constructor(private datePipe: DatePipe) {}
+
+  ngOnInit(): void {}
+  check() {
+    this.today = this.datePipe.transform(Date.now(), 'yyyy-MM-dd') as string;
+    let date1 = formatDate(this.today, 'yyyy-MM-dd', 'en_US');
+    let date2 = formatDate(this.date, 'yyyy-MM-dd', 'en_US');
+    if (date1 < date2) {
+      this.isshow = "wait";
+    }else if(date1 > date2){
+      this.isshow = "end";
+    }else{
+      this.checkforstart();
+      this.chekforclose();
+    }
   }
-
-  ngOnInit(): void {
+  checkforstart() {
+    let close = interval(1000).subscribe((x) => {
+      let currentTime = this.datePipe.transform(new Date(), 'H:mm:ss');
+      if (currentTime) {
+        if (currentTime >= this.startAt) {
+          this.isshow = "start";
+          close.unsubscribe();
+        }
+      }
+    });
   }
-  check(){
-    this.today = this.datePipe.transform(Date.now(), 'yyyy-MM-dd') as string
-
-   let date1 = formatDate(this.today,'yyyy-MM-dd','en_US');
-  let  date2 = formatDate(this.date,'yyyy-MM-dd','en_US');
-console.log(date1 +" "+date2);
-
-console.log(date1 < date2);
-
-
-
+  chekforclose() {
+    let close = interval(1000).subscribe((x) => {
+      let currentTime = this.datePipe.transform(new Date(), 'H:mm:ss');
+      if (currentTime) {
+        if (currentTime >= this.endAt) {
+          this.isshow = "end";
+          close.unsubscribe();
+        }
+      }
+    });
   }
-
 }

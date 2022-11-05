@@ -6,32 +6,32 @@
           <h5 class="card-title">create exam</h5>
           <div class="row mb-3">
             <label for="inputEmail3" class="col-sm-1 col-form-label">exam</label>
-            <div class="col-sm-6">
+            <div class="col-sm-4">
               <input type="text" class="form-control" [(ngModel)]="examName" id="inputText" />
             </div>
           </div>
           <div class="row mb-3">
             <label for="inputEmail" class="col-sm-1 col-form-label">Time</label>
-            <div class="col-sm-6">
+            <div class="col-sm-4">
               <input type="number" class="form-control" [(ngModel)]="time" id="inputText" />
             </div>
           </div>
           <div class="row mb-3">
-            <div class="col-1">
+            <div class="col-sm-1">
               <input class="form-check-input" type="radio" [(ngModel)]="level" value="easy" />
-              &nbsp; easy
+              &nbsp;easy
             </div>
-            <div class="col-2">
+            <div class="col-sm-2">
               <input class="form-check-input" type="radio" [(ngModel)]="level" value="easy-moderate" />
               &nbsp;easy-moderate
             </div>
-            <div class="col-2">
+            <div class="col-sm-2">
               <input class="form-check-input" type="radio" [(ngModel)]="level" value="moderate-hard" />
-              &nbsp; moderate-hard
+              &nbsp;moderate-hard
             </div>
-            <div class="col-2">
+            <div class="col-sm-1">
               <input class="form-check-input" type="radio" [(ngModel)]="level" value="hard" />
-              &nbsp; hard
+              &nbsp;hard
             </div>
           </div>
           <div class="form-check mb-3">
@@ -40,19 +40,25 @@
           </div>
           <div class="row mb-3">
             <label for="inputEmail" class="col-sm-1 col-form-label">Date</label>
-            <div class="col-sm-6">
-              <input type="Date" class="form-control" placeholder="dd/mm/yyy" [(ngModel)]="date" id="Date" />
+            <div class="col-sm-4">
+              <input type="Date" class="form-control" [(ngModel)]="date"  id="Date" />
             </div>
           </div>
           <div class="row mb-3">
             <label for="inputEmail" class="col-sm-1 col-form-label">Start At</label>
-            <div class="col-sm-6">
-              <input type="time" class="form-control" [(ngModel)]="start" id="start" />
+            <div class="col-sm-4">
+              <input type="time" class="form-control" [(ngModel)]="startAt" id="startAt" />
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="inputEmail" class="col-sm-1 col-form-label">End At</label>
+            <div class="col-sm-4">
+              <input type="time" class="form-control" [(ngModel)]="endAt" id="startAt" />
             </div>
           </div>
           <div class="row mb-3">
             <label for="inputEmail" class="col-sm-1 col-form-label">course</label>
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <select class="form-select" aria-label="Default select example" (change)="courseselect()" [(ngModel)]="course" >
                     <option *ngFor="let i of courses" [ngValue]="i">{{i.courseName}}</option>
                 </select>
@@ -60,7 +66,7 @@
         </div>
           <div class="row mb-3">
             <label for="inputEmail3" class="col-sm-1 col-form-label">subject</label>
-            <div class="col-sm-6">
+            <div class="col-sm-4">
               <ng-multiselect-dropdown [settings]="dropdownSettingsforsubject" [data]="subjectsshow"
                 [(ngModel)]="subjectIds" (onSelect)="select()" required>
               </ng-multiselect-dropdown>

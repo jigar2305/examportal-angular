@@ -39,37 +39,69 @@ export class ExamComponent implements OnInit {
     {
       headerName: 'Is Answer Show',
       field: 'isshow',
+      minWidth:100,
+      maxWidth:150,
       cellRenderer: (params: ICellRendererParams) => {
         if (params.value == true) {
           return 'yes';
         } else {
-          return 'false';
+          return 'No';
         }
       },
     },
     {
       headerName: 'Date',
       field: 'date',
+      minWidth:100,
+      maxWidth:180,
       cellRenderer: (params: ICellRendererParams) => {
         let date = params.value as string;
-        return date.substring(0, 10);
+        return date;
       },
     },
     {
-      headerName: 'StartAt',
+      headerName: 'Start Time',
       field: 'startAt',
+      minWidth:100,
+      maxWidth:150,
       cellRenderer: (params: ICellRendererParams) => {
         let timeString = params.value as string;
-        const [hourString, minute] = timeString.split(':');
+        if(timeString != null){
+
+          const [hourString, minute] = timeString.split(':');
         const hour = +hourString % 24;
         return (
           (hour % 12 || 12) + ':' + minute + ' ' + (hour < 12 ? 'AM' : 'PM')
-        );
-      },
+          );
+        }else{
+          return "---"
+        }
+      }
+    },
+    {
+      headerName: 'End Time',
+      field: 'endAt',
+      minWidth:100,
+      maxWidth:150,
+      cellRenderer: (params: ICellRendererParams) => {
+        let timeString = params.value as string;
+        if(timeString != null){
+
+          const [hourString, minute] = timeString.split(':');
+        const hour = +hourString % 24;
+        return (
+          (hour % 12 || 12) + ':' + minute + ' ' + (hour < 12 ? 'AM' : 'PM')
+          );
+        }else{
+          return "---"
+        }
+      }
     },
     {
       headerName: 'level',
       field: 'level',
+      minWidth:100,
+      maxWidth:100,
     },
 
     {
@@ -91,7 +123,7 @@ export class ExamComponent implements OnInit {
       headerName: 'Action',
       field: 'examId',
       maxWidth: 300,
-      minWidth: 100,
+      minWidth: 200,
       cellRenderer: ExamactionComponent,
     },
   ];
