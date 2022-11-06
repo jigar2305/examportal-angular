@@ -13,24 +13,25 @@ import { count } from 'rxjs';
   styleUrls: ['./exam.component.css'],
 })
 export class ExamComponent implements OnInit {
-  subjects: Array<any> = [];
+
   exams: Array<any> = [];
   users: any = [];
   examId: number = 0;
   dropdownSettings: IDropdownSettings = {};
   dropdownSettingsforsubject: IDropdownSettings = {};
-  userId: Array<number> = [];
+  userId: Array<any> = [];
+  Ids: Array<any> = [];
   enrollexamform: FormGroup;
   subjectIds: Array<any> = [];
   examselected: any;
   count!: number;
-
+  filterText!: string;
   constructor(
     private adminservice: AdminService,
     private tostr: ToastrService
   ) {
     this.enrollexamform = new FormGroup({
-      userId: new FormControl([Validators.required]),
+      ids: new FormControl([Validators.required]),
     });
   }
 
@@ -39,8 +40,8 @@ export class ExamComponent implements OnInit {
     {
       headerName: 'Is Answer Show',
       field: 'isshow',
-      minWidth:100,
-      maxWidth:150,
+      minWidth: 100,
+      maxWidth: 150,
       cellRenderer: (params: ICellRendererParams) => {
         if (params.value == true) {
           return 'yes';
@@ -52,8 +53,8 @@ export class ExamComponent implements OnInit {
     {
       headerName: 'Date',
       field: 'date',
-      minWidth:100,
-      maxWidth:180,
+      minWidth: 100,
+      maxWidth: 180,
       cellRenderer: (params: ICellRendererParams) => {
         let date = params.value as string;
         return date;
@@ -62,18 +63,18 @@ export class ExamComponent implements OnInit {
     {
       headerName: 'Start Time',
       field: 'startAt',
-      minWidth:100,
-      maxWidth:150,
+      minWidth: 100,
+      maxWidth: 150,
       cellRenderer: (params: ICellRendererParams) => {
         let timeString = params.value as string;
-        if(timeString != null){
+        if (timeString != null) {
 
           const [hourString, minute] = timeString.split(':');
-        const hour = +hourString % 24;
-        return (
-          (hour % 12 || 12) + ':' + minute + ' ' + (hour < 12 ? 'AM' : 'PM')
+          const hour = +hourString % 24;
+          return (
+            (hour % 12 || 12) + ':' + minute + ' ' + (hour < 12 ? 'AM' : 'PM')
           );
-        }else{
+        } else {
           return "---"
         }
       }
@@ -81,18 +82,18 @@ export class ExamComponent implements OnInit {
     {
       headerName: 'End Time',
       field: 'endAt',
-      minWidth:100,
-      maxWidth:150,
+      minWidth: 100,
+      maxWidth: 150,
       cellRenderer: (params: ICellRendererParams) => {
         let timeString = params.value as string;
-        if(timeString != null){
+        if (timeString != null) {
 
           const [hourString, minute] = timeString.split(':');
-        const hour = +hourString % 24;
-        return (
-          (hour % 12 || 12) + ':' + minute + ' ' + (hour < 12 ? 'AM' : 'PM')
+          const hour = +hourString % 24;
+          return (
+            (hour % 12 || 12) + ':' + minute + ' ' + (hour < 12 ? 'AM' : 'PM')
           );
-        }else{
+        } else {
           return "---"
         }
       }
@@ -100,22 +101,22 @@ export class ExamComponent implements OnInit {
     {
       headerName: 'level',
       field: 'level',
-      minWidth:100,
-      maxWidth:100,
+      minWidth: 100,
+      maxWidth: 100,
     },
 
     {
       headerName: 'Time',
       field: 'time',
       cellRenderer: (params: ICellRendererParams) => {
-        if(params.value < 60){
-          return params.value+" "+"minute"
-        }else if(params.value == 60){
+        if (params.value < 60) {
+          return params.value + " " + "minute"
+        } else if (params.value == 60) {
           return "1 hour";
-        }else{
+        } else {
           let time = Math.trunc((params.value / 60))
           let minute = params.value % 60
-          return time+" : "+minute+" minute"
+          return time + " : " + minute + " minute"
         }
       },
     },
@@ -147,24 +148,18 @@ export class ExamComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getallsubject();
+
     this.getallexam();
     this.getuser();
     this.dropdownSettings = {
       idField: 'userId',
       textField: 'firstName',
-    };
-    this.dropdownSettingsforsubject = {
-      idField: 'subjectId',
-      textField: 'subjectName',
       allowSearchFilter: true,
     };
+    console.log("jjj".toLowerCase().includes("jp"));
+
   }
-  getallsubject() {
-    this.adminservice.Listsubject().subscribe((res) => {
-      this.subjects = res.data;
-    });
-  }
+
   getallexam() {
     this.adminservice.listexam().subscribe((res) => {
       this.exams = res.data;
@@ -200,6 +195,9 @@ export class ExamComponent implements OnInit {
       (res) => {
         this.users = res.data;
         this.users = this.users.filter((u: any) => u.role.roleName != 'admin');
+        this.users.forEach((element: any) => {
+          this.userId.push({ "userId": element.userId, "firstName": element.firstName, "lastName": element.lastName, "ischeck": false })
+        });
       },
       (err) => {
         this.tostr.error('Technical error occourd');
@@ -210,16 +208,22 @@ export class ExamComponent implements OnInit {
     this.examId = examId;
   }
   enroll() {
-    if (this.enrollexamform.valid) {
-      this.enrollexamform.value.userId.forEach((element: any) => {
-        if (element.userId) {
-          this.userId.push(element.userId);
-        }
-      });
+    this.userId.forEach(element=>{
+      if(element.ischeck == true){
+        this.Ids.push(element.userId)
+      }
+    })
+    if (this.Ids != null) {
+      // this.enrollexamform.value.userId.forEach((element: any) => {
+      //   if (element.userId) {
+      //     this.userId.push(element.userId);
+      //   }
+      // });
       let enroll = {
         examId: this.examId,
-        userId: this.userId,
+        userId: this.Ids,
       };
+      console.log(enroll);
 
       this.adminservice.enrollexam(enroll).subscribe(
         (res) => {
@@ -230,9 +234,21 @@ export class ExamComponent implements OnInit {
         }
       );
 
-      this.userId = [];
+      this.Ids = [];
     } else {
       this.tostr.error('At least one', 'please select');
+    }
+  }
+
+  filter() {
+    console.log(this.filterText);
+    if (this.filterText.length > 0) {
+      this.userId = this.userId.filter(e => (e.firstName+" "+e.lastName).toLowerCase().includes(this.filterText))
+    } else {
+      this.userId = [];
+      this.users.forEach((element: any) => {
+        this.userId.push({ "userId": element.userId, "firstName": element.firstName, "lastName": element.lastName, "ischeck": false })
+      });
     }
   }
 }

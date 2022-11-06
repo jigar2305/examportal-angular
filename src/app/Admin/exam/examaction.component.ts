@@ -11,9 +11,8 @@ import { ExamComponent } from './exam.component';
 
       <i class="bi bi-trash" (click)="deleteexam()"></i>
       &nbsp;&nbsp;
-      <!-- <a routerLink="/admin/course/edit"><i class="ri-edit-2-fill"></i></a>
-      &nbsp;&nbsp; -->
-      <i styles="cursor:pointer;"  class="ri-user-add-line"  data-bs-toggle="modal" data-bs-target="#verticalycentered2" (click)="setexam(value)"></i>
+      <i styles="cursor:pointer;"  class="ri-user-add-line"  data-bs-toggle="modal" data-bs-target="#largeModal" (click)="setexam(value)"></i>
+      <!-- <i styles="cursor:pointer;"  class="ri-user-add-line"  data-bs-toggle="modal" data-bs-target="#largeModal" (click)="setexam(value)"></i> -->
       &nbsp;&nbsp;
       <a routerLink="/admin/exam/examresult/{{value}}">result</a>
       &nbsp;&nbsp;
@@ -33,13 +32,13 @@ export class ExamactionComponent implements OnInit, ICellRendererAngularComp {
     private adminservice: AdminService,
     private toster: ToastrService,
     private examcomponent: ExamComponent
-  ) {}
+  ) { }
   deleteexam() {
     this.examcomponent.checkfordelete(this.value);
   }
-  setexam(examId:number){
+  setexam(examId: number) {
     this.examcomponent.setexamId(examId)
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

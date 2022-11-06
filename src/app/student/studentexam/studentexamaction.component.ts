@@ -63,7 +63,7 @@ export class StudentexamactionComponent
     }
   }
   checkforstart() {
-    let close = interval(1000).subscribe((x) => {
+    let close = interval(2000).subscribe((x) => {
       let currentTime = this.datePipe.transform(new Date(), 'H:mm:ss');
       if (currentTime) {
         if (currentTime >= this.startAt) {
@@ -74,7 +74,7 @@ export class StudentexamactionComponent
     });
   }
   chekforclose() {
-    let close = interval(1000).subscribe((x) => {
+    let close = interval(2000).subscribe((x) => {
       let currentTime = this.datePipe.transform(new Date(), 'H:mm:ss');
       if (currentTime) {
         if (currentTime >= this.endAt) {

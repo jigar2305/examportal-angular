@@ -13,10 +13,10 @@ export class AuthGuardGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if(this.authTokenService.authToken == undefined || this.authTokenService.authToken == "" || this.authTokenService.authToken.length == 0 ){
-        this.router.navigateByUrl("/login")
-        return false;
-    }
+      // if(this.authTokenService.authToken == undefined || this.authTokenService.authToken == "" || this.authTokenService.authToken.length == 0 ){
+      //   this.router.navigateByUrl("/login")
+      //   return false;
+      // }
     return true;
   }
 

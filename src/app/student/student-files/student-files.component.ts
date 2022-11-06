@@ -13,12 +13,11 @@ export class StudentFilesComponent implements OnInit {
   pdffiles: Array<any> = [];
   file1!: Blob;
   fileUrl: any;
-  subjects: Array<any> = [];
+  files: Array<any> = [];
   constructor(
     private sservice: StudentService,
     private tostr: ToastrService,
-    private sanitizer: DomSanitizer
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.userId = localStorage.getItem('userId');
@@ -27,13 +26,23 @@ export class StudentFilesComponent implements OnInit {
   }
   getsubjectlist() {
     if (this.pdffiles) {
+      let subjects: Array<any> = [];
+
       this.pdffiles.forEach((element: any) => {
-        if (!this.subjects.includes(element.subject.subjectName)) {
-          this.subjects.push(element.subject.subjectName);
+        if (!subjects.includes(element.subject.subjectName)) {
+          subjects.push(element.subject.subjectName);
         }
       });
+      subjects.forEach(element => {
+        let array: Array<any> = [];
+        this.pdffiles.forEach((pdf) => {
+          if (element == pdf.subject.subjectName) {
+            array.push(pdf);
+          }
+        })
+        this.files.push({ "subject": element, "pdfs": array })
+      });
     }
-
   }
 
   getfiles() {

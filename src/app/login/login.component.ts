@@ -60,9 +60,11 @@ export class LoginComponent implements OnInit {
         } else {
           this.tostr.success("login successfully")
           if (res.data.role.roleName == 'admin') {
-            this.router.navigateByUrl("/admin/dashbord")
+            // this.router.navigateByUrl("/admin/dashbord")
+            this.router.navigateByUrl("/admin/user")
           } else {
-            this.router.navigateByUrl("/student/dashbord")
+            // this.router.navigateByUrl("/student/dashbord")
+            this.router.navigateByUrl("/student/subject-pdf")
           }
         }
       }, err => {

@@ -66,7 +66,7 @@
       <div class="modal-body">
         <p>Are you sure you want to delete</p>
         <p *ngIf="count > 0" style="color: red;">
-         this exam is live 
+          this exam is live
         </p>
       </div>
       <div class="modal-footer">
@@ -77,3 +77,37 @@
   </div>
 </div>
 <button type="button" data-bs-toggle="modal" data-bs-target="#smallModal" id="model" hidden="true"></button>
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#largeModal">
+  Large Modal
+</button>
+
+<div class="modal fade" id="largeModal" tabindex="-1" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">users List</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row mb-3">
+            <div class="col-sm-3">
+              <input type="text" [(ngModel)]="filterText" placeholder="Filter..." (ngModelChange)="filter()">
+            </div>
+          </div>
+          <div class="row ml-3 mr-3">
+            <div *ngFor="let user of userId" class="col-3 mb-1 mr-1"
+              style="overflow:hidden; border: 1px solid gray; border-radius: 3px;">
+              <input type="checkbox" [(ngModel)]="user.ischeck" style="margin-right: 10px;"><label
+                for="user">{{user.firstName}}&nbsp;{{user.lastName}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)=" enroll()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
