@@ -1,6 +1,5 @@
 <main>
-    <div class="container" id="login">
-
+    <div class="container-fluid" id="login">
         <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
             <div class="container">
                 <div class="row justify-content-center">
@@ -18,19 +17,16 @@
                                 </div>
                                 <form class="row g-3 needs-validation" [formGroup]="loginform" (ngSubmit)="login()"
                                     novalidate>
-
                                     <div class="col-12">
                                         <label for="yourEmail" class="form-label">Email</label>
                                         <div class="input-group has-validation">
-                                            <input type="email" name="username" class="form-control" id="yourUsername"
+                                            <input type="email" name="username" class="form-control" id="loginemail"
                                                 formControlName="email" required>
-
                                         </div>
                                         <span *ngIf="loginform.get('email')?.hasError('pattern')">
                                             Please Enter valid email
                                         </span>
                                     </div>
-
                                     <div class="col-12">
                                         <label for="yourPassword" class="form-label">Password</label>
                                         <input type="password" name="password" class="form-control"
@@ -80,7 +76,7 @@
                     <label for="yourEmail" class="form-label">Email:</label>
                     <div class="col-10">
                         <div class="input-group has-validation">
-                            <input type="email" class="form-control" id="yourUsername" formControlName="email" required>
+                            <input type="email" class="form-control" id="email" formControlName="email" required>
                         </div>
                         <span *ngIf="loginform.get('email')?.hasError('pattern')">
                             Please Enter valid email

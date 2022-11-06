@@ -20,6 +20,7 @@ import { PdfviewadminComponent } from './Admin/subject/pdfviewadmin.component';
 import { SubjectComponent } from './Admin/subject/subject.component';
 import { UserExamsComponent } from './Admin/user-exams/user-exams.component';
 import { UserComponent } from './Admin/user/user.component';
+import { AuthGuardGuard } from './auth-guard.guard';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
@@ -35,62 +36,65 @@ import { StudentexamComponent } from './student/studentexam/studentexam.componen
 
 const routes: Routes = [
   {
-
-      path:'',
-      redirectTo:'/login',
-      pathMatch:'full'
-
+    path: '',
+    redirectTo: '/login',
+    pathMatch: 'full',
   },
-  {component:SignupComponent, path:"signup"},
-  {component:LoginComponent, path:"login"},
-  {component:ForgotpasswordComponent, path:"forgot"},
-  {component:LogoutComponent, path:"logout"},
+  { component: SignupComponent, path: 'signup' },
+  { component: LoginComponent, path: 'login' },
+  { component: ForgotpasswordComponent, path: 'forgot' },
+  { component: LogoutComponent, path: 'logout' },
 
-  {component:AdminComponent, path:"admin", children:[
-    {component:DashbordComponent, path:"dashbord"},
-    {component:AdminheaderComponent,path:"header"},
+  {
+    component: AdminComponent,
+    path: 'admin',
+    canActivate: [AuthGuardGuard],
+    children: [
+      { component: DashbordComponent, path: 'dashbord' },
+      { component: AdminheaderComponent, path: 'header' },
 
-    {component:CourseComponent,path:"course"},
-    {component:EditComponent,path:"course/edit/:courseId"},
-    {component:AddCourseComponent,path:"course/add"},
+      { component: CourseComponent, path: 'course' },
+      { component: EditComponent, path: 'course/edit/:courseId' },
+      { component: AddCourseComponent, path: 'course/add' },
 
-    {component:SubjectComponent,path:"subject"},
-    {component:AddSubjectComponent,path:"subject/add"},
-    {component:EditsubjectComponent,path:"subject/edit/:subjectId"},
-    {component:PdfviewadminComponent,path:"subject/pdf/list/:subjectId"},
+      { component: SubjectComponent, path: 'subject' },
+      { component: AddSubjectComponent, path: 'subject/add' },
+      { component: EditsubjectComponent, path: 'subject/edit/:subjectId' },
+      { component: PdfviewadminComponent, path: 'subject/pdf/list/:subjectId' },
 
-    {component:QuestionComponent,path:"question"},
-    {component:ListQuestionComponent,path:"list-question"},
-    {component:EditquestionComponent,path:"question/edit/:questionId"},
+      { component: QuestionComponent, path: 'question' },
+      { component: ListQuestionComponent, path: 'list-question' },
+      { component: EditquestionComponent, path: 'question/edit/:questionId' },
 
-    {component:ExamComponent,path:"exam"},
-    {component:AddExamComponent,path:"addexam"},
-    {component:ExamresultpdfComponent,path:"exam/examresult/:examId"},
-    {component:ExamwaitingComponent,path:"exam/waiting/:examId"},
+      { component: ExamComponent, path: 'exam' },
+      { component: AddExamComponent, path: 'addexam' },
+      { component: ExamresultpdfComponent, path: 'exam/examresult/:examId' },
+      { component: ExamwaitingComponent, path: 'exam/waiting/:examId' },
 
+      { component: UserComponent, path: 'user' },
+      { component: AddUserComponent, path: 'adduser' },
+      { component: UserExamsComponent, path: 'user-exams/:userId' },
+    ],
+  },
 
-    {component:UserComponent,path:"user"},
-    {component:AddUserComponent,path:"adduser"},
-    {component:UserExamsComponent,path:"user-exams/:userId"}
-
-  ]},
-
-
-  {component:StudentComponent, path:"student", children:[
-    {component:PapersecondComponent,path:"paper/:examId"},
-    {component:StudentexamComponent,path:"exam"},
-    {component:StudentdashbordComponent, path:"dashbord"},
-    {component:HeaderComponent,path:"header"},
-    {component:ResultComponent,path:"result/:examId/:resultId"},
-    {component:ResultsComponent,path:"results"},
-    {component:StudentFilesComponent,path:"subject-pdf"},
-  ]},
-
-
+  {
+    component: StudentComponent,
+    path: 'student',
+    canActivate: [AuthGuardGuard],
+    children: [
+      { component: PapersecondComponent, path: 'paper/:examId' },
+      { component: StudentexamComponent, path: 'exam' },
+      { component: StudentdashbordComponent, path: 'dashbord' },
+      { component: HeaderComponent, path: 'header' },
+      { component: ResultComponent, path: 'result/:examId/:resultId' },
+      { component: ResultsComponent, path: 'results' },
+      { component: StudentFilesComponent, path: 'subject-pdf' },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

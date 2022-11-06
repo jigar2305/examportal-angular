@@ -3,7 +3,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SignupComponent } from './signup/signup.component';
@@ -56,6 +56,7 @@ import { ResultsactionComponent } from './student/results/resultsaction.componen
 import { ExamresultpdfComponent } from './Admin/exam/examresultpdf.component';
 import { ExamwaitingComponent } from './Admin/exam/examwaiting/examwaiting.component';
 import { DatePipe } from '@angular/common';
+import { AuthTokenInterceptor } from './auth-token.interceptor';
 
 
 
@@ -122,7 +123,7 @@ import { DatePipe } from '@angular/common';
     AgGridModule,
     TooltipModule
   ],
-  providers: [DatePipe],
+  providers: [DatePipe,{provide:HTTP_INTERCEPTORS,useClass:AuthTokenInterceptor,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

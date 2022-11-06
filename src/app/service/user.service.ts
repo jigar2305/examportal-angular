@@ -25,6 +25,9 @@ export class UserService {
   resetpassword(passwordbean:any):Observable<any>{
     return this.http.post(environment.url+"public/forgot",passwordbean)
   }
+  logout(userId:any):void{
+    this.http.get(environment.url+"public/logout"+userId)
+  }
 
 
 }

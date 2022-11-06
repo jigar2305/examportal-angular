@@ -54,10 +54,10 @@ export class StudentexamactionComponent
     let date1 = formatDate(this.today, 'yyyy-MM-dd', 'en_US');
     let date2 = formatDate(this.date, 'yyyy-MM-dd', 'en_US');
     if (date1 < date2) {
-      this.isshow = "wait";
-    }else if(date1 > date2){
-      this.isshow = "end";
-    }else{
+      this.isshow = 'wait';
+    } else if (date1 > date2) {
+      this.isshow = 'end';
+    } else {
       this.checkforstart();
       this.chekforclose();
     }
@@ -67,7 +67,7 @@ export class StudentexamactionComponent
       let currentTime = this.datePipe.transform(new Date(), 'H:mm:ss');
       if (currentTime) {
         if (currentTime >= this.startAt) {
-          this.isshow = "start";
+          this.isshow = 'start';
           close.unsubscribe();
         }
       }
@@ -78,7 +78,7 @@ export class StudentexamactionComponent
       let currentTime = this.datePipe.transform(new Date(), 'H:mm:ss');
       if (currentTime) {
         if (currentTime >= this.endAt) {
-          this.isshow = "end";
+          this.isshow = 'end';
           close.unsubscribe();
         }
       }

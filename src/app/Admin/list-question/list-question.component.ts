@@ -91,7 +91,11 @@ export class ListQuestionComponent implements OnInit {
       this.count = res.data
       this.questionId = questionId
     },(err)=>{
-      this.tostr.error('question Not found');
+      if(err.error.msg == 'not found'){
+        this.tostr.error('question Not found');
+      }else{
+        this.tostr.error('Technical error accoured')
+      }
     })
   }
 

@@ -37,11 +37,11 @@
       </div>
       <div class="modal-body">
         <p>Are you sure you want to delete</p>
-        <p *ngIf="subject.length > 0">
+        <b *ngIf="subject.length > 0">
           this subject is also delete:
-          <b *ngFor="let s of subject">
-            {{s.subjectName}}
-          </b>
+        </b>
+        <p *ngFor="let s of subject" style="margin: 0px; padding: 0px;">
+          {{s.subjectName}}
         </p>
       </div>
       <div class="modal-footer">

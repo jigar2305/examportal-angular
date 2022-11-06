@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuthTokenService } from '../service/auth-token.service';
 import { UserService } from '../service/user.service';
 
 @Component({
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
   emailPattern = "^[a-z0-9]+@gmail.com";
   display: boolean = false;
 
-  constructor(private tostr: ToastrService, private router: Router, private userservice: UserService) {
+  constructor(private tostr: ToastrService, private router: Router, private userservice: UserService,private authtoken:AuthTokenService) {
     this.loginform = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.pattern(this.emailPattern)]),
       password: new FormControl('', [Validators.required]),
@@ -48,9 +49,12 @@ export class LoginComponent implements OnInit {
   login() {
     if (this.loginform.valid) {
       this.userservice.loginApi(this.loginform.value).subscribe(res => {
+        console.log(res.data);
         localStorage.setItem("firstName",res.data.firstName)
         localStorage.setItem("userId", res.data.userId)
         localStorage.setItem("email", res.data.email)
+        localStorage.setItem('authToken',res.data.authToken)
+        this.authtoken.authToken = res.data.authToken
         if (res.data.active == false) {
           this.tostr.error("please contact admin", "Your account is deactivate");
         } else {
@@ -63,7 +67,6 @@ export class LoginComponent implements OnInit {
         }
       }, err => {
         this.tostr.error("Incoorect email & password")
-
       })
     } else {
       this.tostr.error("please fill form correctly")
