@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { AgGridModule } from 'ag-grid-angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { TooltipModule } from '@cesarbr/angular-tooltip';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SignupComponent } from './signup/signup.component';
@@ -30,7 +33,6 @@ import { UserComponent } from './Admin/user/user.component';
 import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
 import { UserExamsComponent } from './Admin/user-exams/user-exams.component';
 import { ListQuestionComponent } from './Admin/list-question/list-question.component';
-import { AgGridModule } from 'ag-grid-angular';
 import { AddCourseComponent } from './Admin/add-course/add-course.component';
 import { AddExamComponent } from './Admin/add-exam/add-exam.component';
 import { AddSubjectComponent } from './Admin/add-subject/add-subject.component';
@@ -39,7 +41,6 @@ import { ButtoncomponentComponent } from './buttoncomponent/buttoncomponent.comp
 import { DeleteuserbuttonComponent } from './buttoncomponent/deleteuserbutton.component';
 import { UserstatusbuttonComponent } from './buttoncomponent/userstatusbutton.component';
 import { AddUserComponent } from './Admin/add-user/add-user.component';
-import { TooltipModule } from '@cesarbr/angular-tooltip';
 import { CourseactionComponent } from './Admin/course/courseaction.component';
 import { EditComponent } from './Admin/course/edit.component';
 import { SubjectactionComponent } from './Admin/subject/subjectaction.component';
@@ -55,8 +56,8 @@ import { StudentexamactionComponent } from './student/studentexam/studentexamact
 import { ResultsactionComponent } from './student/results/resultsaction.component';
 import { ExamresultpdfComponent } from './Admin/exam/examresultpdf.component';
 import { ExamwaitingComponent } from './Admin/exam/examwaiting/examwaiting.component';
-import { DatePipe } from '@angular/common';
 import { AuthTokenInterceptor } from './auth-token.interceptor';
+import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
 
 
 
@@ -121,7 +122,11 @@ import { AuthTokenInterceptor } from './auth-token.interceptor';
     CountdownModule,
     NgMultiSelectDropDownModule.forRoot(),
     AgGridModule,
-    TooltipModule
+    TooltipModule,
+    NgxUiLoaderModule,
+    NgxUiLoaderHttpModule.forRoot({
+      showForeground:true
+    })
   ],
   providers: [DatePipe,{provide:HTTP_INTERCEPTORS,useClass:AuthTokenInterceptor,multi:true}],
   bootstrap: [AppComponent]

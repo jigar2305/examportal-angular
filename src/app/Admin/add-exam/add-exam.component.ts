@@ -1,6 +1,5 @@
 import { DatePipe, Time } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { ToastrService } from 'ngx-toastr';
@@ -17,12 +16,13 @@ export class AddExamComponent implements OnInit {
   dropdownSettings: IDropdownSettings = {};
   dropdownSettingsforsubject: IDropdownSettings = {};
   subjectIds: Array<any> = [];
-  time: number = 0;
+  time!: number;
   examName: string = '';
   level: string = '';
   date!: String;
   startAt!: String;
   endAt!: String;
+  Percentage!:number;
   isshow: boolean = false;
   courses: Array<any> = [];
   course: any;
@@ -31,7 +31,7 @@ export class AddExamComponent implements OnInit {
     private tostr: ToastrService,
     private router: Router,
     private datePipe: DatePipe
-  ) {}
+  ) { }
   ngOnInit(): void {
     this.getallsubject();
     this.getallcourse();
@@ -74,7 +74,6 @@ export class AddExamComponent implements OnInit {
     this.date = this.date.replace('-', '/');
     let flag = 0;
     console.log(this.date);
-
     this.subjectIds.forEach((element) => {
       if (element.number == 0 || element.number == null) {
         flag = 1;
@@ -91,12 +90,14 @@ export class AddExamComponent implements OnInit {
       this.startAt == null ||
       this.endAt == null ||
       this.date == null ||
+      this.Percentage == null ||
+      this.Percentage == 0 ||
       flag == 1
     ) {
       this.tostr.info('please fill form correctly');
-    } else if(this.endAt < this.startAt){
+    } else if (this.endAt < this.startAt) {
       this.tostr.info('end time is more than start time');
-    } else{
+    } else {
       let addquestion = {
         examName: this.examName,
         level: this.level,
@@ -106,6 +107,7 @@ export class AddExamComponent implements OnInit {
         date: this.date,
         startAt: this.startAt,
         endAt: this.endAt,
+        percentage: this.Percentage
       };
       this.adminservice.addexam(addquestion).subscribe(
         (res) => {
