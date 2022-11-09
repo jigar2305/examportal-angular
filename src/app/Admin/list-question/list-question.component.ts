@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ColDef, RowGroupingDisplayType } from 'ag-grid-community';
+import { ColDef } from 'ag-grid-community';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from 'src/app/service/admin.service';
 import { QuestionactionComponent } from '../question/questionaction.component';
@@ -18,7 +17,7 @@ export class ListQuestionComponent implements OnInit {
   count!:number
   constructor(private aservice: AdminService, private tostr: ToastrService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(){ /* TODO document why this method 'ngOnInit' is empty */ }
   gridApActive: any;
   searchText: any;
   // public groupDisplayType: RowGroupingDisplayType = 'groupRows';
@@ -91,22 +90,20 @@ export class ListQuestionComponent implements OnInit {
       this.count = res.data
       this.questionId = questionId
     },(err)=>{
-      if(err.error.msg == 'not found'){
-        this.tostr.error('question Not found');
-      }else{
-        this.tostr.error('Technical error accoured')
-      }
+        this.tostr.error(err.error.msg);
     })
   }
 
   delete() {
       this.aservice.deletquestion(this.questionId).subscribe(
         (res) => {
-          this.tostr.success('question deleted');
+          this.tostr.success(res.msg);
           this.questions = this.questions.filter((r) => r.questionId != this.questionId);
         },
         (err) => {
-          this.tostr.error('something went wrong');
+          console.log(err);
+
+          this.tostr.error(err.error.msg);
         }
       );
   }

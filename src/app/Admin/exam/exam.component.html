@@ -78,10 +78,6 @@
 </div>
 <button type="button" data-bs-toggle="modal" data-bs-target="#smallModal" id="model" hidden="true"></button>
 
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#largeModal">
-  Large Modal
-</button>
-
 <div class="modal fade" id="largeModal" tabindex="-1" aria-hidden="true" style="display: none;">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -90,23 +86,24 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div class="container">
-          <div class="row mb-3">
-            <div class="col-sm-3">
-              <input type="text" [(ngModel)]="filterText" placeholder="Filter..." (ngModelChange)="filter()">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-3">
+              <input type="text" [(ngModel)]="filterText" style="margin: 0px;" placeholder="Filter..." (ngModelChange)="filter()">
             </div>
           </div>
-          <div class="row ml-3 mr-3">
-            <div *ngFor="let user of userId" class="col-3 mb-1 mr-1"
-              style="overflow:hidden; border: 1px solid gray; border-radius: 3px;">
-              <input type="checkbox" [(ngModel)]="user.ischeck" style="margin-right: 10px;"><label
+          <div class="row mt-3">
+            <div *ngFor="let user of userId" class="col-3"
+              style="overflow:hidden; border: 1px solid gray; border-radius: 3px; margin: 8px;">
+              <input type="checkbox" [(ngModel)]="user.ischeck" style="margin-right: 10px;" (click)="check(user)"><label
                 for="user">{{user.firstName}}&nbsp;{{user.lastName}}</label>
             </div>
           </div>
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)=" enroll()">Save changes</button>
+      <div class="modal-footer pt-0 pb-0">
+        <button type="button" class="btn btn-secondary pl-2 pr-2" data-bs-dismiss="modal"
+          (click)=" enroll()">Add</button>
       </div>
     </div>
   </div>

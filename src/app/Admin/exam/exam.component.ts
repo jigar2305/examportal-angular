@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators, Form } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from 'src/app/service/admin.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { ColDef, ICellRendererParams } from 'ag-grid-community';
 import { ExamactionComponent } from './examaction.component';
-import { count } from 'rxjs';
 
 @Component({
   selector: 'app-exam',
@@ -25,6 +24,7 @@ export class ExamComponent implements OnInit {
   subjectIds: Array<any> = [];
   examselected: any;
   count!: number;
+  checkArray:Array<any>=[]
   filterText!: string;
   constructor(
     private adminservice: AdminService,
@@ -34,16 +34,28 @@ export class ExamComponent implements OnInit {
       ids: new FormControl([Validators.required]),
     });
   }
+  ngOnInit(): void {
+    this.getallexam();
+    this.getuser();
+    this.dropdownSettings = {
+      idField: 'userId',
+      textField: 'firstName',
+      allowSearchFilter: true,
+    };
+  }
 
   colDefs: ColDef[] = [
-    { field: 'examName' },
+    {
+      headerName: 'Name',
+      field: 'examName'
+    },
     {
       headerName: 'Is Answer Show',
       field: 'isshow',
       minWidth: 100,
       maxWidth: 150,
       cellRenderer: (params: ICellRendererParams) => {
-        if (params.value == true) {
+        if (params.value) {
           return 'yes';
         } else {
           return 'No';
@@ -147,18 +159,7 @@ export class ExamComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
 
-    this.getallexam();
-    this.getuser();
-    this.dropdownSettings = {
-      idField: 'userId',
-      textField: 'firstName',
-      allowSearchFilter: true,
-    };
-    console.log("jjj".toLowerCase().includes("jp"));
-
-  }
 
   getallexam() {
     this.adminservice.listexam().subscribe((res) => {
@@ -208,29 +209,22 @@ export class ExamComponent implements OnInit {
     this.examId = examId;
   }
   enroll() {
-    this.userId.forEach(element=>{
-      if(element.ischeck == true){
+    this.userId.forEach(element => {
+      if (element.ischeck) {
         this.Ids.push(element.userId)
       }
     })
     if (this.Ids != null) {
-      // this.enrollexamform.value.userId.forEach((element: any) => {
-      //   if (element.userId) {
-      //     this.userId.push(element.userId);
-      //   }
-      // });
       let enroll = {
         examId: this.examId,
         userId: this.Ids,
       };
-      console.log(enroll);
-
       this.adminservice.enrollexam(enroll).subscribe(
         (res) => {
           this.tostr.success('exam enroll successfully');
         },
         (err) => {
-          this.tostr.error('sonething went wrong');
+          this.tostr.error(err.error.msg);
         }
       );
 
@@ -241,14 +235,32 @@ export class ExamComponent implements OnInit {
   }
 
   filter() {
-    console.log(this.filterText);
-    if (this.filterText.length > 0) {
-      this.userId = this.userId.filter(e => (e.firstName+" "+e.lastName).toLowerCase().includes(this.filterText))
+    if (this.filterText.length > 0 && this.filterText != '') {
+      this.userId = [];
+      this.users.forEach((element: any) => {
+        this.userId.push({ "userId": element.userId, "firstName": element.firstName, "lastName": element.lastName, "ischeck": element.ischeck })
+      });
+      this.userId = this.userId.filter(e => (e.firstName + " " + e.lastName).toLowerCase().includes(this.filterText) || (e.firstName + "" + e.lastName).toLowerCase().includes(this.filterText))
     } else {
       this.userId = [];
       this.users.forEach((element: any) => {
-        this.userId.push({ "userId": element.userId, "firstName": element.firstName, "lastName": element.lastName, "ischeck": false })
+        this.userId.push({ "userId": element.userId, "firstName": element.firstName, "lastName": element.lastName, "ischeck": element.ischeck })
       });
+    }
+  }
+  check(user:any) {
+    if(user.ischeck){
+      this.users.forEach((element:any) => {
+        if(user.userId == element.userId){
+          element.ischeck = false
+        }
+      });
+    }else{
+     this.users.forEach((element:any) => {
+      if(user.userId == element.userId){
+        element.ischeck = true
+      }
+    });
     }
   }
 }
