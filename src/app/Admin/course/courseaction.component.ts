@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { ICellRendererParams } from 'ag-grid-community';
 import { ToastrService } from 'ngx-toastr';
@@ -20,7 +20,7 @@ import { CourseComponent } from './course.component';
     `
   ]
 })
-export class CourseactionComponent implements OnInit,ICellRendererAngularComp {
+export class CourseactionComponent implements ICellRendererAngularComp {
 
   value: any;
   constructor(private aservice:AdminService ,private tostr:ToastrService,private ccomponent:CourseComponent) {}
@@ -29,8 +29,6 @@ export class CourseactionComponent implements OnInit,ICellRendererAngularComp {
   }
   refresh(params: ICellRendererParams<any, any>): boolean {
     return false;
-  }
-  ngOnInit(): void {
   }
   deletecourse(courseId: any) {
     this.ccomponent.checkfordelete(courseId);

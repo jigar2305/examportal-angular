@@ -37,9 +37,9 @@
       </div>
       <div class="modal-body">
         <p>Are you sure you want to delete</p>
-        <b *ngIf="subject.length > 0">
+        <strong *ngIf="subject.length > 0">
           this subject is also delete:
-        </b>
+        </strong>
         <p *ngFor="let s of subject" style="margin: 0px; padding: 0px;">
           {{s.subjectName}}
         </p>

@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { ICellRendererParams } from 'ag-grid-community';
 import { ToastrService } from 'ngx-toastr';
-import { UserComponent } from '../Admin/user/user.component';
-import { AdminService } from '../service/admin.service';
+import { UserComponent } from '../user.component';
+import { AdminService } from '../../../service/admin.service';
 
 @Component({
   selector: 'app-userstatusbutton',
@@ -16,7 +16,7 @@ import { AdminService } from '../service/admin.service';
   ],
 })
 export class UserstatusbuttonComponent
-  implements OnInit, ICellRendererAngularComp
+  implements  ICellRendererAngularComp
 {
   user: any;
   value: any;
@@ -58,5 +58,4 @@ export class UserstatusbuttonComponent
     return true;
   }
 
-  ngOnInit(): void {}
 }

@@ -35,5 +35,38 @@
       </div>
   </div>
 </div>
+<div class="modal fade" id="smallModal" tabindex="-1" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Conform</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p class="delete">Are you sure you want to delete</p>
+        <p *ngIf="(exam != null && exam != [] && exam.length > 0) ||  (subject != null && subject != [] && subject.length > 0 )">
+          This user is enroll
+        </p>
+        <p *ngIf=" subject != null && subject != [] && subject.length > 0 " style="margin: 0px; padding: 0px;">
+          subject :
+          <strong *ngFor="let p of subject">
+            &nbsp;{{p.subjectName}},
+          </strong>
+        </p>
+        <p *ngIf="exam != null && exam != [] && exam.length > 0" style="margin: 0px; padding: 0px;">
+          exam :
+          <strong *ngFor="let p of exam">
+            &nbsp;{{p.examName}},
+          </strong>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="deleteuser()">delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+<button type="button" data-bs-toggle="modal" data-bs-target="#smallModal" id="model" hidden="true"></button>
 
 

@@ -29,5 +29,4 @@ export class UserService {
     this.http.get(environment.url+"public/logout"+userId)
   }
 
-
 }

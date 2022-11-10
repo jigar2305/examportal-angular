@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { ICellRendererParams } from 'ag-grid-community';
 import { ToastrService } from 'ngx-toastr';
@@ -12,7 +12,6 @@ import { ExamComponent } from './exam.component';
       <i class="bi bi-trash" (click)="deleteexam()"></i>
       &nbsp;&nbsp;
       <i styles="cursor:pointer;"  class="ri-user-add-line"  data-bs-toggle="modal" data-bs-target="#largeModal" (click)="setexam(value)"></i>
-      <!-- <i styles="cursor:pointer;"  class="ri-user-add-line"  data-bs-toggle="modal" data-bs-target="#largeModal" (click)="setexam(value)"></i> -->
       &nbsp;&nbsp;
       <a routerLink="/admin/exam/examresult/{{value}}">result</a>
       &nbsp;&nbsp;
@@ -20,7 +19,7 @@ import { ExamComponent } from './exam.component';
   `,
   styles: [],
 })
-export class ExamactionComponent implements OnInit, ICellRendererAngularComp {
+export class ExamactionComponent implements  ICellRendererAngularComp {
   value: any;
   agInit(params: ICellRendererParams<any, any>): void {
     this.value = params.value;
@@ -40,5 +39,4 @@ export class ExamactionComponent implements OnInit, ICellRendererAngularComp {
     this.examcomponent.setexamId(examId)
   }
 
-  ngOnInit(): void { }
 }

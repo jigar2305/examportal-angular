@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ColDef, Grid, GridOptions, GridReadyEvent } from 'ag-grid-community';
+import { Component } from '@angular/core';
+import { ColDef} from 'ag-grid-community';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from 'src/app/service/admin.service';
 import { CourseactionComponent } from './courseaction.component';
@@ -10,7 +9,7 @@ import { CourseactionComponent } from './courseaction.component';
   templateUrl: './course.component.html',
   styleUrls: ['./course.component.css'],
 })
-export class CourseComponent implements OnInit {
+export class CourseComponent  {
   courses: Array<any> = [];
   searchText: any;
   gridApActive: any;
@@ -21,10 +20,6 @@ export class CourseComponent implements OnInit {
     private adminservice: AdminService,
     private tostr: ToastrService
   ) {}
-
-  ngOnInit(): void {
-
-  }
 
   colDefs: ColDef[] = [
     { field: 'courseName' },

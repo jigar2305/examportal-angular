@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
   ColDef,
@@ -6,7 +6,6 @@ import {
   ValueGetterParams,
 } from 'ag-grid-community';
 import jsPDF from 'jspdf';
-import autoTable from 'jspdf-autotable';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from 'src/app/service/admin.service';
 
@@ -114,7 +113,7 @@ import { AdminService } from 'src/app/service/admin.service';
   `,
   styles: [],
 })
-export class ExamresultpdfComponent implements OnInit {
+export class ExamresultpdfComponent {
   @ViewChild('pdf', { static: false }) pdf!: ElementRef;
   examId!: number;
   examName: string = '';
@@ -125,7 +124,7 @@ export class ExamresultpdfComponent implements OnInit {
     private aRoute: ActivatedRoute,
     private aservice: AdminService,
     private tostr: ToastrService
-  ) {}
+  ) { }
   gridApActive: any;
   searchText: any;
   defaultColDef: ColDef = {
@@ -176,7 +175,6 @@ export class ExamresultpdfComponent implements OnInit {
     this.getresult();
   }
 
-  ngOnInit(): void {}
   getresult() {
     this.examId = this.aRoute.snapshot.params['examId'];
     this.aservice.listresults(this.examId).subscribe(
@@ -210,6 +208,29 @@ export class ExamresultpdfComponent implements OnInit {
       windowWidth: 675, //window width in CSS pixels
     });
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   // pdf()
   // {

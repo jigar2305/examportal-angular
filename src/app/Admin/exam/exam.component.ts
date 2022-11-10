@@ -36,7 +36,6 @@ export class ExamComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getallexam();
-    this.getuser();
     this.dropdownSettings = {
       idField: 'userId',
       textField: 'firstName',
@@ -194,6 +193,8 @@ export class ExamComponent implements OnInit {
   getuser() {
     this.adminservice.listuser().subscribe(
       (res) => {
+        this.users = []
+        this.userId = []
         this.users = res.data;
         this.users = this.users.filter((u: any) => u.role.roleName != 'admin');
         this.users.forEach((element: any) => {
@@ -206,6 +207,7 @@ export class ExamComponent implements OnInit {
     );
   }
   setexamId(examId: number) {
+    this.getuser()
     this.examId = examId;
   }
   enroll() {
@@ -235,17 +237,12 @@ export class ExamComponent implements OnInit {
   }
 
   filter() {
+    this.userId = [];
+    this.users.forEach((element: any) => {
+      this.userId.push({ "userId": element.userId, "firstName": element.firstName, "lastName": element.lastName, "ischeck": element.ischeck })
+    });
     if (this.filterText.length > 0 && this.filterText != '') {
-      this.userId = [];
-      this.users.forEach((element: any) => {
-        this.userId.push({ "userId": element.userId, "firstName": element.firstName, "lastName": element.lastName, "ischeck": element.ischeck })
-      });
       this.userId = this.userId.filter(e => (e.firstName + " " + e.lastName).toLowerCase().includes(this.filterText) || (e.firstName + "" + e.lastName).toLowerCase().includes(this.filterText))
-    } else {
-      this.userId = [];
-      this.users.forEach((element: any) => {
-        this.userId.push({ "userId": element.userId, "firstName": element.firstName, "lastName": element.lastName, "ischeck": element.ischeck })
-      });
     }
   }
   check(user:any) {

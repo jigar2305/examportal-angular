@@ -1,27 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  CheckboxSelectionCallbackParams,
-  ColDef,
-  GridApi,
-  HeaderCheckboxSelectionCallbackParams,
-  ICellRendererParams,
-} from 'ag-grid-community';
-import { ICellRendererAngularComp } from 'ag-grid-angular';
+import { Component } from '@angular/core';
+import {ColDef} from 'ag-grid-community';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from 'src/app/service/admin.service';
-import { ButtoncomponentComponent } from 'src/app/buttoncomponent/buttoncomponent.component';
-import { DeleteuserbuttonComponent } from 'src/app/buttoncomponent/deleteuserbutton.component';
-import { UserstatusbuttonComponent } from 'src/app/buttoncomponent/userstatusbutton.component';
+import { ButtoncomponentComponent } from 'src/app/Admin/user/buttoncomponent/buttoncomponent.component';
+import { DeleteuserbuttonComponent } from 'src/app/Admin/user/buttoncomponent/deleteuserbutton.component';
+import { UserstatusbuttonComponent } from 'src/app/Admin/user/buttoncomponent/userstatusbutton.component';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css'],
 })
-export class UserComponent implements OnInit {
-  users: Array<any> = [];
-  userId: number = 0;
+export class UserComponent {
 
+  users: Array<any> = [];
+  userId!: number;
+  subject:Array<any> =[]
+  exam:Array<any> =[]
   colDefs: ColDef[] = [
     { field: 'firstName' },
     { field: 'lastName' },
@@ -59,11 +54,7 @@ export class UserComponent implements OnInit {
   gridApActive: any;
   searchText: any;
 
-  constructor(private aservice: AdminService, private tostr: ToastrService) {}
-
-  ngOnInit(): void {
-  }
-
+  constructor(private aservice: AdminService, private tostr: ToastrService) { }
   onFilterBoxChange() {
     this.gridApActive.setQuickFilter(this.searchText);
   }
@@ -80,7 +71,23 @@ export class UserComponent implements OnInit {
       }
     );
   }
-  updateondelete(userId:any){
-    this.users = this.users.filter((u) => u.userId != userId);
+  checkfordelete(userId: any) {
+    document.getElementById("model")?.click()
+    this.aservice.iscontainchild(userId).subscribe((res)=>{
+      this.subject = res.data.subject
+      this.exam = res.data.exam
+      this.userId = userId
+    })
+  }
+  deleteuser() {
+    this.aservice.deleteuser(this.userId).subscribe(
+      (res) => {
+        this.users = this.users.filter((u) => u.userId != this.userId);
+        this.tostr.success('user deleted..');
+      },
+      (err) => {
+        this.tostr.error(err.error.msg);
+      }
+    );
   }
 }

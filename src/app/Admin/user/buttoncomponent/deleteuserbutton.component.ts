@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { ICellRendererParams } from 'ag-grid-community';
 import { ToastrService } from 'ngx-toastr';
-import { UserComponent } from '../Admin/user/user.component';
-import { AdminService } from '../service/admin.service';
+import { UserComponent } from '../user.component';
+import { AdminService } from '../../../service/admin.service';
 
 @Component({
   selector: 'app-deleteuserbutton',
@@ -11,7 +11,7 @@ import { AdminService } from '../service/admin.service';
   styles: [],
 })
 export class DeleteuserbuttonComponent
-  implements OnInit, ICellRendererAngularComp
+  implements ICellRendererAngularComp
 {
   value: any;
   constructor(private aservice:AdminService ,private tostr:ToastrService,private ucomponent:UserComponent) {}
@@ -22,15 +22,6 @@ export class DeleteuserbuttonComponent
     return false;
   }
   delete(userId: number) {
-    this.aservice.deleteuser(userId).subscribe(
-      (res) => {
-        this.tostr.success('user deleted..');
-        this.ucomponent.updateondelete(userId);
-      },
-      (err) => {
-        this.tostr.error('something went wrong');
-      }
-    );
+    this.ucomponent.checkfordelete(userId)
   }
-  ngOnInit(): void {}
 }
