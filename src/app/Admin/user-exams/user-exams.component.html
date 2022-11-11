@@ -5,7 +5,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{results[0].user.firstName}}'s &nbsp;results</h5>
                     <!-- Default Table -->
-                    <table class="table">
+                    <table class="table" aria-describedby="result">
                         <thead>
                             <tr>
                                 <th scope="col">No.</th>
@@ -40,16 +40,15 @@
             <div class="card">
                 <div class="card-body">
                     <div class="card-header">
-                        <!-- <h1 class="">{{result.exam.examName}}</h1> -->
                         <div class="row">
-                            <h2 class="col-6"><b>Total:&nbsp;</b>{{result.totalMarks}}</h2>
-                            <h2 class="col-6"><b>Obtain:&nbsp;</b>{{result.obtainMarks}}</h2>
+                            <h2 class="col-6"><strong>Total:&nbsp;</strong>{{result.totalMarks}}</h2>
+                            <h2 class="col-6"><strong>Obtain:&nbsp;</strong>{{result.obtainMarks}}</h2>
                             <h1 class="col-6" *ngIf="(result.totalMarks*33/100) < result.obtainMarks">pass</h1>
                             <h1 class="col-6" *ngIf="(result.totalMarks*33/100) > result.obtainMarks"
                                 style="color: red;">fail</h1>
                         </div>
                     </div>
-                    <table class="table table-striped">
+                    <table class="table table-striped" aria-describedby="myarea">
                         <thead>
                             <tr>
                                 <th scope="col">No.</th>

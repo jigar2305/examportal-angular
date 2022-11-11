@@ -23,7 +23,6 @@ export class UserExamsComponent implements OnInit {
     this.userId = this.aRoute.snapshot.params["userId"]
     this.sservice.getresults(this.userId).subscribe(res => {
       this.results = res.data
-
     })
   }
 
@@ -35,16 +34,11 @@ export class UserExamsComponent implements OnInit {
     this.sservice.getresultquestion(this.userId, examId).subscribe(res => {
       this.que = res.data
     }, err => {
-
-
     })
     this.sservice.getresult(resultId).subscribe(res => {
       this.result = res.data
 
     }, err => {
-
-
-
     })
   }
 

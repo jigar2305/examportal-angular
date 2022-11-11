@@ -199,7 +199,7 @@ export class ExamresultpdfComponent {
     let name = this.examName;
     const elementHTML: any = document.querySelector('#pdf');
     doc.html(elementHTML, {
-      callback: function (doc) {
+      callback: function (doc:any) {
         doc.save(name + '.pdf');
       },
       margin: [10, 10, 10, 10],
