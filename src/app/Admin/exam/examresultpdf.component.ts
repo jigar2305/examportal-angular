@@ -8,6 +8,7 @@ import {
 import jsPDF from 'jspdf';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from 'src/app/service/admin.service';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-examresultpdf',
@@ -82,19 +83,21 @@ import { AdminService } from 'src/app/service/admin.service';
               <h6 class="mb-2"><b>Exam :</b> {{ examName }}</h6>
               <h6 class="mb-2"><b>Total Mark :</b> {{ Total }}</h6>
               <h6 class="mb-5"><b>Passing Mark :</b> {{ passingMark }}</h6>
-              <table class="table table-striped">
+              <table class="table table-striped" id="table">
                 <thead>
                   <tr>
                     <th scope="col">No.</th>
                     <th scope="col">Name</th>
-                    <th scope="col">obtain Mark</th>
-                    <th scope="col">result</th>
+                    <th scope="col">Total Marks</th>
+                    <th scope="col">Obtain Mark</th>
+                    <th scope="col">Result</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let result of results; let i = index">
                     <th scope="row">{{ i + 1 }}</th>
                     <td>{{ result.user.firstName }}</td>
+                    <td>{{ result.totalMarks }}</td>
                     <td>{{ result.obtainMarks }}</td>
                     <td>{{ result.status }}</td>
                   </tr>
@@ -102,9 +105,8 @@ import { AdminService } from 'src/app/service/admin.service';
               </table>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary" (click)="makepdf()">
-                download
-              </button>
+              <button type="button" class="btn btn-primary" (click)="makepdf()">download</button>
+              <button type="button" class="btn btn-primary" (click)="excel()">excel</button>
             </div>
           </div>
         </div>
@@ -183,7 +185,7 @@ export class ExamresultpdfComponent {
         if (this.results.length > 0) {
           this.examName = this.results[0].exam.examName;
           this.Total = this.results[0].totalMarks;
-          this.passingMark = (this.Total / 3) as number;
+          this.passingMark = (this.Total / 3);
         }
       },
       (err) => {
@@ -208,7 +210,20 @@ export class ExamresultpdfComponent {
       windowWidth: 675, //window width in CSS pixels
     });
   }
+  excel() {
+    if (this.examName != null) {
+      let element = document.getElementById('table');
+      const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
 
+      /* generate workbook and add the worksheet */
+      const wb: XLSX.WorkBook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+      let name = this.examName + '.xlsx'
+
+      /* save to file */
+      XLSX.writeFile(wb, name);
+    }
+  }
 
 
 
@@ -254,4 +269,5 @@ export class ExamresultpdfComponent {
   // });
   //   doc.save('table.pdf');
   // }
+
 }
