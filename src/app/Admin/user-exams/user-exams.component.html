@@ -1,10 +1,10 @@
-<div class="container-fluid">
+<!-- <div class="container-fluid">
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">{{results[0].user.firstName}}'s &nbsp;results</h5>
-                    <!-- Default Table -->
+
                     <table class="table" aria-describedby="result">
                         <thead>
                             <tr>
@@ -28,67 +28,38 @@
             </div>
         </div>
     </div>
-</div>
-  <div class="modal fade" id="ExtralargeModal" tabindex="-1" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h2 class="modal-title">{{result.exam.examName}}-&nbsp;exam</h2>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div> -->
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-12">
+        <div class="row mb-2">
+          <div style="text-align: start;" class="col-6 p-2">
+            <!-- <h4 style="font-weight: bolder; color: blue; margin-left: 10px;">{{results[0].user.firstName}}'s &nbsp;result</h4> -->
+          </div>
+          <div style="text-align: end;" class="col-6">
+          </div>
         </div>
-        <div class="modal-body">
-            <div class="card">
-                <div class="card-body">
-                    <div class="card-header">
-                        <div class="row">
-                            <h2 class="col-6"><strong>Total:&nbsp;</strong>{{result.totalMarks}}</h2>
-                            <h2 class="col-6"><strong>Obtain:&nbsp;</strong>{{result.obtainMarks}}</h2>
-                            <h1 class="col-6" *ngIf="(result.totalMarks*33/100) < result.obtainMarks">pass</h1>
-                            <h1 class="col-6" *ngIf="(result.totalMarks*33/100) > result.obtainMarks"
-                                style="color: red;">fail</h1>
-                        </div>
+          <div class="card">
+              <div class="card-body">
+                  <div class="row mb-3 mt-3">
+                    <label for="search" class="col-sm-1">&nbsp; search</label>
+                    <div class="col-sm-3">
+                      <input type="text" id="filter-text-box" placeholder="Filter..." [(ngModel)]="searchText"
+                      (ngModelChange)="onFilterBoxChange()" />
                     </div>
-                    <table class="table table-striped" aria-describedby="myarea">
-                        <thead>
-                            <tr>
-                                <th scope="col">No.</th>
-                                <th scope="col">question</th>
-                                <th scope="col">A</th>
-                                <th scope="col">B</th>
-                                <th scope="col">C</th>
-                                <th scope="col">D</th>
-                                <th scope="col">correct answer</th>
-                                <th scope="col">Your answer</th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let q of que; let i = index">
-                                <th scope="row">{{i+1}}</th>
-                                <td>{{q.question.question}}</td>
-                                <td>{{q.question.a}}</td>
-                                <td>{{q.question.b}}</td>
-                                <td>{{q.question.c}}</td>
-                                <td>{{q.question.d}}</td>
-                                <td>{{q.question.correctAnswer}}</td>
-                                <td>
-                                    <p *ngIf="q.question.correctAnswer == q.selectedOption" style="color: green;">
-                                        {{q.selectedOption}}
-                                    </p>
-                                    <p *ngIf="q.question.correctAnswer != q.selectedOption" style="color: red;">
-                                        {{q.selectedOption}}
-                                    </p>
-                                    <p *ngIf="q.selectedOption == '' " style="color: red;">
-                                        not selected
-                                    </p>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                </div>
-            </div>
-        </div>
+                  </div>
+                  <ag-grid-angular style="height: 500px; " class="ag-theme-alpine m-3"
+                  class="ag-theme-alpine"
+                  [defaultColDef]="defaultColDef"
+                  [rowData]="results"
+                  [columnDefs]="colDefs"
+                      [defaultColDef]="defaultColDef"
+                      [suppressRowClickSelection]="true"
+                      (gridReady)="onGridReady($event)"
+                      [pagination]="true"
+                  ></ag-grid-angular>
+              </div>
+          </div>
       </div>
-    </div>
   </div>
+</div>

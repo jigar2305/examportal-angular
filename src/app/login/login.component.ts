@@ -1,5 +1,4 @@
-import { style } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -11,7 +10,7 @@ import { UserService } from '../service/user.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   loginform: FormGroup;
   otpsend: FormGroup;
   emailPattern = "^[a-z0-9]+@gmail.com";
@@ -27,9 +26,6 @@ export class LoginComponent implements OnInit {
       email: new FormControl('', [Validators.required, Validators.pattern(this.emailPattern)]),
     })
   }
-
-  ngOnInit(): void {
-  }
   otpsende() {
     if (this.otpsend.valid) {
       this.userservice.emailsend(this.otpsend.value).subscribe(res => {
@@ -37,7 +33,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem("email", this.otpsend.value.email)
         this.router.navigateByUrl("/forgot")
       }, err => {
-        this.tostr.error("something went wrong")
+        this.tostr.error(err.error.msg)
 
       })
     } else {

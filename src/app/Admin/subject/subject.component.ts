@@ -40,6 +40,7 @@ export class SubjectComponent implements OnInit {
     this.dropdownSettingsforuser = {
       idField: 'userId',
       textField: 'firstName',
+      allowSearchFilter: true
     };
     this.dropdownSettingsforsubject = {
       idField: 'subjectId',

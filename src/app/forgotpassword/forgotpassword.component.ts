@@ -13,7 +13,6 @@ import { UserService } from '../service/user.service';
 export class ForgotpasswordComponent implements OnInit {
   emailform: FormGroup;
   resetform: FormGroup;
-  display: boolean = false;
 
   constructor(private tostr: ToastrService, private router: Router, private userservice: UserService) {
     let email = localStorage.getItem("email")
@@ -30,12 +29,6 @@ export class ForgotpasswordComponent implements OnInit {
     this.emailform.controls['email'].setValue(email);
 
   }
-
-  showDialog() {
-    this.display = true;
-    document.getElementById("body")?.setAttribute("style","background-color:gray")
-  }
-
   email1 = localStorage.getItem("email")
   ngOnInit(): void {
 
@@ -43,11 +36,11 @@ export class ForgotpasswordComponent implements OnInit {
   emailvarify() {
     if (this.emailform.valid) {
       this.userservice.checkotp(this.emailform.value).subscribe(res => {
-        this.tostr.success(res)
-        this.showDialog()
+        this.tostr.success(res.msg)
+        // this.showDialog()
+        document.getElementById('password')?.click();
       }, err => {
-
-        this.tostr.error(err);
+        this.tostr.error(err.error.msg);
       })
     }
   }

@@ -163,20 +163,20 @@ export class ExamComponent implements OnInit {
   getallexam() {
     this.adminservice.listexam().subscribe((res) => {
       this.exams = res.data;
-      console.log(this.exams);
     });
   }
   checkfordelete(examId: any) {
-    document.getElementById('model')?.click();
     this.adminservice.isenroll(examId).subscribe(
       (res) => {
         this.count = res.data;
+        console.log(res.data);
         this.examId = examId;
       },
       (err) => {
         this.tostr.error('Technical error accoured');
       }
-    );
+      );
+      document.getElementById('model')?.click();
   }
   delete() {
     this.adminservice.deleteExam(this.examId).subscribe(

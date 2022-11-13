@@ -18,6 +18,7 @@ import { QuestionComponent } from './Admin/question/question.component';
 import { EditsubjectComponent } from './Admin/subject/editsubject.component';
 import { PdfviewadminComponent } from './Admin/subject/pdfviewadmin.component';
 import { SubjectComponent } from './Admin/subject/subject.component';
+import { UserExamResultViewComponent } from './Admin/user-exams/user-exam-action/user-exam-result-view/user-exam-result-view.component';
 import { UserExamsComponent } from './Admin/user-exams/user-exams.component';
 import { UserComponent } from './Admin/user/user.component';
 import { AuthGuardGuard } from './auth-guard.guard';
@@ -74,6 +75,7 @@ const routes: Routes = [
       { component: UserComponent, path: 'user' },
       { component: AddUserComponent, path: 'adduser' },
       { component: UserExamsComponent, path: 'user-exams/:userId' },
+      { component: UserExamResultViewComponent, path: 'user/result' },
     ],
   },
 

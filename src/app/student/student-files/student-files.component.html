@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="card p-3" *ngFor="let subject of files" style="border-radius: 10px;">
     <div class="row">
-      <h3> <b>subject:</b> {{subject.subject}}</h3>
+      <h3> <strong>subject:</strong> {{subject.subject}}</h3>
       <hr>
       <div class="col-md-2" *ngFor="let pdf of subject.pdfs">
       <div class="card">
@@ -14,7 +14,7 @@
           </div>
           <div style="text-align: center; height: 20px; margin-bottom: 3px; width: 100%; cursor: pointer;"
             (click)="onCdownload(pdf.subjectfileId)">
-            <i class="bi bi-download " ></i>
+            <em class="bi bi-download " ></em>
           </div>
         </div>
     </div>

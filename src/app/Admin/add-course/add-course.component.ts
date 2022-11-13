@@ -25,9 +25,11 @@ export class AddCourseComponent implements OnInit {
         this.toster.success("course Added..")
         this.rout.navigateByUrl("admin/course")
       }, err => {
-        this.toster.error("something went wrong")
+        this.toster.error("Technical error occoured")
       }
       )
+    }else{
+      this.toster.info('Please fill form correctly')
     }
   }
 

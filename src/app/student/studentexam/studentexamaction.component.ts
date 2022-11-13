@@ -28,8 +28,7 @@ import { interval } from 'rxjs';
   ],
 })
 export class StudentexamactionComponent
-  implements OnInit, ICellRendererAngularComp
-{
+  implements OnInit, ICellRendererAngularComp {
   examId!: number;
   date!: string;
   startAt!: string;
@@ -46,9 +45,9 @@ export class StudentexamactionComponent
   refresh(params: ICellRendererParams<any, any>): boolean {
     return true;
   }
-  constructor(private datePipe: DatePipe) {}
+  constructor(private datePipe: DatePipe) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
   check() {
     this.today = this.datePipe.transform(Date.now(), 'yyyy-MM-dd') as string;
     let date1 = formatDate(this.today, 'yyyy-MM-dd', 'en_US');

@@ -18,14 +18,14 @@ import * as XLSX from 'xlsx';
         <div class="col-12">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">{{ examName }} result</h5>
-              <button
-                type="button"
-                data-bs-toggle="modal"
-                data-bs-target="#modalDialogScrollable"
-              >
-                download
-              </button>
+              <div class="row">
+                <div class="col-6">
+                  <h5 class="card-title">{{ examName }} result</h5>
+                </div>
+                <div class="col-6" style="text-align: end;">
+                  <button type="button" data-bs-toggle="modal" class="mt-3" data-bs-target="#modalDialogScrollable"> download </button>
+              </div>
+              </div>
               <div class="row mb-3 mt-3">
                 <label for="search" class="col-1">&nbsp; search</label>
                 <div class="col-3">
@@ -105,8 +105,8 @@ import * as XLSX from 'xlsx';
               </table>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary" (click)="makepdf()">download</button>
-              <button type="button" class="btn btn-primary" (click)="excel()">excel</button>
+              <button type="button" class="btn btn-primary" (click)="makepdf()">  pdf&nbsp;<em class="bi bi-download " ></em></button>
+              <button type="button" class="btn btn-primary" (click)="excel()">  excel&nbsp;<em class="bi bi-download " ></em></button>
             </div>
           </div>
         </div>
@@ -199,7 +199,7 @@ export class ExamresultpdfComponent {
     let name = this.examName;
     const elementHTML: any = document.querySelector('#pdf');
     doc.html(elementHTML, {
-      callback: function (doc:any) {
+      callback: function (doc: any) {
         doc.save(name + '.pdf');
       },
       margin: [10, 10, 10, 10],

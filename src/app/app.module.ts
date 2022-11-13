@@ -58,6 +58,8 @@ import { ExamresultpdfComponent } from './Admin/exam/examresultpdf.component';
 import { ExamwaitingComponent } from './Admin/exam/examwaiting/examwaiting.component';
 import { AuthTokenInterceptor } from './auth-token.interceptor';
 import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
+import { UserExamActionComponent } from './Admin/user-exams/user-exam-action/user-exam-action.component';
+import { UserExamResultViewComponent } from './Admin/user-exams/user-exam-action/user-exam-result-view/user-exam-result-view.component';
 
 
 
@@ -109,6 +111,8 @@ import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
     ResultsactionComponent,
     ExamresultpdfComponent,
     ExamwaitingComponent,
+    UserExamActionComponent,
+    UserExamResultViewComponent,
   ],
   imports: [
     BrowserModule,

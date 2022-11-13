@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { SPINNER } from 'ngx-ui-loader';
 
 @Component({
@@ -9,5 +9,6 @@ import { SPINNER } from 'ngx-ui-loader';
 export class AppComponent{
 
   title = 'examportal';
-  SPINNER:SPINNER = SPINNER.threeStrings
+  SPINNER!:SPINNER
+  // SPINNER!:any
 }
