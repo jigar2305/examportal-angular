@@ -221,7 +221,7 @@ export class EditquestionComponent implements OnInit {
           if (err.error.data == "question not found"){
             this.tostr.error('question Not found');
           }else{
-            this.tostr.error('Technical Error Accord');
+            this.tostr.error('Technical error occurred');
           }
         }
       );

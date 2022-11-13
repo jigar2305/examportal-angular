@@ -173,7 +173,7 @@ export class ExamComponent implements OnInit {
         this.examId = examId;
       },
       (err) => {
-        this.tostr.error('Technical error accoured');
+        this.tostr.error('Technical error occurred');
       }
       );
       document.getElementById('model')?.click();

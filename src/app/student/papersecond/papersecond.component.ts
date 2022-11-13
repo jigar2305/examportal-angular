@@ -88,7 +88,7 @@ export class PapersecondComponent implements OnInit, OnDestroy {
         this.router.navigateByUrl('/student/results');
       },
       (err) => {
-        this.toster.error("Technical error accourd")
+        this.toster.error("Technical error occurred")
       }
     );
   }

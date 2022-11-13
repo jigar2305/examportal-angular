@@ -28,13 +28,13 @@ export class ResultComponent implements OnInit {
     this.sservice.getresultquestion(this.userId, this.examId).subscribe(res => {
       this.que = res.data
     }, err => {
-      this.tostr.error('Technical error accoured')
+      this.tostr.error('Technical error occurred')
     })
     this.sservice.getresult(this.resultId).subscribe(res => {
       this.result = res.data
       this.isshow = this.result.exam.isshow
     }, err => {
-      this.tostr.error('Technical error accoured')
+      this.tostr.error('Technical error occurred')
     })
 
   }

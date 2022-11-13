@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ColDef } from 'ag-grid-community';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from 'src/app/service/admin.service';
@@ -9,7 +9,7 @@ import { QuestionactionComponent } from '../question/questionaction.component';
   templateUrl: './list-question.component.html',
   styleUrls: ['./list-question.component.css'],
 })
-export class ListQuestionComponent implements OnInit {
+export class ListQuestionComponent {
 
   questions: Array<any> = [];
   subjects: Array<any> = [];
@@ -17,7 +17,6 @@ export class ListQuestionComponent implements OnInit {
   count!:number
   constructor(private aservice: AdminService, private tostr: ToastrService) {}
 
-  ngOnInit(){ /* TODO document why this method 'ngOnInit' is empty */ }
   gridApActive: any;
   searchText: any;
   // public groupDisplayType: RowGroupingDisplayType = 'groupRows';
@@ -79,7 +78,6 @@ export class ListQuestionComponent implements OnInit {
     this.gridApActive = params.api;
     this.aservice.listquestions().subscribe((res) => {
       this.questions = res.data;
-      console.log(this.questions);
     });
   }
   checkfordelete(questionId: any){
@@ -101,8 +99,6 @@ export class ListQuestionComponent implements OnInit {
           this.questions = this.questions.filter((r) => r.questionId != this.questionId);
         },
         (err) => {
-          console.log(err);
-
           this.tostr.error(err.error.msg);
         }
       );

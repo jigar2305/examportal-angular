@@ -45,7 +45,6 @@ export class LoginComponent {
   login() {
     if (this.loginform.valid) {
       this.userservice.loginApi(this.loginform.value).subscribe(res => {
-        console.log(res.data);
         localStorage.setItem("firstName",res.data.firstName)
         localStorage.setItem("userId", res.data.userId)
         localStorage.setItem("email", res.data.email)
