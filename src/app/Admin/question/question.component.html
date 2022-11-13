@@ -152,7 +152,7 @@
             <div class="modal-body">
                 <div class="m-2">
                     <div class="input-group has-validation">
-                        <input class="form-control" type="file" (change)="onChange($event)">
+                        <input class="form-control" type="file" [accept]="exceltype" (change)="onChange($event)">
                     </div>
                 </div>
                 <div class="m-2">

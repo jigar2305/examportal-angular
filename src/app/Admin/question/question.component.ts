@@ -14,6 +14,7 @@ export class QuestionComponent implements OnInit {
   submitted = false;
   subject: any
   file!: File;
+  exceltype:String="application/vnd.ms-excel,application/msexcel,application/x-msexcel,application/x-ms-excel,application/x-excel,application/x-dos_ms_excel,application/xls,application/x-xls,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
   subjects: Array<any> = []
   questions: Array<any> = []
   constructor(private formBuilder: FormBuilder, private adminservice: AdminService, private tostr: ToastrService) {
@@ -39,9 +40,6 @@ export class QuestionComponent implements OnInit {
   ngOnInit(): void {
     this.getallsubject()
   }
-  subjectvalue() {
-  }
-
   getallsubject() {
     this.adminservice.Listsubject().subscribe(res => {
       this.subjects = res.data

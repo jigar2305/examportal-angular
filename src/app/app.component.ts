@@ -9,6 +9,6 @@ import { SPINNER } from 'ngx-ui-loader';
 export class AppComponent{
 
   title = 'examportal';
-  SPINNER!:SPINNER
-  // SPINNER!:any
+  SPINNER:SPINNER = SPINNER.threeStrings
+
 }
