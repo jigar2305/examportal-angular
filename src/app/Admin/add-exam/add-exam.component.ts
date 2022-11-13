@@ -73,7 +73,6 @@ export class AddExamComponent implements OnInit {
     this.date = this.date.replace('-', '/');
     this.date = this.date.replace('-', '/');
     let flag = 0;
-    console.log(this.date);
     this.subjectIds.forEach((element) => {
       if (element.number == 0 || element.number == null) {
         flag = 1;

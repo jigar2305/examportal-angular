@@ -100,7 +100,6 @@ export class UserExamResultViewComponent implements OnInit {
     let examId = this.share.getexamId() as number;
     let resultId = this.share.getresultId() as number;
     let userId = this.share.getuserId() as number;
-    console.log(examId, userId, resultId);
 
     this.sservice.getresultquestion(userId, examId).subscribe(
       (res) => {

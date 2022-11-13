@@ -53,7 +53,6 @@ export class UserExamsComponent {
     this.userId = this.aRoute.snapshot.params["userId"]
     this.sservice.getresults(this.userId).subscribe(res => {
       this.results = res.data
-      console.log(this.results);
     })
   }
 }

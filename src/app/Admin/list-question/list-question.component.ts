@@ -81,9 +81,7 @@ export class ListQuestionComponent {
     });
   }
   checkfordelete(questionId: any){
-    let e = document.getElementById("model")
-    e?.click()
-    console.log(e);
+    document.getElementById("model")?.click()
     this.aservice.iscontainexamquestion(questionId).subscribe((res)=>{
       this.count = res.data
       this.questionId = questionId

@@ -45,16 +45,12 @@ export class CourseComponent  {
     this.gridApActive = params.api;
     this.adminservice.Listcourse().subscribe((res: { data: any }) => {
       this.courses = res.data;
-      console.log(this.courses);
     });
   }
   checkfordelete(courseId: any){
-    let e = document.getElementById("model")
-    e?.click()
-    console.log(e);
+    document.getElementById("model")?.click()
     this.adminservice.iscontainsubject(courseId).subscribe((res)=>{
       this.subject = res.data
-      console.log(this.subject);
       this.courseId = courseId
     })
 

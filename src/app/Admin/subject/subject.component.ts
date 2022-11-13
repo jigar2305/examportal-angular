@@ -85,9 +85,7 @@ export class SubjectComponent implements OnInit {
     });
   }
   checkfordelete(subjectId: any){
-    let e = document.getElementById("model")
-    e?.click()
-    console.log(e);
+    document.getElementById("model")?.click()
     this.adminservice.iscontainquestion(subjectId).subscribe((res)=>{
       this.quetion = res.data
       this.subjectId = subjectId

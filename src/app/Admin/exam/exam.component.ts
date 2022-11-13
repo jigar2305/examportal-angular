@@ -169,7 +169,6 @@ export class ExamComponent implements OnInit {
     this.adminservice.isenroll(examId).subscribe(
       (res) => {
         this.count = res.data;
-        console.log(res.data);
         this.examId = examId;
       },
       (err) => {

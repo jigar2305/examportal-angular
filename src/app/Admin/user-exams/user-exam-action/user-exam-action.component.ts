@@ -18,7 +18,6 @@ export class UserExamActionComponent implements ICellRendererAngularComp {
   constructor(private aRoute: ActivatedRoute, private sservice: StudentService, private share: ShareService) { }
 
   agInit(params: ICellRendererParams<any, any>): void {
-    console.log(params.value);
     this.share.setexamId(params.value.examId)
     this.share.setresultId(params.value.resultId)
     this.share.setuserId(params.value.userId)
