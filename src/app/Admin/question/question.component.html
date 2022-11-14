@@ -1,148 +1,140 @@
 <div class="container-fluid">
-    <div class="card">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-10">
-                    <h5 class="card-title">Add question</h5>
-                </div>
-                <div class="col-2">
-                    <button class="btn btn-secondary btn-sm mt-3" data-bs-toggle="modal"
-                        data-bs-target="#verticalycentered">excel</button>
-                </div>
-            </div>
-            <div class="card-header">
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-10">
+          <h5 class="card-title">Add question</h5>
+        </div>
+        <div class="col-2">
+          <button class="btn btn-secondary btn-sm mt-3" data-bs-toggle="modal"
+            data-bs-target="#largeModal">excel</button>
+        </div>
+      </div>
+      <div class="card-header">
 
-                <!-- <form [formGroup]="subjectform" (ngSubmit)="subjectvalue()"> -->
-                    <div class="row">
-                        <div class="col-1">
-                            <label>subject</label>
-                        </div>
-                        <div class="col-2">
-                            <select aria-label="Default select example" [(ngModel)]="subject">
-                                <option selected="" [ngValue]="null">plese select subject</option>
-                                <option *ngFor="let i of subjects" [ngValue]="i">{{i.subjectName}}</option>
-                            </select>
-                        </div>
-                        <!-- <div class="col-2">
+        <!-- <form [formGroup]="subjectform" (ngSubmit)="subjectvalue()"> -->
+        <div class="row">
+          <div class="col-1">
+            <label>subject</label>
+          </div>
+          <div class="col-2">
+            <select aria-label="Default select example" [(ngModel)]="subject">
+              <option selected="" [ngValue]="null">plese select subject</option>
+              <option *ngFor="let i of subjects" [ngValue]="i">{{i.subjectName}}</option>
+            </select>
+          </div>
+          <!-- <div class="col-2">
                             <button class="btn btn-primary btn-sm">select</button>
                         </div> -->
-                    </div>
-                <!-- </form> -->
-            </div>
-
-            <form [formGroup]="questionform" (ngSubmit)="onSubmit()">
-                <div class="card">
-                    <h5 class="card-header"></h5>
-                    <div class="row p-3">
-                        <label for="inputEmail3" class="col-sm-2 col-form-label">Number of question</label>
-                        <div class="col-sm-10">
-                            <input type="number" class="form-control" (change)="onChangequestion($event)"
-                                formControlName="Numberofquestion" id="inputText">
-
-                        </div>
-                    </div>
-
-                    <div *ngFor="let question of questionFormGroups; let i = index" class="list-group list-group-flush">
-                        <div class="list-group-item">
-                            <h5 class="card-title">question {{i + 1}}</h5>
-                            <div [formGroup]="question" class="form-row">
-                                <div class="row mb-3">
-                                    <label for="inputEmail3" class="col-sm-2 col-form-label">question</label>
-                                    <div class="col-sm-10">
-                                        <textarea type="text" class="form-control"
-                                            formControlName="question"></textarea>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputEmail3" class="col-sm-2 col-form-label">A</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" formControlName="a" id="inputText">
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputEmail3" class="col-sm-2 col-form-label">B</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" formControlName="b" id="inputText">
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputEmail3" class="col-sm-2 col-form-label">C</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" formControlName="c" id="inputText">
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputEmail3" class="col-sm-2 col-form-label">D</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" formControlName="d" id="inputText">
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputEmail3" class="col-sm-2 col-form-label">Answer</label>
-                                    <div class="col-sm-10">
-                                        <div class="row">
-                                            <div class="col-3">
-                                                A. &nbsp;
-                                                <input class="form-check-input" type="radio"
-                                                    formControlName="correctAnswer" value="a">
-                                            </div>
-                                            <div class="col-3">
-                                                B. &nbsp;
-                                                <input class="form-check-input" type="radio"
-                                                    formControlName="correctAnswer" value="b">
-                                            </div>
-                                            <div class="col-3">
-                                                c. &nbsp;
-                                                <input class="form-check-input" type="radio"
-                                                    formControlName="correctAnswer" value="c">
-                                            </div>
-                                            <div class="col-3">
-                                                D.&nbsp;
-                                                <input class="form-check-input" type="radio"
-                                                    formControlName="correctAnswer" value="d">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputEmail3" class="col-sm-2 col-form-label">level</label>
-                                    <div class="col-sm-4">
-                                        <div class="row">
-                                            <div class="col-4">
-                                                hard. &nbsp;
-                                                <input class="form-check-input" type="radio"
-                                                formControlName="level" value="hard">
-                                            </div>
-                                            <div class="col-4">
-                                              moderate. &nbsp;
-                                                <input class="form-check-input" type="radio"
-                                                formControlName="level" value="moderate">
-                                            </div>
-                                            <div class="col-4">
-                                                easy. &nbsp;
-                                                <input class="form-check-input" type="radio"
-                                                formControlName="level" value="easy">
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer text-center border-top-0">
-                        <button class="btn btn-primary mr-1">submit</button>&nbsp;
-                        <button class="btn btn-secondary mr-1" type="reset" (click)="onReset()">Reset</button>&nbsp;
-                        <button class="btn btn-secondary" type="button" (click)="onClear()">Clear</button>
-                    </div>
-
-                </div>
-            </form>
         </div>
+        <!-- </form> -->
+      </div>
+
+      <form [formGroup]="questionform" (ngSubmit)="onSubmit()">
+        <div class="card">
+          <h5 class="card-header"></h5>
+          <div class="row p-3">
+            <label for="inputEmail3" class="col-sm-2 col-form-label">Number of question</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" (change)="onChangequestion($event)"
+                formControlName="Numberofquestion" id="inputText">
+
+            </div>
+          </div>
+
+          <div *ngFor="let question of questionFormGroups; let i = index" class="list-group list-group-flush">
+            <div class="list-group-item">
+              <h5 class="card-title">question {{i + 1}}</h5>
+              <div [formGroup]="question" class="form-row">
+                <div class="row mb-3">
+                  <label for="inputEmail3" class="col-sm-2 col-form-label">question</label>
+                  <div class="col-sm-10">
+                    <textarea type="text" class="form-control" formControlName="question"></textarea>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputEmail3" class="col-sm-2 col-form-label">A</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" formControlName="a" id="inputText">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputEmail3" class="col-sm-2 col-form-label">B</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" formControlName="b" id="inputText">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputEmail3" class="col-sm-2 col-form-label">C</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" formControlName="c" id="inputText">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputEmail3" class="col-sm-2 col-form-label">D</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" formControlName="d" id="inputText">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputEmail3" class="col-sm-2 col-form-label">Answer</label>
+                  <div class="col-sm-10">
+                    <div class="row">
+                      <div class="col-3">
+                        A. &nbsp;
+                        <input class="form-check-input" type="radio" formControlName="correctAnswer" value="a">
+                      </div>
+                      <div class="col-3">
+                        B. &nbsp;
+                        <input class="form-check-input" type="radio" formControlName="correctAnswer" value="b">
+                      </div>
+                      <div class="col-3">
+                        c. &nbsp;
+                        <input class="form-check-input" type="radio" formControlName="correctAnswer" value="c">
+                      </div>
+                      <div class="col-3">
+                        D.&nbsp;
+                        <input class="form-check-input" type="radio" formControlName="correctAnswer" value="d">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputEmail3" class="col-sm-2 col-form-label">level</label>
+                  <div class="col-sm-4">
+                    <div class="row">
+                      <div class="col-4">
+                        hard. &nbsp;
+                        <input class="form-check-input" type="radio" formControlName="level" value="hard">
+                      </div>
+                      <div class="col-4">
+                        moderate. &nbsp;
+                        <input class="form-check-input" type="radio" formControlName="level" value="moderate">
+                      </div>
+                      <div class="col-4">
+                        easy. &nbsp;
+                        <input class="form-check-input" type="radio" formControlName="level" value="easy">
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="card-footer text-center border-top-0">
+            <button class="btn btn-primary mr-1">submit</button>&nbsp;
+            <button class="btn btn-secondary mr-1" type="reset" (click)="onReset()">Reset</button>&nbsp;
+            <button class="btn btn-secondary" type="button" (click)="onClear()">Clear</button>
+          </div>
+
+        </div>
+      </form>
     </div>
+  </div>
 </div>
-<div class="modal fade" id="verticalycentered" tabindex="-1" style="display: none;" aria-hidden="true">
+<!-- <div class="modal fade" id="verticalycentered" tabindex="-1" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -150,6 +142,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+              <div class="container">
+                <img src="assets/img/excel_example.JPG" alt="" width="500px">
+              </div>
                 <div class="m-2">
                     <div class="input-group has-validation">
                         <input class="form-control" type="file" [accept]="exceltype" (change)="onChange($event)">
@@ -161,5 +156,43 @@
                 </div>
             </div>
         </div>
+    </div> -->
+<div class="modal fade" id="largeModal" tabindex="-1" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Select Excel File:</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-7 mr-0">
+              <img src="assets/img/excel_example2.JPG" alt="excel demo file..." width="430px">
+            </div>
+            <div class="col-5 ml-1">
+              <strong>Rules:</strong>
+              <ul>
+                <li>Use this format.</li>
+                <li>The first line should be blank or not include a question.</li>
+                <li>Only use question levels (easy, moderate, and hard).</li>
+                <li>If a subject does not exist, then it is not saved as a question.</li>
+                <li>Only Excel files were accepted.</li>
+                <li>Don't contain an empty cell in a row..</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-2 mb-0">
+          <div class="col-8">
+            <input class="form-control" type="file" [accept]="exceltype" (change)="onChange($event)">
+          </div>
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary" (click)="onUpload()" data-bs-dismiss="modal"
+              style="width: 100%;">upload</button>
+          </div>
+        </div>
+      </div>
     </div>
-</div><!-- End Vertically centered Modal-->
+  </div>
+</div>

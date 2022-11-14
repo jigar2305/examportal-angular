@@ -60,6 +60,8 @@ import { AuthTokenInterceptor } from './auth-token.interceptor';
 import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
 import { UserExamActionComponent } from './Admin/user-exams/user-exam-action/user-exam-action.component';
 import { UserExamResultViewComponent } from './Admin/user-exams/user-exam-action/user-exam-result-view/user-exam-result-view.component';
+import { LoadingBarModule } from '@ngx-loading-bar/core';
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 
 
 
@@ -127,10 +129,11 @@ import { UserExamResultViewComponent } from './Admin/user-exams/user-exam-action
     NgMultiSelectDropDownModule.forRoot(),
     AgGridModule,
     TooltipModule,
+    LoadingBarHttpClientModule,
     NgxUiLoaderModule,
-    NgxUiLoaderHttpModule.forRoot({
-      showForeground:true
-    })
+    // NgxUiLoaderHttpModule.forRoot({
+    //   showForeground:true
+    // })
   ],
   providers: [DatePipe,{provide:HTTP_INTERCEPTORS,useClass:AuthTokenInterceptor,multi:true}],
   bootstrap: [AppComponent]

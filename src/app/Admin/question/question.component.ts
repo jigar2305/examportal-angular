@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Route, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from 'src/app/service/admin.service';
 
@@ -17,7 +18,7 @@ export class QuestionComponent implements OnInit {
   exceltype:String="application/vnd.ms-excel,application/msexcel,application/x-msexcel,application/x-ms-excel,application/x-excel,application/x-dos_ms_excel,application/xls,application/x-xls,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
   subjects: Array<any> = []
   questions: Array<any> = []
-  constructor(private formBuilder: FormBuilder, private adminservice: AdminService, private tostr: ToastrService) {
+  constructor(private formBuilder: FormBuilder, private adminservice: AdminService, private tostr: ToastrService,private rout:Router) {
     this.questionform = this.formBuilder.group({
       Numberofquestion: ['', Validators.required],
       question: new FormArray([])
@@ -50,6 +51,7 @@ export class QuestionComponent implements OnInit {
     this.adminservice.addquestionsbyexcel(this.file).subscribe(
         (event: any) => {
           this.tostr.success("question added....")
+          this.rout.navigateByUrl('/admin/list-question')
         }
     );
 }
@@ -90,6 +92,7 @@ export class QuestionComponent implements OnInit {
       this.adminservice.addquestions(this.questionform.value.question).subscribe(res => {
         this.tostr.success("questions added successfully")
         this.onClear()
+        this.rout.navigateByUrl('/admin/list-question')
       }, err => {
 
         this.tostr.error("somethin went wrong")
