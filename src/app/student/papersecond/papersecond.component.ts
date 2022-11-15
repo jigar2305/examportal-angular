@@ -18,6 +18,7 @@ export class PapersecondComponent implements OnInit, OnDestroy {
   btnvalue: string = '';
   que: Array<question> = [];
   time: any;
+  issubmit:boolean = false;
 
   constructor(
     private SService: StudentService,
@@ -32,7 +33,9 @@ export class PapersecondComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.submit();
+    if(!this.issubmit){
+      this.submit();
+    }
   }
 
   ngOnInit(): void {
@@ -86,6 +89,7 @@ export class PapersecondComponent implements OnInit, OnDestroy {
       (res) => {
         this.toster.success("exam complated susseccfully")
         this.router.navigateByUrl('/student/results');
+        this.issubmit = true
       },
       (err) => {
         this.toster.error("Technical error occurred")
