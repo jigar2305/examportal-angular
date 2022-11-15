@@ -1,45 +1,9 @@
-<!-- <div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">exam results</h5>
-
-
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">No.</th>
-                                <th scope="col">exam</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let j of results;let i = index">
-                                <th scope="row">{{i + 1}}</th>
-                                <td>{{j.exam.examName}}</td>
-                                <td>
-                                    <a routerLink="/student/result/{{j.exam.examId}}/{{j.resultId}}">view result </a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
 <div class="container-fluid">
   <div class="row">
     <div class="col-12">
       <div class="row mb-2">
         <div style="text-align: start;" class="col-6 p-2">
           <h4 style="font-weight: bolder; color: blue; margin-left: 10px;">results</h4>
-        </div>
-        <div style="text-align: end;" class="col-6">
-          <a routerLink="/admin/addexam">
-            <h1 class="ri-add-circle-fill"></h1>
-          </a>
         </div>
       </div>
       <div class="card">

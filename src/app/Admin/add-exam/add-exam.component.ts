@@ -70,8 +70,9 @@ export class AddExamComponent implements OnInit {
     });
   }
   addexamquestions() {
-    this.date = this.date.replace('-', '/');
-    this.date = this.date.replace('-', '/');
+    let date1 = this.date;
+    date1 = date1.replace('-', '/');
+    date1 = date1.replace('-', '/');
     let flag = 0;
     this.subjectIds.forEach((element) => {
       if (element.number == 0 || element.number == null) {
@@ -103,7 +104,7 @@ export class AddExamComponent implements OnInit {
         time: this.time,
         isshow: this.isshow,
         subjects: this.subjectIds,
-        date: this.date,
+        date: date1,
         startAt: this.startAt,
         endAt: this.endAt,
         percentage: this.Percentage
