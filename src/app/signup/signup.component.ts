@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -9,25 +9,23 @@ import { UserService } from '../service/user.service';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent {
   userform: FormGroup;
   emailPattern = "^[a-z0-9]+@gmail.com";
   constructor(private tostr: ToastrService, private router: Router, private userservice: UserService) {
     this.userform = new FormGroup({
       firstName: new FormControl('', [Validators.required, Validators.minLength(3)]),
       lastName: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      email: new FormControl('', [Validators.required,Validators.pattern(this.emailPattern)]),
-      password: new FormControl('', [Validators.required,Validators.minLength(8),this.strongpassword]),
+      email: new FormControl('', [Validators.required, Validators.pattern(this.emailPattern)]),
+      password: new FormControl('', [Validators.required, Validators.minLength(8), this.strongpassword]),
       gender: new FormControl('', [Validators.required]),
     })
   }
 
-get email() {
-  return this.userform.get('email');
-}
-
-  ngOnInit(): void {
+  get email() {
+    return this.userform.get('email');
   }
+
   adduser() {
     if (this.userform.valid) {
       this.userservice.signupApi(this.userform.value).subscribe(res => {
@@ -37,7 +35,7 @@ get email() {
         this.tostr.error("something went wrong")
 
       })
-    }else{
+    } else {
       this.tostr.error("please fill form correctly")
 
     }

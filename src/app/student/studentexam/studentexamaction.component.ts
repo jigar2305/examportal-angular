@@ -31,7 +31,7 @@ export class StudentexamactionComponent
   implements OnInit, ICellRendererAngularComp {
   examId!: number;
   date!: string;
-  startAt!: string;
+  startAt: string='wait';
   today!: string;
   endAt!: string;
   isshow!: string;
@@ -63,24 +63,57 @@ export class StudentexamactionComponent
   }
   checkforstart() {
     let close = interval(2000).subscribe((x) => {
-      let currentTime = this.datePipe.transform(new Date(), 'H:mm:ss');
-      if (currentTime) {
-        if (currentTime >= this.startAt) {
+      // let currentTime = this.datePipe.transform(new Date(), 'H:mm:ss');
+      // if (currentTime) {
+        if (this.compareTime(this.startAt)) {
           this.isshow = 'start';
           close.unsubscribe();
         }
-      }
+      // }
     });
   }
   chekforclose() {
     let close = interval(2000).subscribe((x) => {
-      let currentTime = this.datePipe.transform(new Date(), 'H:mm:ss');
-      if (currentTime) {
-        if (currentTime >= this.endAt) {
-          this.isshow = 'end';
-          close.unsubscribe();
-        }
+      // let currentTime = this.datePipe.transform(new Date(), 'H:mm:ss');
+      // if (currentTime) {
+      //   this.compareTime(this.endAt)
+      if (this.compareTime(this.endAt)) {
+        this.isshow = 'end';
+        close.unsubscribe();
       }
+      // }
     });
+  }
+  compareTime(time: any): boolean {
+
+    // let hh: Array<string> = comparetime.split(':');
+    // // let h1 = hh[0] as unknown as number
+    // // let h2 = hh[1] as unknown as number
+    // // let h3 = hh[2] as unknown as number
+    // console.log(h1 + " " + h2 + " " + h3);
+    let currentTime = this.datePipe.transform(new Date(), 'HH:mm:ss') as string
+    // let hh2: Array<string> = currentTime.split(':');
+    // let c1 = hh2[0] as unknown as number
+    // let c2 = hh2[1] as unknown as number
+    // let c3 = hh2[2] as unknown as number
+    // console.log(c1 + " " + c2 + " " + c3);
+    let first = time.replace(':','');
+    let second = currentTime.replace(':','');
+    first = first.replace(':','');
+    second = second.replace(':','');
+    let f = first as unknown as number
+    let s = second as unknown as number
+    if(f < s){
+      return true
+    }else{
+      return false;
+    }
+
+
+
+
+
+
+
   }
 }
