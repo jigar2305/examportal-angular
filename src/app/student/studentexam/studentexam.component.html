@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-12">
-      <div class="row mb-2">
+      <div class="row mb-2 mt-2">
         <div style="text-align: start;" class="col-6 p-2">
           <h4 style="font-weight: bolder; color: blue; margin-left: 10px;">Exams</h4>
         </div>
@@ -15,7 +15,7 @@
                 (ngModelChange)="onFilterBoxChange()" />
             </div>
           </div>
-          <ag-grid-angular style="height: 500px; " class="ag-theme-alpine" [defaultColDef]="defaultColDef"
+          <ag-grid-angular style="height: 490px; " class="ag-theme-alpine" [defaultColDef]="defaultColDef"
           [rowData]="exams" [columnDefs]="colDefs" [suppressRowClickSelection]="true"
           [pagination]="true" (gridReady)="onGridReady($event)"></ag-grid-angular>
         </div>
