@@ -41,6 +41,7 @@ export class AdminheaderComponent implements OnInit {
         this.userservice.resetpassword(data).subscribe(res => {
           this.tostr.success("Password changed successfully")
           document.getElementById('close')?.click()
+          this.passwordform.reset()
         }, err => {
           this.tostr.error(err.error.msg)
         })

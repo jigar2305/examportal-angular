@@ -20,7 +20,7 @@
                 (ngModelChange)="onFilterBoxChange()" />
             </div>
           </div>
-          <ag-grid-angular style="height: 490px; " class="ag-theme-alpine" [defaultColDef]="defaultColDef"
+          <ag-grid-angular style="height: 500px; " class="ag-theme-alpine" [defaultColDef]="defaultColDef"
             [rowData]="courses" [columnDefs]="colDefs" [suppressRowClickSelection]="true"
             [pagination]="true" (gridReady)="onGridReady($event)"></ag-grid-angular>
         </div>

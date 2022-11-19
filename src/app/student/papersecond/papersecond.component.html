@@ -22,19 +22,19 @@
                   <p><strong>Q {{index +1}})</strong> {{que[index].question}}</p>
                   <div class="row">
 
-                    <div class="col-6"> <input class="form-check-input" type="radio" [(ngModel)]="que[index].selected"
+                    <div class="col-6 wrap"> <input class="form-check-input" type="radio" [(ngModel)]="que[index].selected"
                         value="a">
                       A. &nbsp; {{que[index].a}}
                     </div>
-                    <div class="col-6">
+                    <div class="col-6 wrap">
                       <input class="form-check-input" type="radio" [(ngModel)]="que[index].selected" value="b">
                       B. &nbsp;{{que[index].b}}
                     </div>
-                    <div class="col-6">
+                    <div class="col-6 wrap">
                       <input class="form-check-input" type="radio" [(ngModel)]="que[index].selected" value="c">
                       c. &nbsp; {{que[index].c}}
                     </div>
-                    <div class="col-6">
+                    <div class="col-6 wrap">
                       <input class="form-check-input" type="radio" [(ngModel)]="que[index].selected" value="d">
                       D. &nbsp;{{que[index].d}}
                     </div>
