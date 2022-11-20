@@ -27,15 +27,11 @@ export class UserstatusbuttonComponent
       (res) => {
         if (res.data == true) {
           this.tostr.success('user activated..');
-          // this.ucomponent.changestatus(userId)
           this.setstatus()
         } else {
           this.tostr.success('user Deactivated..');
           this.setstatus()
         }
-      },
-      (err) => {
-        this.tostr.error('something went wrong');
       }
     );
   }

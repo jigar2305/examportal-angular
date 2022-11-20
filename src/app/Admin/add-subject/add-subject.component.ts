@@ -53,12 +53,7 @@ export class AddSubjectComponent implements OnInit {
     this.adminservice.addsubject(subjectform).subscribe(
       (res) => {
         this.rout.navigateByUrl('admin/subject')
-        this.toster.success('subject Added..');
-      },
-      (err) => {
-        this.toster.error('something went wrong');
-      }
-    );
+      });
   }
 
   }

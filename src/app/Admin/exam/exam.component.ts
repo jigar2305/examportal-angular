@@ -170,9 +170,6 @@ export class ExamComponent implements OnInit {
       (res) => {
         this.count = res.data;
         this.examId = examId;
-      },
-      (err) => {
-        this.tostr.error('Technical error occurred');
       }
       );
       document.getElementById('model')?.click();
@@ -180,11 +177,7 @@ export class ExamComponent implements OnInit {
   delete() {
     this.adminservice.deleteExam(this.examId).subscribe(
       (res) => {
-        this.tostr.success('exam deleted..');
         this.exams = this.exams.filter((r) => r.examId != this.examId);
-      },
-      (err) => {
-        this.tostr.error('something went wrong');
       }
     );
   }
@@ -199,9 +192,6 @@ export class ExamComponent implements OnInit {
         this.users.forEach((element: any) => {
           this.userId.push({ "userId": element.userId, "firstName": element.firstName, "lastName": element.lastName, "ischeck": false })
         });
-      },
-      (err) => {
-        this.tostr.error('Technical error occourd');
       }
     );
   }
@@ -220,14 +210,7 @@ export class ExamComponent implements OnInit {
         examId: this.examId,
         userId: this.Ids,
       };
-      this.adminservice.enrollexam(enroll).subscribe(
-        (res) => {
-          this.tostr.success('exam enroll successfully');
-        },
-        (err) => {
-          this.tostr.error(err.error.msg);
-        }
-      );
+      this.adminservice.enrollexam(enroll).subscribe();
 
       this.Ids = [];
     } else {

@@ -85,20 +85,13 @@ export class ListQuestionComponent {
     this.aservice.iscontainexamquestion(questionId).subscribe((res)=>{
       this.count = res.data
       this.questionId = questionId
-    },(err)=>{
-        this.tostr.error(err.error.msg);
     })
   }
 
   delete() {
       this.aservice.deletquestion(this.questionId).subscribe(
         (res) => {
-          this.tostr.success(res.msg);
           this.questions = this.questions.filter((r) => r.questionId != this.questionId);
-        },
-        (err) => {
-          this.tostr.error(err.error.msg);
-        }
-      );
+       });
   }
 }

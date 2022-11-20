@@ -22,7 +22,7 @@ export class AddExamComponent implements OnInit {
   date!: String;
   startAt!: String;
   endAt!: String;
-  Percentage!:number;
+  Percentage!: number;
   isshow: boolean = false;
   courses: Array<any> = [];
   course: any;
@@ -30,7 +30,6 @@ export class AddExamComponent implements OnInit {
     private adminservice: AdminService,
     private tostr: ToastrService,
     private router: Router,
-    private datePipe: DatePipe
   ) { }
   ngOnInit(): void {
     this.getallsubject();
@@ -112,16 +111,6 @@ export class AddExamComponent implements OnInit {
       this.adminservice.addexam(addquestion).subscribe(
         (res) => {
           this.router.navigateByUrl('/admin/exam');
-          this.tostr.success(this.examName + ' added susseccfully..');
-        },
-        (err) => {
-          if (err.error.msg == 'exam alredy added...') {
-            this.tostr.error(this.examName + ' ' + 'is already exist');
-          } else if (err.error.msg == 'please add questions first') {
-            this.tostr.error('please add questions first');
-          } else {
-            this.tostr.error('please try again', 'Technical error occurred');
-          }
         }
       );
     }

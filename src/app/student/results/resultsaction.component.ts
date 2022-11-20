@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { ICellRendererParams } from 'ag-grid-community';
 
@@ -11,7 +11,7 @@ import { ICellRendererParams } from 'ag-grid-community';
   styles: [
   ]
 })
-export class ResultsactionComponent implements OnInit,ICellRendererAngularComp {
+export class ResultsactionComponent implements ICellRendererAngularComp {
   resultId!:number
   examId!:number
   value: any;
@@ -23,10 +23,6 @@ export class ResultsactionComponent implements OnInit,ICellRendererAngularComp {
   }
   refresh(params: ICellRendererParams<any, any>): boolean {
     return false;
-  }
-  constructor() { }
-
-  ngOnInit(): void {
   }
 
 }

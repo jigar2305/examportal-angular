@@ -187,9 +187,6 @@ export class ExamresultpdfComponent {
           this.Total = this.results[0].totalMarks;
           this.passingMark = (this.Total / 3);
         }
-      },
-      (err) => {
-        this.tostr.error('technical error occourd');
       }
     );
   }
@@ -206,8 +203,8 @@ export class ExamresultpdfComponent {
       autoPaging: 'text',
       x: 0,
       y: 0,
-      width: 190, //target width in the PDF document
-      windowWidth: 675, //window width in CSS pixels
+      width: 190,
+      windowWidth: 675,
     });
   }
   excel() {

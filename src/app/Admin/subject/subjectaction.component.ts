@@ -39,7 +39,6 @@ export class SubjectactionComponent implements OnInit,ICellRendererAngularComp {
   }
   deletesubject(subjectId: any) {
     this.subj.checkfordelete(subjectId)
-
   }
 
 }

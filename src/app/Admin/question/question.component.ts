@@ -15,10 +15,10 @@ export class QuestionComponent implements OnInit {
   submitted = false;
   subject: any
   file!: File;
-  exceltype:String="application/vnd.ms-excel,application/msexcel,application/x-msexcel,application/x-ms-excel,application/x-excel,application/x-dos_ms_excel,application/xls,application/x-xls,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+  exceltype: String = "application/vnd.ms-excel,application/msexcel,application/x-msexcel,application/x-ms-excel,application/x-excel,application/x-dos_ms_excel,application/xls,application/x-xls,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
   subjects: Array<any> = []
   questions: Array<any> = []
-  constructor(private formBuilder: FormBuilder, private adminservice: AdminService, private tostr: ToastrService,private rout:Router) {
+  constructor(private formBuilder: FormBuilder, private adminservice: AdminService, private tostr: ToastrService, private rout: Router) {
     this.questionform = this.formBuilder.group({
       Numberofquestion: ['', Validators.required],
       question: new FormArray([])
@@ -28,7 +28,7 @@ export class QuestionComponent implements OnInit {
     })
   }
 
-  onChange(event:any) {
+  onChange(event: any) {
     this.file = event.target.files[0];
   }
 
@@ -49,12 +49,10 @@ export class QuestionComponent implements OnInit {
 
   onUpload() {
     this.adminservice.addquestionsbyexcel(this.file).subscribe(
-        (event: any) => {
-          this.tostr.success("question added....")
-          this.rout.navigateByUrl('/admin/list-question')
-        }
-    );
-}
+      (res) => {
+        this.rout.navigateByUrl('/admin/list-question')
+      });
+  }
 
   onChangequestion(e: any) {
     const numberOfquestions = e.target.value || 0;
@@ -82,20 +80,16 @@ export class QuestionComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
-      if (this.subject == null) {
-        this.tostr.warning("please select subject")
-      }
+    if (this.subject == null) {
+      this.tostr.warning("please select subject")
+    }
     if (this.questionform.invalid) {
       this.tostr.warning("please fill form correctly")
     }
     if (this.questionform.valid) {
       this.adminservice.addquestions(this.questionform.value.question).subscribe(res => {
-        this.tostr.success("questions added successfully")
         this.onClear()
         this.rout.navigateByUrl('/admin/list-question')
-      }, err => {
-
-        this.tostr.error("somethin went wrong")
       })
     }
   }

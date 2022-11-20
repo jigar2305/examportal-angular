@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {ColDef} from 'ag-grid-community';
+import { ColDef } from 'ag-grid-community';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from 'src/app/service/admin.service';
 import { ButtoncomponentComponent } from 'src/app/Admin/user/buttoncomponent/buttoncomponent.component';
@@ -15,8 +15,8 @@ export class UserComponent {
 
   users: Array<any> = [];
   userId!: number;
-  subject:Array<any> =[]
-  exam:Array<any> =[]
+  subject: Array<any> = []
+  exam: Array<any> = []
   colDefs: ColDef[] = [
     { field: 'firstName' },
     { field: 'lastName' },
@@ -65,15 +65,12 @@ export class UserComponent {
       (res) => {
         this.users = res.data;
         this.users = this.users.filter((u) => u.role.roleName != "admin");
-      },
-      (err) => {
-        this.tostr.error('sonething went wrong');
       }
     );
   }
   checkfordelete(userId: any) {
     document.getElementById("model")?.click()
-    this.aservice.iscontainchild(userId).subscribe((res)=>{
+    this.aservice.iscontainchild(userId).subscribe((res) => {
       this.subject = res.data.subject
       this.exam = res.data.exam
       this.userId = userId
@@ -83,10 +80,6 @@ export class UserComponent {
     this.aservice.deleteuser(this.userId).subscribe(
       (res) => {
         this.users = this.users.filter((u) => u.userId != this.userId);
-        this.tostr.success('user deleted..');
-      },
-      (err) => {
-        this.tostr.error(err.error.msg);
       }
     );
   }

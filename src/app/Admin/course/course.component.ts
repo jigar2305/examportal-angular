@@ -58,9 +58,6 @@ export class CourseComponent  {
   deletecourse() {
     this.adminservice.deletecourse(this.courseId).subscribe(res => {
       this.courses = this.courses.filter(r => r.courseId != this.courseId)
-      this.tostr.success("course deleted..")
-    }, err => {
-      this.tostr.error("something went wrong")
     })
   }
 }

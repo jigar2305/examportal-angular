@@ -47,12 +47,8 @@ export class EditComponent implements OnInit {
   updatecourse() {
     if (this.course.courseName != null) {
       this.adminservice.addcourse(this.course).subscribe(res => {
-        this.toster.success("course updated..")
         this.rout.navigateByUrl("admin/course")
-      }, err => {
-        this.toster.error("something went wrong")
-      }
-      )
+      })
     }
   }
 

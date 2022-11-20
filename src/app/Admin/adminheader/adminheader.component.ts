@@ -36,14 +36,9 @@ export class AdminheaderComponent implements OnInit {
           email: localStorage.getItem('email'),
           password: this.passwordform.value.password
         }
-        console.log(data);
-
         this.userservice.resetpassword(data).subscribe(res => {
-          this.tostr.success("Password changed successfully")
           document.getElementById('close')?.click()
           this.passwordform.reset()
-        }, err => {
-          this.tostr.error(err.error.msg)
         })
       }
     } else {

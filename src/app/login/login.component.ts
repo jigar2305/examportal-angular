@@ -53,7 +53,6 @@ export class LoginComponent {
         if (res.data.active == false) {
           this.tostr.error("please contact admin", "Your account is deactivate");
         } else {
-          this.tostr.success("login successfully")
           if (res.data.role.roleName == 'admin') {
             // this.router.navigateByUrl("/admin/dashbord")
             this.router.navigateByUrl("/admin/user")
@@ -62,8 +61,6 @@ export class LoginComponent {
             this.router.navigateByUrl("/student/subject-pdf")
           }
         }
-      }, err => {
-        this.tostr.error("Incoorect email & password")
       })
     } else {
       this.tostr.error("please fill form correctly")

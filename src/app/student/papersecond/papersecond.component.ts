@@ -87,12 +87,8 @@ export class PapersecondComponent implements OnInit, OnDestroy {
     };
     this.SService.submitquestion(answers).subscribe(
       (res) => {
-        this.toster.success("exam complated susseccfully")
         this.router.navigateByUrl('/student/results');
         this.issubmit = true
-      },
-      (err) => {
-        this.toster.error("Technical error occurred")
       }
     );
   }
