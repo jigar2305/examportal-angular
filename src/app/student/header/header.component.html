@@ -1,0 +1,59 @@
+<header id="header" class="header fixed-top d-flex align-items-center">
+
+  <div class="d-flex align-items-center justify-content-between">
+    <a  routerLink="/student/dashbord" class="logo d-flex align-items-center">
+      <img src="assets/img/logo.png" alt="">
+      <span class="d-none d-lg-block">ExamPortal</span>
+    </a>
+  </div><!-- End Logo -->
+
+
+
+  <nav class="header-nav ms-auto">
+    <ul class="d-flex align-items-center">
+      <li class="nav-item">
+        <h4> <b>Welcome,{{firstName}}</b></h4>
+      </li>
+      <li class="nav-item">
+        &nbsp;
+      </li>
+    </ul>
+  </nav><!-- End Icons Navigation -->
+
+</header><!-- End Header -->
+
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+
+  <ul class="sidebar-nav" id="sidebar-nav">
+
+    <!-- <li class="nav-item" tooltip="Dashboard" placement="right" backgroundColor="#CCCCFF" textColor="blue">
+      <a class="nav-link " routerLink="/student/dashbord">
+        <i class="bi bi-grid"></i>
+      </a>
+    </li> -->
+    <li class="nav-item" tooltip="subjects" placement="right" backgroundColor="#CCCCFF" textColor="blue">
+      <a class="nav-link " routerLink="/student/subject-pdf">
+        <i class="bi bi-grid"></i>
+      </a>
+    </li>
+    <li class="nav-item" tooltip="Exam" placement="right" backgroundColor="#CCCCFF" textColor="blue">
+      <a class="nav-link " routerLink="/student/exam">
+        <i class="ri-file-paper-fill"></i>
+      </a>
+    </li>
+    <li class="nav-item" tooltip="Results" placement="right" backgroundColor="#CCCCFF" textColor="blue">
+      <a class="nav-link " routerLink="/student/results">
+        <i class="bi bi-receipt"></i>
+      </a>
+    </li>
+    <li class="nav-item" tooltip="Sign Out" placement="right" backgroundColor="#CCCCFF" textColor="blue">
+      <a class="nav-link " routerLink="/logout">
+        <i class="bi bi-box-arrow-right"></i>
+      </a>
+    </li>
+
+
+  </ul>
+
+</aside>

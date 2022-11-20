@@ -1,0 +1,101 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">create exam</h5>
+          <div class="row mb-3">
+            <label for="inputEmail3" class="col-sm-1 col-form-label">exam</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" [(ngModel)]="examName" id="exam" />
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="inputEmail" class="col-sm-1 col-form-label">Time</label>
+            <div class="col-sm-4">
+              <input type="number" class="form-control" [(ngModel)]="time" id="Time" />
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="inputEmail" class="col-sm-1 col-form-label">Percentage</label>
+            <div class="col-sm-4">
+              <input type="number" class="form-control" [(ngModel)]="Percentage" id="Percentage" />
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-sm-1">
+              <input class="form-check-input" type="radio" [(ngModel)]="level" value="easy" />
+              &nbsp;easy
+            </div>
+            <div class="col-sm-2">
+              <input class="form-check-input" type="radio" [(ngModel)]="level" value="easy-moderate" />
+              &nbsp;easy-moderate
+            </div>
+            <div class="col-sm-2">
+              <input class="form-check-input" type="radio" [(ngModel)]="level" value="moderate-hard" />
+              &nbsp;moderate-hard
+            </div>
+            <div class="col-sm-1">
+              <input class="form-check-input" type="radio" [(ngModel)]="level" value="hard" />
+              &nbsp;hard
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label for="inputEmail" class="col-sm-1 col-form-label">Date</label>
+            <div class="col-sm-4">
+              <input type="Date" class="form-control" [(ngModel)]="date"  id="Date" />
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="inputEmail" class="col-sm-1 col-form-label">Start At</label>
+            <div class="col-sm-4">
+              <input type="time" class="form-control" [(ngModel)]="startAt" id="startAt" />
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="inputEmail" class="col-sm-1 col-form-label">End At</label>
+            <div class="col-sm-4">
+              <input type="time" class="form-control" [(ngModel)]="endAt" id="EndAt" />
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="inputEmail" class="col-sm-1 col-form-label">course</label>
+            <div class="col-sm-4">
+                <select class="form-select" aria-label="Default select example" (change)="courseselect()" [(ngModel)]="course" >
+                    <option *ngFor="let i of courses" [ngValue]="i">{{i.courseName}}</option>
+                </select>
+            </div>
+        </div>
+          <div class="row mb-3">
+            <label for="inputEmail3" class="col-sm-1 col-form-label">subject</label>
+            <div class="col-sm-4">
+              <ng-multiselect-dropdown [settings]="dropdownSettingsforsubject" [data]="subjectsshow"
+                [(ngModel)]="subjectIds" (onSelect)="select()" required>
+              </ng-multiselect-dropdown>
+            </div>
+          </div>
+          <div *ngIf="subjectIds != null" class="mt-2">
+            <div class="row mb-2" *ngFor="let i of subjectIds">
+              <div class="col-1">
+              </div>
+              <div class="col-2">
+                <p> {{i.subjectName}}</p>
+              </div>
+              <div class="col-2">
+                <input type="number" class="col-8" placeholder="number" [(ngModel)]="i.number" required>
+              </div>
+            </div>
+          </div>
+          <div class="form-check mb-3">
+            <label class="form-check-label" for="acceptTerms">Is answer Show</label>
+            <input class="form-check-input" type="checkbox"  [(ngModel)]="isshow">
+          </div>
+          <div class="ml-5">
+            <button type="submit" class="btn btn-primary" (click)="addexamquestions()">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

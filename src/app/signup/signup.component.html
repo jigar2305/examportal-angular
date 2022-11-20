@@ -1,0 +1,121 @@
+<main>
+    <div class="container">
+
+        <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+                        <div class="d-flex justify-content-center py-4">
+                            <a  class="logo d-flex align-items-center w-auto">
+                                <img src="assets/img/logo.png" alt="">
+                                <span class="d-none d-lg-block">ExamPortal</span>
+                            </a>
+                        </div><!-- End Logo -->
+
+                        <div class="card mb-3">
+
+                            <div class="card-body">
+
+                                <div class="pt-4 pb-2">
+                                    <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
+                                    <p class="text-center small">Enter your personal details to create account</p>
+                                </div>
+
+                                <form class="row g-3 needs-validation" [formGroup]="userform" (ngSubmit)="adduser()"
+                                    novalidate>
+                                    <div class="col-12">
+                                        <label for="yourName" class="form-label">FirstName</label>
+                                        <input type="text" name="name" class="form-control" formControlName="firstName"
+                                            id="yourName" required>
+                                    </div>
+                                    <span class="err"
+                                        *ngIf="userform.get('firstName')?.touched  && userform.get('firstName')?.hasError('required')">Please
+                                        Enter FirstName</span>
+                                    <span class="err"
+                                        *ngIf="userform.get('firstName')?.touched  && userform.get('firstName')?.hasError('minlength')">FirstName
+                                        Should be in 3 length </span>
+                                    <div class="col-12">
+                                        <label for="yourUsername" class="form-label">lastName</label>
+                                        <div class="input-group has-validation">
+                                            <input type="text" name="lastName" class="form-control"
+                                                formControlName="lastName" id="yourlastName" required>
+                                            <div class="invalid-feedback">Please choose a username.</div>
+                                        </div>
+                                    </div>
+                                    <span class="err"
+                                        *ngIf="userform.get('lastName')?.touched  && userform.get('lastName')?.hasError('required')">Please
+                                        Enter FirstName</span>
+                                    <span class="err"
+                                        *ngIf="userform.get('lastName')?.touched  && userform.get('lastName')?.hasError('minlength')">lastName
+                                        Should be in 3 length </span>
+
+                                    <div class="col-12">
+                                        <label for="yourEmail" class="form-label">Your Email</label>
+                                        <input type="email" name="email" class="form-control" formControlName="email"
+                                            id="yourEmail" required>
+                                    </div>
+                                    <span class="err" *ngIf="userform.get('email')?.hasError('pattern')">
+                                        Please Enter valid email
+                                    </span>
+
+
+                                    <div class="col-12">
+                                        <label for="yourPassword" class="form-label">Password</label>
+                                        <input type="password" name="password" formControlName="password"
+                                            class="form-control" id="yourPassword" required>
+                                    </div>
+                                    <span class="err"
+                                        *ngIf="userform.get('password')?.touched && userform.get('password')?.hasError('required')">
+                                        Please Enter Password
+                                    </span>
+                                    <span class="err"
+                                        *ngIf="userform.get('password')?.touched && userform.get('password')?.hasError('minlength')">
+                                        Password Must be in 8 length</span>
+                                    <span class="err"
+                                        *ngIf="userform.get('password')?.touched && userform.get('password')?.hasError('strongPassword')">
+                                        Please Select Strong Password [include <br> 1) [ @ or $ or # ] <br>2) Upper
+                                        Letter <br>3) Lower Letter ]
+                                    </span>
+
+                                    <fieldset class="row mb-8 mt-2">
+                                        <legend class="col-form-label col-sm-3 pt-0">Gender</legend>
+                                        <div class="col-sm-8">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="gridRadios"
+                                                    id="gridRadios1" formControlName="gender" value="male" checked="">
+                                                <label class="form-check-label" for="gridRadios1">
+                                                    male
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="gridRadios"
+                                                    id="gridRadios2" formControlName="gender" value="female">
+                                                <label class="form-check-label" for="gridRadios2">
+                                                    female
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <span class="err"
+                                        *ngIf="userform.get('gender')?.touched  && userform.get('gender')?.hasError('required')">Please
+                                        Select gender</span>
+                                    <div class="col-12">
+                                        <button class="btn btn-primary w-100" type="submit">Create Account</button>
+                                    </div>
+                                    <div class="col-12">
+                                        <p class="small mb-0">Already have an account? <a routerLink="/login">Log in</a>
+                                        </p>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+</main><!-- End #main -->

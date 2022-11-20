@@ -1,0 +1,108 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="row mb-2">
+        <div style="text-align: start;" class="col-6 p-2">
+          <h4 style="font-weight: bolder; color: blue; margin-left: 10px;">Exams</h4>
+        </div>
+        <div style="text-align: end;" class="col-6">
+          <a routerLink="/admin/addexam">
+            <h1 class="ri-add-circle-fill"></h1>
+          </a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="row mb-3 mt-3">
+            <label for="search" class="col-sm-1">&nbsp; search</label>
+            <div class="col-sm-3">
+              <input type="text" id="filter-text-box" placeholder="Filter..." [(ngModel)]="searchText"
+                (ngModelChange)="onFilterBoxChange()" />
+            </div>
+          </div>
+          <ag-grid-angular style="height: 500px; " class="ag-theme-alpine" [defaultColDef]="defaultColDef"
+            [rowData]="exams" [columnDefs]="colDefs" [suppressRowClickSelection]="true" [pagination]="true"
+            (gridReady)="onGridReady($event)"></ag-grid-angular>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="verticalycentered2" tabindex="-1" style="display: none;" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Enroll</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="row g-3 needs-validation" [formGroup]="enrollexamform" (ngSubmit)="enroll()" novalidate>
+          <label class="form-label">students:</label>
+          <div class="col-10">
+            <div class="input-group has-validation">
+              <div class="col-sm-10">
+                <ng-multiselect-dropdown [settings]="dropdownSettings" [data]="users" formControlName="userId">
+                </ng-multiselect-dropdown>
+              </div>
+            </div>
+          </div>
+          <div class="col-2">
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" style="width: 100%;">send</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="smallModal" tabindex="-1" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Conform</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete</p>
+        <p *ngIf="count > 0" style="color: red;">
+          this exam is live
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="delete()">delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+<button type="button" data-bs-toggle="modal" data-bs-target="#smallModal" id="model" hidden="true"></button>
+
+<div class="modal fade" id="largeModal" tabindex="-1" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">users List</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-3">
+              <input type="text" [(ngModel)]="filterText" style="margin: 0px;" placeholder="Filter..." (ngModelChange)="filter()">
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div *ngFor="let user of userId" class="col-3"
+              style="overflow:hidden; border: 1px solid gray; border-radius: 3px; margin: 8px;">
+              <input type="checkbox" [(ngModel)]="user.ischeck" style="margin-right: 10px;" (click)="check(user)"><label
+                for="user">{{user.firstName}}&nbsp;{{user.lastName}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer pt-0 pb-0">
+        <button type="button" class="btn btn-secondary pl-2 pr-2" data-bs-dismiss="modal"
+          (click)=" enroll()">Add</button>
+      </div>
+    </div>
+  </div>
+</div>

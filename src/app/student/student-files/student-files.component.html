@@ -1,0 +1,27 @@
+<div class="container-fluid" *ngIf="files">
+  <div class="card p-3 mt-3" *ngFor="let subject of files" style="border-radius: 10px;">
+    <div class="row">
+      <h3> <strong>subject:</strong> {{subject.subject}}</h3>
+      <hr>
+      <div class="col-md-2" *ngFor="let pdf of subject.pdfs">
+        <div class="card">
+          <div style="overflow-y: hidden; height: 100px;  cursor: pointer;" (click)="onview(pdf.subjectfileId)">
+            <img src="data:image/png;base64,{{pdf.pdfimage}}" class="card-img-top" alt="...">
+          </div>
+          <div class="card-body" style="height: 70px; margin: 0px; background-color: gainsboro;text-align: center;">
+            <div class="cut-text" style="height: 40px; margin-top: 0px; padding-top: 0px; ">
+              <h6 class="mt-3">{{pdf.fileName}}</h6>
+            </div>
+            <div style="text-align: center; height: 20px; margin-bottom: 3px; width: 100%; cursor: pointer;"
+              (click)="onCdownload(pdf.subjectfileId)">
+              <em class="bi bi-download "></em>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="center-text" *ngIf="files == null || files.length == 0" style="text-align: center;height: 400px;">
+  <strong style="margin-top: 200px;">No file Available</strong>
+</div>

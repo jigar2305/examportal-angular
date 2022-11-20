@@ -1,0 +1,43 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Add subject</h5>
+          <div class="row mb-3">
+            <label for="inputEmail" class="col-sm-1 col-form-label">course</label>
+            <div class="col-sm-6">
+              <select class="form-select" aria-label="Default select example" [(ngModel)]="course">
+                <option *ngFor="let i of courses" [ngValue]="i">{{i.courseName}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="inputEmail3" class="col-sm-1 col-form-label">subject</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" [(ngModel)]="subject" id="inputText">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="inputEmail3" class="col-sm-1 col-form-label">select files</label>
+            <div class="col-sm-6">
+              <input type="file" id="fileinput" class="form-control" (change)="onChange($event)" accept="application/pdf">
+              <div *ngIf="files.length > 0" style="border: 1px solid black; border-radius: 10px;" class="mt-2 p-2">
+                <div *ngFor="let i of files" class="row">
+                  <div class="col-sm-9" >
+                    <p style="overflow:auto;">{{i.fileName}}</p>
+                  </div>
+                  <div class="col-sm-3"><button class="btn btn-danger btn-sm" type="button"
+                      (click)="removefile(i.fileName)">remove</button></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="ml-5">
+            <button type="submit" class="btn btn-primary mr-2" (click)="addsubject()">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

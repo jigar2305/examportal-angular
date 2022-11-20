@@ -1,0 +1,34 @@
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-12">
+        <div class="row mb-2">
+          <div style="text-align: start;" class="col-6 p-2">
+            <!-- <h4 style="font-weight: bolder; color: blue; margin-left: 10px;">{{results[0].user.firstName}}'s &nbsp;result</h4> -->
+          </div>
+          <div style="text-align: end;" class="col-6">
+          </div>
+        </div>
+          <div class="card">
+              <div class="card-body">
+                  <div class="row mb-3 mt-3">
+                    <label for="search" class="col-sm-1">&nbsp; search</label>
+                    <div class="col-sm-3">
+                      <input type="text" id="filter-text-box" placeholder="Filter..." [(ngModel)]="searchText"
+                      (ngModelChange)="onFilterBoxChange()" />
+                    </div>
+                  </div>
+                  <ag-grid-angular style="height: 500px; " class="ag-theme-alpine m-3"
+                  class="ag-theme-alpine"
+                  [defaultColDef]="defaultColDef"
+                  [rowData]="results"
+                  [columnDefs]="colDefs"
+                      [defaultColDef]="defaultColDef"
+                      [suppressRowClickSelection]="true"
+                      (gridReady)="onGridReady($event)"
+                      [pagination]="true"
+                  ></ag-grid-angular>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

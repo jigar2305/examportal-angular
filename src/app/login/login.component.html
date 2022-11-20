@@ -1,0 +1,85 @@
+<main>
+    <div class="container-fluid" id="login">
+        <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+                        <div class="d-flex justify-content-center py-4">
+                            <a class="logo d-flex align-items-center w-auto">
+                                <img src="assets/img/logo.png" alt="">
+                                <span class="d-none d-lg-block">ExamPortal</span>
+                            </a>
+                        </div><!-- End Logo -->
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="pt-4 pb-2">
+                                    <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
+                                </div>
+                                <form class="row g-3 needs-validation" [formGroup]="loginform" (ngSubmit)="login()"
+                                    novalidate>
+                                    <div class="col-12">
+                                        <label for="yourEmail" class="form-label">Email</label>
+                                        <div class="input-group has-validation">
+                                            <input type="email" name="username" class="form-control" id="loginemail"
+                                                formControlName="email" required>
+                                        </div>
+                                        <span *ngIf="loginform.get('email')?.hasError('pattern')">
+                                            Please Enter valid email
+                                        </span>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="yourPassword" class="form-label">Password</label>
+                                        <input type="password" name="password" class="form-control"
+                                            formControlName="password" id="yourPassword" required>
+                                    </div>
+                                    <span class="err"
+                                        *ngIf="loginform.get('password')?.touched && loginform.get('password')?.hasError('required')">
+                                        Please Enter your Password
+                                    </span>
+                                    <div class="col-12">
+                                        <button class="btn btn-primary w-100" type="submit">Login</button>
+                                    </div>
+                                </form>
+                                <div class="col-12">
+                                    <p class="small mb-0">Don't have account? <a routerLink="/signup">Create
+                                            an account</a></p>
+                                    <p class="small mb-0" data-bs-toggle="modal" data-bs-target="#verticalycentered">
+                                        forgot password</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main><!-- End #main -->
+
+<div class="modal fade" id="verticalycentered" tabindex="-1" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Send OTP</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3 needs-validation" [formGroup]="otpsend" (ngSubmit)="otpsende()" novalidate>
+
+                    <label for="yourEmail" class="form-label">Email:</label>
+                    <div class="col-10">
+                        <div class="input-group has-validation">
+                            <input type="email" class="form-control" id="email" formControlName="email" required>
+                        </div>
+                        <span *ngIf="loginform.get('email')?.hasError('pattern')">
+                            Please Enter valid email
+                        </span>
+                    </div>
+                    <div class="col-2">
+                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal"
+                            style="width: 100%;">send</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div><!-- End Vertically centered Modal-->

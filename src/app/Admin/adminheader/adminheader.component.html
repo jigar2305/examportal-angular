@@ -1,0 +1,111 @@
+<header id="header" class="header fixed-top d-flex align-items-center">
+
+  <div class="d-flex align-items-center justify-content-between">
+    <a routerLink="/admin/dashbord" class="logo d-flex align-items-center">
+      <img src="assets/img/logo.png" alt="">
+      <span class="d-none d-lg-block">Exam Portal</span>
+    </a>
+  </div><!-- End Logo -->
+  <nav class="header-nav ms-auto">
+    <ul class="d-flex align-items-center">
+      <!-- <li class="nav-item" style="background-color: black; padding-left: 20px;padding-right: 20px;  border-radius: 30px;"> -->
+      <!-- <h3 class="mt-2" style=" color: white;">{{today | date:'h:mm a'}}</h3> -->
+      <li class="nav-item">
+        <h4> <strong>Welcome,{{firstName}}</strong></h4>
+      </li>
+      <li class="nav-item">
+        &nbsp;
+      </li>
+
+    </ul>
+  </nav><!-- End Icons Navigation -->
+
+</header><!-- End Header -->
+
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+
+  <ul class="sidebar-nav" id="sidebar-nav">
+
+    <!-- <li class="nav-item" tooltip="Dashboard" placement="right" backgroundColor="#CCCCFF" textColor="blue">
+      <a class="nav-link " routerLink="/admin/dashbord">
+        <em  class="bi bi-grid"></i>
+      </a>
+    </li> -->
+    <li class="nav-item" tooltip="User" placement="right" backgroundColor="#CCCCFF" textColor="blue">
+      <a class="nav-link " routerLink="/admin/user">
+        <em class="bx bxs-group"></em>
+      </a>
+    </li>
+    <li class="nav-item" tooltip="Course" placement="right" backgroundColor="#CCCCFF" textColor="blue">
+      <a class="nav-link " routerLink="/admin/course">
+        <em class="ri-side-bar-fill"></em>
+      </a>
+    </li>
+    <li class="nav-item" tooltip="Subject" placement="right" backgroundColor="#CCCCFF" textColor="blue">
+      <a class="nav-link " routerLink="/admin/subject">
+        <em class="bx bxs-food-menu"></em>
+      </a>
+    </li>
+    <li class="nav-item" tooltip="Questions" placement="right" backgroundColor="#CCCCFF" textColor="blue">
+      <a class="nav-link " routerLink="/admin/list-question">
+        <em class="ri-file-copy-2-fill"></em>
+      </a>
+    </li>
+    <li class="nav-item" tooltip="Exam" placement="right" backgroundColor="#CCCCFF" textColor="blue">
+      <a class="nav-link " routerLink="/admin/exam">
+        <em class="ri-file-paper-fill"></em>
+      </a>
+    </li>
+    <li class="nav-item" tooltip="Change Password" placement="right" backgroundColor="#CCCCFF" textColor="blue">
+      <em class="ri-lock-password-fill nav-link " data-bs-toggle="modal" data-bs-target="#verticalycentered"></em>
+    </li>
+    <li class="nav-item" tooltip="Sign Out" placement="right" backgroundColor="#CCCCFF" textColor="blue">
+      <a class="nav-link " routerLink="/logout">
+        <em class="bi bi-box-arrow-right"></em>
+      </a>
+    </li>
+  </ul>
+</aside>
+<div class="modal fade" id="verticalycentered" tabindex="-1" style="display: none;" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Change password</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" id="close" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="row g-3 needs-validation" [formGroup]="passwordform" (ngSubmit)="forgetpassword()" novalidate>
+          <div class="col-12">
+            <label for="yourPassword" class="form-label">Password</label>
+            <input type="password" name="password" formControlName="password" class="form-control" id="yourPassword"
+              required>
+          </div>
+          <span class="err"
+            *ngIf="passwordform.get('password')?.touched && passwordform.get('password')?.hasError('required')">
+            Please Enter Password
+          </span>
+          <span class="err"
+            *ngIf="passwordform.get('password')?.touched && passwordform.get('password')?.hasError('minlength')">
+            Password Must be in 8 length</span>
+          <span class="err"
+            *ngIf="passwordform.get('password')?.touched && passwordform.get('password')?.hasError('strongPassword')">
+            Please Select Strong Password [include <br> 1) [ @ or $ or # ] <br>2) Upper
+            Letter <br>3) Lower Letter ]
+          </span>
+          <div class="col-12">
+            <label for="cpassword" class="form-label">Conform Password</label>
+            <input type="password" name="cpassword" formControlName="cPassword" class="form-control" id="cPassword"
+            (ngModelChange)="checkcpassword()"
+            >
+          </div>
+          <span class="err"
+            *ngIf="issame" >
+            Conform Password Must be Same as Password
+          </span>
+          <button type="submit" class="btn btn-primary"  style="width: 100%;">send</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
