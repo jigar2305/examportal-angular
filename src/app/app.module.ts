@@ -56,10 +56,9 @@ import { StudentexamactionComponent } from './student/studentexam/studentexamact
 import { ResultsactionComponent } from './student/results/resultsaction.component';
 import { ExamresultpdfComponent } from './Admin/exam/examresultpdf.component';
 import { ExamwaitingComponent } from './Admin/exam/examwaiting/examwaiting.component';
-import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { UserExamActionComponent } from './Admin/user-exams/user-exam-action/user-exam-action.component';
 import { UserExamResultViewComponent } from './Admin/user-exams/user-exam-action/user-exam-result-view/user-exam-result-view.component';
-import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { AuthTokenInterceptor } from './interceptors/auth-token.interceptor';
 import { ToastrServiceInterceptor } from './interceptors/toastr-service.interceptor';

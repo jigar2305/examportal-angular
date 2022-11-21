@@ -33,6 +33,7 @@ export class SubjectComponent implements OnInit {
   ngOnInit(): void {
     this.adminservice.listuser().subscribe(res => {
       this.users = res.data
+      this.users = this.users.filter((user) => user.role.roleName != 'admin')
     })
     this.dropdownSettingsforuser = {
       idField: 'userId',
@@ -86,8 +87,6 @@ export class SubjectComponent implements OnInit {
     this.adminservice.iscontainquestion(subjectId).subscribe((res) => {
       this.quetion = res.data
       this.subjectId = subjectId
-    }, (err) => {
-
     })
   }
   delete() {
@@ -99,7 +98,9 @@ export class SubjectComponent implements OnInit {
   enroll() {
     let subjectIds: Array<number> = []
     this.enrollsubjectform.value.subjectId.forEach((element: any) => {
-      subjectIds.push(element.subjectId)
+      if(element.subjectId != undefined || element.subjectId != null){
+        subjectIds.push(element.subjectId)
+      }
     });
     let userIds: Array<number> = []
     this.enrollsubjectform.value.userId.forEach((element: any) => {
