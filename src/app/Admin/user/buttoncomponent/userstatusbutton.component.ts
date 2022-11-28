@@ -24,21 +24,12 @@ export class UserstatusbuttonComponent
   constructor(private aservise: AdminService, private tostr: ToastrService,private router: Router,private ucomponent:UserComponent) {}
   userstatus(userId: number) {
     this.aservise.userstatus(userId).subscribe(
-      (res) => {
-        if (res.data == true) {
-          this.tostr.success('user activated..');
-          this.setstatus()
-        } else {
-          this.tostr.success('user Deactivated..');
-          this.setstatus()
-        }
-      }
-    );
+      (res) => {this.setstatus()});
   }
   setstatus(){
     this.aservise.finduser(this.value).subscribe((res) => {
       this.user = res.data;
-      if(this.user.active == true){
+      if(this.user.active){
         this.str = "Active"
       }else{
         this.str = "Deactive"

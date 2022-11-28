@@ -12,7 +12,7 @@ import { AppComponent } from './app.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
-import {DialogModule} from 'primeng/dialog';
+import { DialogModule } from 'primeng/dialog';
 import { DashbordComponent } from './Admin/dashbord/dashbord.component';
 import { AdminheaderComponent } from './Admin/adminheader/adminheader.component';
 import { AdminComponent } from './Admin/admin/admin.component';
@@ -62,8 +62,6 @@ import { UserExamResultViewComponent } from './Admin/user-exams/user-exam-action
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { AuthTokenInterceptor } from './interceptors/auth-token.interceptor';
 import { ToastrServiceInterceptor } from './interceptors/toastr-service.interceptor';
-
-
 
 
 @NgModule({
@@ -135,7 +133,7 @@ import { ToastrServiceInterceptor } from './interceptors/toastr-service.intercep
     //   showForeground:true
     // })
   ],
-  providers: [DatePipe,{provide:HTTP_INTERCEPTORS,useClass:AuthTokenInterceptor,multi:true},{provide:HTTP_INTERCEPTORS,useClass:ToastrServiceInterceptor,multi:true}],
+  providers: [DatePipe, { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true }, { provide: HTTP_INTERCEPTORS, useClass: ToastrServiceInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

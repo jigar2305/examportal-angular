@@ -6,7 +6,7 @@ import { AdminService } from 'src/app/service/admin.service';
 @Component({
   selector: 'app-editquestion',
   template: `
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
         <div class="col-12">
           <div class="card">

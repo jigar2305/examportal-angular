@@ -159,6 +159,14 @@ export class ExamresultpdfComponent {
       field: 'obtainMarks',
     },
     {
+      headerName: 'Exam Date',
+      field: 'exam.date',
+    },
+    {
+      headerName: 'Percentage',
+      field: 'exam.percentage',
+    },
+    {
       headerName: 'Status',
       field: 'status',
       cellRenderer: (params: ICellRendererParams) => {

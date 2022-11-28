@@ -16,6 +16,7 @@ export class ToastrServiceInterceptor implements HttpInterceptor {
           let apicode = event.body.apicode;
           let msg = event.body.msg;
           let msgstring = msg as string;
+          msgstring = msgstring.toLowerCase();
           switch (apicode) {
             case 200:
               if (!msgstring.includes("get") && !msgstring.includes("list") && !msgstring.includes("fetch") && msgstring != null) {
@@ -34,9 +35,9 @@ export class ToastrServiceInterceptor implements HttpInterceptor {
             default:
               break;
           }
-          if(event.status == 401){
+          if (event.status == 401) {
             this.tostr.error("Please Login before access service")
-          }else if(event.status == 500){
+          } else if (event.status == 500) {
             this.tostr.error("Technical Error accoured")
           }
         }
