@@ -5,6 +5,7 @@ import { AdminService } from 'src/app/service/admin.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { ColDef, ICellRendererParams } from 'ag-grid-community';
 import { ExamactionComponent } from './examaction.component';
+import { Exam, User } from 'src/app/interfaces/entity';
 
 @Component({
   selector: 'app-exam',
@@ -13,18 +14,18 @@ import { ExamactionComponent } from './examaction.component';
 })
 export class ExamComponent implements OnInit {
 
-  exams: Array<any> = [];
-  users: any = [];
+  exams: Array<Exam> = [];
+  users: Array<User> = [];
   examId: number = 0;
   dropdownSettings: IDropdownSettings = {};
   dropdownSettingsforsubject: IDropdownSettings = {};
-  userId: Array<any> = [];
+  userId: Array<Sortuser> = [];
   Ids: Array<any> = [];
   enrollexamform: FormGroup;
   subjectIds: Array<any> = [];
   examselected: any;
   count!: number;
-  checkArray:Array<any>=[]
+  checkArray: Array<any> = []
   filterText!: string;
   constructor(
     private adminservice: AdminService,
@@ -171,8 +172,8 @@ export class ExamComponent implements OnInit {
         this.count = res.data;
         this.examId = examId;
       }
-      );
-      document.getElementById('model')?.click();
+    );
+    document.getElementById('model')?.click();
   }
   delete() {
     this.adminservice.deleteExam(this.examId).subscribe(
@@ -190,8 +191,15 @@ export class ExamComponent implements OnInit {
         this.users = res.data;
         this.users = this.users.filter((u: any) => u.role.roleName != 'admin');
         this.users.forEach((element: any) => {
-          this.userId.push({ "userId": element.userId, "firstName": element.firstName, "lastName": element.lastName, "ischeck": false })
+          let user1!:Sortuser;
+          user1.userId = element.userId
+          user1.ischeck = false
+          user1.lastName = element.lastName
+          user1.firstName = element.firstName
+          this.userId.push(user1)
         });
+        console.log(this.userId);
+
       }
     );
   }
@@ -221,25 +229,36 @@ export class ExamComponent implements OnInit {
   filter() {
     this.userId = [];
     this.users.forEach((element: any) => {
-      this.userId.push({ "userId": element.userId, "firstName": element.firstName, "lastName": element.lastName, "ischeck": element.ischeck })
+      let user1!:Sortuser;
+      user1.userId = element.userId
+      user1.ischeck = false
+      user1.lastName = element.lastName
+      user1.firstName = element.firstName
+      this.userId.push(user1)
     });
     if (this.filterText.length > 0 && this.filterText != '') {
       this.userId = this.userId.filter(e => (e.firstName + " " + e.lastName).toLowerCase().includes(this.filterText) || (e.firstName + "" + e.lastName).toLowerCase().includes(this.filterText))
     }
   }
-  check(user:any) {
-    if(user.ischeck){
-      this.users.forEach((element:any) => {
-        if(user.userId == element.userId){
+  check(user: any) {
+    if (user.ischeck) {
+      this.users.forEach((element: any) => {
+        if (user.userId == element.userId) {
           element.ischeck = false
         }
       });
-    }else{
-     this.users.forEach((element:any) => {
-      if(user.userId == element.userId){
-        element.ischeck = true
-      }
-    });
+    } else {
+      this.users.forEach((element: any) => {
+        if (user.userId == element.userId) {
+          element.ischeck = true
+        }
+      });
     }
   }
+}
+export interface Sortuser {
+  ischeck: boolean;
+  userId: number;
+  firstName: string;
+  lastName: string;
 }

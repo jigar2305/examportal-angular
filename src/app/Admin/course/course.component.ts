@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ColDef} from 'ag-grid-community';
 import { AdminService } from 'src/app/service/admin.service';
 import { CourseactionComponent } from './courseaction.component';
+import { Course } from "src/app/interfaces/entity";
 
 @Component({
   selector: 'app-course',
@@ -9,7 +10,7 @@ import { CourseactionComponent } from './courseaction.component';
   styleUrls: ['./course.component.css'],
 })
 export class CourseComponent  {
-  courses: Array<any> = [];
+  courses: Array<Course> = [];
   searchText: any;
   gridApActive: any;
   subject:Array<any> = []

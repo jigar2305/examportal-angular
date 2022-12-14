@@ -79,7 +79,7 @@ export class QuestionComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-
+    console.log(this.questionform.value.question);
     if (this.subject == null) {
       this.tostr.warning("please select subject")
     }

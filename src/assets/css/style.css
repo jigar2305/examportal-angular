@@ -45,11 +45,13 @@ h6 {
   margin-top: 40px;
   padding: 10px 10px;
   transition: all 0.3s;
+  height: 95%;
 }
 
 @media (max-width: 1199px) {
   #main {
     padding: 10px;
+    height: 100%;
   }
 }
 
@@ -396,7 +398,7 @@ h6 {
 .header {
   transition: all 0.5s;
   z-index: 997;
-  height: 45px;
+  height: 5%;
   box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);
   background-color: #fff;
   padding-left: 20px;
@@ -616,7 +618,7 @@ h6 {
 --------------------------------------------------------------*/
 .sidebar {
   position: fixed;
-  top: 45px;
+  top:  5%;
   left: 0;
   bottom: 0;
   width: 80px;

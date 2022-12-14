@@ -14,9 +14,9 @@ import { UserstatusbuttonComponent } from 'src/app/Admin/user/buttoncomponent/us
 export class UserComponent {
 
   users: Array<any> = [];
-  userId!: number;
   subject: Array<any> = []
   exam: Array<any> = []
+  Id:any
   colDefs: ColDef[] = [
     { field: 'firstName' },
     { field: 'lastName' },
@@ -70,17 +70,17 @@ export class UserComponent {
   }
   checkfordelete(userId: any) {
     document.getElementById("model")?.click()
-    this.aservice.iscontainchild(userId).subscribe((res) => {
+    this.aservice.iscontainchild(userId).subscribe((res)=>{
       this.subject = res.data.subject
       this.exam = res.data.exam
-      this.userId = userId
     })
+   this.Id = userId;
   }
   deleteuser() {
-    this.aservice.deleteuser(this.userId).subscribe(
-      (res) => {
-        this.users = this.users.filter((u) => u.userId != this.userId);
+      this.aservice.deleteuser(this.Id).subscribe(
+        (res) => {
+        this.users = this.users.filter((u) => u.userId != this.Id);
       }
-    );
+      );
   }
 }

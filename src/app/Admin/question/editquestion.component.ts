@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Question } from 'src/app/interfaces/entity';
 import { AdminService } from 'src/app/service/admin.service';
 
 @Component({
@@ -176,8 +177,7 @@ import { AdminService } from 'src/app/service/admin.service';
 })
 export class EditquestionComponent implements OnInit {
 
-  questionObj:any
-
+  questionObj!:Question
 
   onupdate() {
     if (
@@ -193,11 +193,7 @@ export class EditquestionComponent implements OnInit {
     } else {
       this.aservice.updatequestions(this.questionObj).subscribe(
         (res) => {
-          this.tostr.success('question updated..');
           this.rout.navigateByUrl('/admin/list-question')
-        },
-        (err) => {
-          this.tostr.error('something went wrong');
         }
       );
     }
@@ -216,13 +212,6 @@ export class EditquestionComponent implements OnInit {
       .subscribe(
         (res) => {
           this.questionObj=res.data
-        },
-        (err) => {
-          if (err.error.data == "question not found"){
-            this.tostr.error('question Not found');
-          }else{
-            this.tostr.error('Technical error occurred');
-          }
         }
       );
   }

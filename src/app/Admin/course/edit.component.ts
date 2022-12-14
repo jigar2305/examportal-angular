@@ -1,6 +1,7 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Course } from 'src/app/interfaces/entity';
 import { AdminService } from 'src/app/service/admin.service';
 
 @Component({
@@ -32,7 +33,7 @@ import { AdminService } from 'src/app/service/admin.service';
 })
 
 export class EditComponent implements OnInit {
-  course:any
+  course!:Course
 
   constructor(private adminservice: AdminService, private toster: ToastrService,private aRoute: ActivatedRoute,private rout:Router) { }
 

@@ -21,7 +21,7 @@ export class AddCourseComponent implements OnInit {
   }
   addcourse() {
     if (this.courseform.valid) {
-      this.adminservice.addcourse(this.courseform.value).subscribe(res => {
+      this.adminservice.addcourse(this.courseform.value).subscribe(() => {
         this.rout.navigateByUrl("admin/course")
       })
     } else {

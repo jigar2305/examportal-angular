@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ColDef } from 'ag-grid-community';
 import { ToastrService } from 'ngx-toastr';
+import { Question, Subject } from 'src/app/interfaces/entity';
 import { AdminService } from 'src/app/service/admin.service';
 import { QuestionactionComponent } from '../question/questionaction.component';
 
@@ -11,8 +12,8 @@ import { QuestionactionComponent } from '../question/questionaction.component';
 })
 export class ListQuestionComponent {
 
-  questions: Array<any> = [];
-  subjects: Array<any> = [];
+  questions: Array<Question> = [];
+  subjects: Array<Subject> = [];
   questionId!: number;
   count!:number
   constructor(private aservice: AdminService, private tostr: ToastrService) {}
