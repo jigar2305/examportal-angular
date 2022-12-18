@@ -9,9 +9,9 @@ import { interval } from 'rxjs';
   template: `
     <button
       class="btn btn-sm"
+      *ngIf="isshow == 'start'"
       routerLink="/student/paper/{{ examId }}"
       >
-      <!-- *ngIf="isshow == 'start'" -->
       start
     </button>
     <button class="btn btn-sm" *ngIf="isshow == 'wait'">Wait</button>
