@@ -50,42 +50,20 @@ export class StudentFilesComponent implements OnInit {
       (res) => {
         this.pdffiles = res.data;
         this.getsubjectlist();
-      },
-      (err) => {
-        this.tostr.error('Technical error occourd');
-      }
-    );
+      });
   }
 
   onCdownload(subjectfileId: number) {
     this.sservice.getfile(subjectfileId).subscribe(
       (res) => {
         this.downloadpdf(res.data);
-      },
-      (err) => {
-
-        if (err.error.msg == 'file not found') {
-          this.tostr.error('file not found');
-        } else {
-          this.tostr.error('Technical error occourd');
-        }
-      }
-    );
+      });
   }
   onview(subjectfileId: number) {
     this.sservice.getfile(subjectfileId).subscribe(
       (res) => {
         this.openpdf(res.data);
-      },
-      (err) => {
-
-        if (err.error.msg == 'file not found') {
-          this.tostr.error('file not found');
-        } else {
-          this.tostr.error('Technical error occourd');
-        }
-      }
-    );
+      });
   }
 
   downloadpdf(File: any) {
@@ -104,7 +82,7 @@ export class StudentFilesComponent implements OnInit {
         "<iframe width='100%' height='100%' src='" + url + "'></iframe>"
       );
     } else {
-      this.tostr.error('pdf not avilable');
+      this.tostr.error('PDF not avilable');
     }
   }
   base64ToBlob(base64: string, type = 'application/pdf') {

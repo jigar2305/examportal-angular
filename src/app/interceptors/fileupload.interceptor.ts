@@ -4,14 +4,11 @@ import {
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
-  HttpHeaders,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable()
 export class FileuploadInterceptor implements HttpInterceptor {
-  constructor() {}
-
   intercept(
     request: HttpRequest<unknown>,
     next: HttpHandler

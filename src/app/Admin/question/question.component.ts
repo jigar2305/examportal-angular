@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Route, Router } from '@angular/router';
+import { Editor } from 'ngx-editor';
+import { Toolbar } from 'ngx-editor';
 import { ToastrService } from 'ngx-toastr';
+import { Question, Subject } from 'src/app/interfaces/entity';
 import { AdminService } from 'src/app/service/admin.service';
 
 @Component({
@@ -13,12 +16,13 @@ export class QuestionComponent implements OnInit {
   questionform: FormGroup
   subjectform: FormGroup
   submitted = false;
-  subject: any
+  subject!: Subject
   file!: File;
-  exceltype:String="application/vnd.ms-excel,application/msexcel,application/x-msexcel,application/x-ms-excel,application/x-excel,application/x-dos_ms_excel,application/xls,application/x-xls,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-  subjects: Array<any> = []
-  questions: Array<any> = []
-  constructor(private formBuilder: FormBuilder, private adminservice: AdminService, private tostr: ToastrService,private rout:Router) {
+  exceltype: string = "application/vnd.ms-excel,application/msexcel,application/x-msexcel,application/x-ms-excel,application/x-excel,application/x-dos_ms_excel,application/xls,application/x-xls,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+  subjects: Array<Subject> = []
+  questions: Array<Question> = []
+
+  constructor(private formBuilder: FormBuilder, private adminservice: AdminService, private tostr: ToastrService, private rout: Router) {
     this.questionform = this.formBuilder.group({
       Numberofquestion: ['', Validators.required],
       question: new FormArray([])
@@ -27,8 +31,27 @@ export class QuestionComponent implements OnInit {
       subject: new FormControl([Validators.required])
     })
   }
+  editor!: Editor;
+  toolbar: Toolbar = [
+    ['bold', 'italic'],
+    ['underline', 'strike'],
+    ['code', 'blockquote'],
+    ['ordered_list', 'bullet_list'],
+    [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
+    ['link', 'image'],
+    ['text_color', 'background_color'],
+    ['align_left', 'align_center', 'align_right', 'align_justify'],
+  ];
+  ngOnInit(): void {
+    this.editor = new Editor();
+    this.getallsubject()
+  }
 
-  onChange(event:any) {
+  ngOnDestroy(): void {
+    this.editor.destroy();
+  }
+
+  onChange(event: any) {
     this.file = event.target.files[0];
   }
 
@@ -38,9 +61,7 @@ export class QuestionComponent implements OnInit {
   }
   get questionFormGroups() { return this.t.controls as FormGroup[]; }
 
-  ngOnInit(): void {
-    this.getallsubject()
-  }
+
   getallsubject() {
     this.adminservice.Listsubject().subscribe(res => {
       this.subjects = res.data
@@ -49,12 +70,10 @@ export class QuestionComponent implements OnInit {
 
   onUpload() {
     this.adminservice.addquestionsbyexcel(this.file).subscribe(
-        (event: any) => {
-          this.tostr.success("question added....")
-          this.rout.navigateByUrl('/admin/list-question')
-        }
-    );
-}
+      (res) => {
+        this.rout.navigateByUrl('/admin/list-question')
+      });
+  }
 
   onChangequestion(e: any) {
     const numberOfquestions = e.target.value || 0;
@@ -81,22 +100,19 @@ export class QuestionComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
+    if (this.subject == null) {
+      this.tostr.warning("please select subject")
+    }else{
 
-      if (this.subject == null) {
-        this.tostr.warning("please select subject")
+      if (this.questionform.invalid) {
+        this.tostr.warning("please fill form correctly")
       }
-    if (this.questionform.invalid) {
-      this.tostr.warning("please fill form correctly")
-    }
-    if (this.questionform.valid) {
-      this.adminservice.addquestions(this.questionform.value.question).subscribe(res => {
-        this.tostr.success("questions added successfully")
-        this.onClear()
-        this.rout.navigateByUrl('/admin/list-question')
-      }, err => {
-
-        this.tostr.error("somethin went wrong")
-      })
+      if (this.questionform.valid) {
+        this.adminservice.addquestions(this.questionform.value.question).subscribe(res => {
+          this.onClear()
+          this.rout.navigateByUrl('/admin/list-question')
+        })
+      }
     }
   }
 

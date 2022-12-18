@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { AdminService } from 'src/app/service/admin.service';
 import { UserService } from 'src/app/service/user.service';
 
 @Component({
@@ -30,20 +29,14 @@ export class AdminheaderComponent implements OnInit {
   }
   forgetpassword() {
     if (this.passwordform.valid) {
-      if (this.issame == false) {
-        this.issame = false
+      if (!this.issame) {
         let data = {
           email: localStorage.getItem('email'),
           password: this.passwordform.value.password
         }
-        console.log(data);
-
         this.userservice.resetpassword(data).subscribe(res => {
-          this.tostr.success("Password changed successfully")
           document.getElementById('close')?.click()
           this.passwordform.reset()
-        }, err => {
-          this.tostr.error(err.error.msg)
         })
       }
     } else {

@@ -39,8 +39,6 @@ export class ForgotpasswordComponent implements OnInit {
         this.tostr.success(res.msg)
         // this.showDialog()
         document.getElementById('password')?.click();
-      }, err => {
-        this.tostr.error(err.error.msg);
       })
     }
   }
@@ -50,9 +48,6 @@ export class ForgotpasswordComponent implements OnInit {
         this.tostr.success(res)
     document.getElementById("body")?.setAttribute("style","background-color:white")
         this.router.navigateByUrl("/login")
-      }, err => {
-
-        this.tostr.error(err);
       })
     }
 

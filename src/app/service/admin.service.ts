@@ -16,7 +16,6 @@ export class AdminService {
   Listcourse(): Observable<any> {
     return this.http.get(environment.url + 'course/list');
   }
-
   deletecourse(courseId: any): Observable<any> {
     return this.http.delete(environment.url + 'course/delete/' + courseId);
   }
@@ -66,13 +65,16 @@ export class AdminService {
   addquestions(question: any): Observable<any> {
     return this.http.post(environment.url + 'que/add', question);
   }
+  addquestion(question: any): Observable<any> {
+    return this.http.post(environment.url + 'que/single-add', question);
+  }
   updatequestions(question: any): Observable<any> {
     return this.http.put(environment.url + 'que/update', question);
   }
   addquestionsbyexcel(file: any): Observable<any> {
     const formdata = new FormData();
     formdata.append('file', file);
-    return this.http.post(environment.url + 'file/excel', formdata);
+    return this.http.post(environment.url + 'que/excel', formdata);
   }
   listquestions(): Observable<any> {
     return this.http.get(environment.url + 'que/list');
@@ -116,7 +118,7 @@ export class AdminService {
     return this.http.get(environment.url + 'exam/statusofexam/' + examId);
   }
   enrollexam(enroll: any) {
-    return this.http.post(environment.url + 'er/add', enroll);
+    return this.http.post(environment.url + 'exam/enrollExam', enroll);
   }
   getexam(examId: number): Observable<any> {
     return this.http.get(environment.url + 'exam/get/' + examId);

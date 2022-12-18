@@ -8,6 +8,7 @@
         <div class="col-2">
           <button class="btn btn-secondary btn-sm mt-3" data-bs-toggle="modal"
             data-bs-target="#largeModal">excel</button>
+            <a routerLink="/admin/user/add-question">add</a>
         </div>
       </div>
       <div class="card-header">
@@ -38,10 +39,8 @@
             <div class="col-sm-10">
               <input type="number" class="form-control" (change)="onChangequestion($event)"
                 formControlName="Numberofquestion" id="inputText">
-
             </div>
           </div>
-
           <div *ngFor="let question of questionFormGroups; let i = index" class="list-group list-group-flush">
             <div class="list-group-item">
               <h5 class="card-title">question {{i + 1}}</h5>
@@ -49,7 +48,17 @@
                 <div class="row mb-3">
                   <label for="inputEmail3" class="col-sm-2 col-form-label">question</label>
                   <div class="col-sm-10">
-                    <textarea type="text" class="form-control" formControlName="question"></textarea>
+                    <!-- <textarea type="text" class="form-control" formControlName="question"></textarea> -->
+                    <!-- <angular-editor formControlName="question" [config]="config"></angular-editor> -->
+                    <div class="NgxEditor__Wrapper">
+                      <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
+                      <ngx-editor
+                        [editor]="editor"
+                        formControlName="question"
+                        [disabled]="false"
+                        [placeholder]="'Type here...'"
+                      ></ngx-editor>
+                    </div>
                   </div>
                 </div>
                 <div class="row mb-3">

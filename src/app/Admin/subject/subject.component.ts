@@ -13,17 +13,16 @@ import { SubjectactionComponent } from './subjectaction.component';
 })
 export class SubjectComponent implements OnInit {
   subjects: Array<any> = [];
-  quetion!:number
+  quetion!: number
   gridApActive: any;
   searchText: any;
-  users:Array<any> = [];
+  users: Array<any> = [];
   dropdownSettingsforuser: IDropdownSettings = {};
   dropdownSettingsforsubject: IDropdownSettings = {};
   enrollsubjectform: FormGroup;
   subjectId!: number;
   constructor(
     private adminservice: AdminService,
-    private toster: ToastrService
   ) {
     this.enrollsubjectform = new FormGroup({
       userId: new FormControl([Validators.required]),
@@ -34,8 +33,7 @@ export class SubjectComponent implements OnInit {
   ngOnInit(): void {
     this.adminservice.listuser().subscribe(res => {
       this.users = res.data
-    }, err => {
-      this.toster.error("sonething went wrong");
+      this.users = this.users.filter((user) => user.role.roleName != 'admin')
     })
     this.dropdownSettingsforuser = {
       idField: 'userId',
@@ -58,8 +56,8 @@ export class SubjectComponent implements OnInit {
     {
       headerName: 'Action',
       field: 'subjectId',
-      maxWidth:200,
-      minWidth:100,
+      maxWidth: 200,
+      minWidth: 100,
       cellRenderer: SubjectactionComponent,
     },
   ];
@@ -84,44 +82,34 @@ export class SubjectComponent implements OnInit {
       this.subjects = res.data;
     });
   }
-  checkfordelete(subjectId: any){
+  checkfordelete(subjectId: any) {
     document.getElementById("model")?.click()
-    this.adminservice.iscontainquestion(subjectId).subscribe((res)=>{
+    this.adminservice.iscontainquestion(subjectId).subscribe((res) => {
       this.quetion = res.data
       this.subjectId = subjectId
-    },(err)=>{
-
     })
   }
   delete() {
     this.adminservice.deletesubject(this.subjectId).subscribe(
       (res) => {
         this.subjects = this.subjects.filter((r) => r.subjectId != this.subjectId);
-        this.toster.success('subject deleted..');
-      },
-      (err) => {
-        this.toster.error('something went wrong');
-      }
-    );
+      });
   }
-  enroll(){
-    let subjectIds:Array<number> = []
-    this.enrollsubjectform.value.subjectId.forEach((element:any) => {
+  enroll() {
+    let subjectIds: Array<number> = []
+    this.enrollsubjectform.value.subjectId.forEach((element: any) => {
+      if(element.subjectId != undefined || element.subjectId != null){
         subjectIds.push(element.subjectId)
+      }
     });
-    let userIds:Array<number> = []
-    this.enrollsubjectform.value.userId.forEach((element:any) => {
+    let userIds: Array<number> = []
+    this.enrollsubjectform.value.userId.forEach((element: any) => {
       userIds.push(element.userId)
     });
     let enrollsubjectfile = {
-      subjectId:subjectIds,
-      userId:userIds
+      subjectId: subjectIds,
+      userId: userIds
     }
-    this.adminservice.enrolesubjectfiles(enrollsubjectfile).subscribe((res)=>{
-      this.toster.success("subject file send to user...")
-    },(err)=>{
-      this.toster.error("Technical error occurred")
-    })
-
+    this.adminservice.enrolesubjectfiles(enrollsubjectfile).subscribe();
   }
 }

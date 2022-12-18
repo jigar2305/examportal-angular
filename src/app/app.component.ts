@@ -10,5 +10,6 @@ export class AppComponent{
 
   title = 'examportal';
   SPINNER:SPINNER = SPINNER.threeStrings
+  
 
 }

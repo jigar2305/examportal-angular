@@ -6,13 +6,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
-import { TooltipModule } from '@cesarbr/angular-tooltip';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
-import {DialogModule} from 'primeng/dialog';
+import { DialogModule } from 'primeng/dialog';
 import { DashbordComponent } from './Admin/dashbord/dashbord.component';
 import { AdminheaderComponent } from './Admin/adminheader/adminheader.component';
 import { AdminComponent } from './Admin/admin/admin.component';
@@ -56,14 +55,16 @@ import { StudentexamactionComponent } from './student/studentexam/studentexamact
 import { ResultsactionComponent } from './student/results/resultsaction.component';
 import { ExamresultpdfComponent } from './Admin/exam/examresultpdf.component';
 import { ExamwaitingComponent } from './Admin/exam/examwaiting/examwaiting.component';
-import { AuthTokenInterceptor } from './auth-token.interceptor';
-import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { UserExamActionComponent } from './Admin/user-exams/user-exam-action/user-exam-action.component';
 import { UserExamResultViewComponent } from './Admin/user-exams/user-exam-action/user-exam-result-view/user-exam-result-view.component';
-import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
-
-
+import { AuthTokenInterceptor } from './interceptors/auth-token.interceptor';
+import { ToastrServiceInterceptor } from './interceptors/toastr-service.interceptor';
+import { NgxEditorModule } from 'ngx-editor';
+import { TooltipModule } from '@cesarbr/angular-tooltip';
+import { HtmlConvertPipe } from './Pipes/html-convert.pipe';
+import { AddQuestionComponent } from './Admin/add-question/add-question.component';
 
 
 @NgModule({
@@ -115,6 +116,8 @@ import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
     ExamwaitingComponent,
     UserExamActionComponent,
     UserExamResultViewComponent,
+    HtmlConvertPipe,
+    AddQuestionComponent,
   ],
   imports: [
     BrowserModule,
@@ -128,14 +131,52 @@ import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
     CountdownModule,
     NgMultiSelectDropDownModule.forRoot(),
     AgGridModule,
-    TooltipModule,
     LoadingBarHttpClientModule,
     NgxUiLoaderModule,
+    TooltipModule,
+    NgxEditorModule.forRoot({
+      locals: {
+        // menu
+        bold: 'Bold',
+        italic: 'Italic',
+        code: 'Code',
+        blockquote: 'Blockquote',
+        underline: 'Underline',
+        strike: 'Strike',
+        bullet_list: 'Bullet List',
+        ordered_list: 'Ordered List',
+        heading: 'Heading',
+        h1: 'Header 1',
+        h2: 'Header 2',
+        h3: 'Header 3',
+        h4: 'Header 4',
+        h5: 'Header 5',
+        h6: 'Header 6',
+        align_left: 'Left Align',
+        align_center: 'Center Align',
+        align_right: 'Right Align',
+        align_justify: 'Justify',
+        text_color: 'Text Color',
+        background_color: 'Background Color',
+
+        // popups, forms, others...
+        url: 'URL',
+        text: 'Text',
+        openInNewTab: 'Open in new tab',
+        insert: 'Insert',
+        altText: 'Alt Text',
+        title: 'Title',
+        remove: 'Remove',
+      },
+    }),
     // NgxUiLoaderHttpModule.forRoot({
     //   showForeground:true
     // })
   ],
-  providers: [DatePipe,{provide:HTTP_INTERCEPTORS,useClass:AuthTokenInterceptor,multi:true}],
-  bootstrap: [AppComponent]
+  providers: [DatePipe, { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true }, { provide: HTTP_INTERCEPTORS, useClass: ToastrServiceInterceptor, multi: true }],
+  bootstrap: [AppComponent],
+
+
+
 })
 export class AppModule { }

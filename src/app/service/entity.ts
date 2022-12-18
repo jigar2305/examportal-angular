@@ -10,7 +10,3 @@ export interface Subject {
 export interface Course {
 
 }
-export interface Result {
-
-}
-

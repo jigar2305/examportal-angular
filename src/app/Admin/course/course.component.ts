@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ColDef} from 'ag-grid-community';
-import { ToastrService } from 'ngx-toastr';
 import { AdminService } from 'src/app/service/admin.service';
 import { CourseactionComponent } from './courseaction.component';
+import { Course } from "src/app/interfaces/entity";
 
 @Component({
   selector: 'app-course',
@@ -10,7 +10,7 @@ import { CourseactionComponent } from './courseaction.component';
   styleUrls: ['./course.component.css'],
 })
 export class CourseComponent  {
-  courses: Array<any> = [];
+  courses: Array<Course> = [];
   searchText: any;
   gridApActive: any;
   subject:Array<any> = []
@@ -18,7 +18,6 @@ export class CourseComponent  {
 
   constructor(
     private adminservice: AdminService,
-    private tostr: ToastrService
   ) {}
 
   colDefs: ColDef[] = [
@@ -38,29 +37,29 @@ export class CourseComponent  {
     flex: 1,
     minWidth: 100,
   };
+
   onFilterBoxChange() {
     this.gridApActive.setQuickFilter(this.searchText);
   }
+
   onGridReady(params: any) {
     this.gridApActive = params.api;
     this.adminservice.Listcourse().subscribe((res: { data: any }) => {
       this.courses = res.data;
     });
   }
+
   checkfordelete(courseId: any){
     document.getElementById("model")?.click()
     this.adminservice.iscontainsubject(courseId).subscribe((res)=>{
       this.subject = res.data
       this.courseId = courseId
     })
-
   }
+
   deletecourse() {
     this.adminservice.deletecourse(this.courseId).subscribe(res => {
       this.courses = this.courses.filter(r => r.courseId != this.courseId)
-      this.tostr.success("course deleted..")
-    }, err => {
-      this.tostr.error("something went wrong")
     })
   }
 }

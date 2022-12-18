@@ -19,6 +19,7 @@ export class AddSubjectComponent implements OnInit {
   subject!: string;
   files: Array<any> = [];
   filename!: string;
+  _ = require('lodash');
 
   constructor(
     private adminservice: AdminService,
@@ -52,13 +53,10 @@ export class AddSubjectComponent implements OnInit {
     };
     this.adminservice.addsubject(subjectform).subscribe(
       (res) => {
-        this.rout.navigateByUrl('admin/subject')
-        this.toster.success('subject Added..');
-      },
-      (err) => {
-        this.toster.error('something went wrong');
-      }
-    );
+        if(res.apicode == 200){
+          this.rout.navigateByUrl('admin/subject')
+        }
+      });
   }
 
   }
@@ -68,22 +66,27 @@ export class AddSubjectComponent implements OnInit {
     });
     observable.subscribe((d) => {
       let file = { fileString: d, fileName: filename };
-      this.files.push(file);
+        this.files.push(file);
     });
   }
   onChange($event: Event) {
     const files = ($event.target as HTMLInputElement).files;
     if (files) {
       const file = files[0];
-      let filesize = file.size;
-
       if (file.type != 'application/pdf') {
         this.toster.info('only accept pdf');
       }
+      // let filesize = file.size;
       // if(filesize > (1024*20)) {
       //   this.toster.info('pdf size should be less than 20Mb');
       // }
-      if (file.type == 'application/pdf') {
+      let i = true
+      this.files.forEach((e)=>{
+        if(e.fileName == file.name){
+          i = false
+        }
+      })
+      if (file.type == 'application/pdf' && i) {
         this.convertToBase64(file, file.name);
       }
     }

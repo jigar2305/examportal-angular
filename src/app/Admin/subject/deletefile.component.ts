@@ -13,7 +13,7 @@ import { EditsubjectComponent } from './editsubject.component';
   styles: [
   ]
 })
-export class DeletefileComponent implements OnInit,ICellRendererAngularComp {
+export class DeletefileComponent implements OnInit, ICellRendererAngularComp {
 
   value: any;
   agInit(params: ICellRendererParams<any, any>): void {
@@ -25,18 +25,13 @@ export class DeletefileComponent implements OnInit,ICellRendererAngularComp {
   constructor(
     private adminservice: AdminService,
     private toster: ToastrService,
-    private editfile:EditsubjectComponent
-  ) {}
+    private editfile: EditsubjectComponent
+  ) { }
   deletefile(subjectfileId: number) {
     this.adminservice.deletesubjectfile(subjectfileId).subscribe(
       (res) => {
         this.editfile.deletefileremove(subjectfileId)
-        this.toster.success('file deleted....');
-      },
-      (err) => {
-        this.toster.error('something went wrong');
-      }
-    );
+      });
   }
 
   ngOnInit(): void {

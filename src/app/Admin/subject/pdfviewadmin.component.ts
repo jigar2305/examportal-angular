@@ -51,32 +51,14 @@ export class PdfviewadminComponent implements OnInit {
     this.adminservice.getfile(subjectfileId).subscribe(
       (res) => {
         this.downloadpdf(res.data);
-      },
-      (err) => {
-
-        if (err.error.msg == 'file not found') {
-          this.toster.error('file not found');
-        } else {
-          this.toster.error('Technical error occourd');
-        }
-      }
-    );
+      });
   }
 
   onview(subjectfileId: number) {
     this.adminservice.getfile(subjectfileId).subscribe(
       (res) => {
         this.openpdf(res.data);
-      },
-      (err) => {
-
-        if (err.error.msg == 'file not found') {
-          this.toster.error('file not found');
-        } else {
-          this.toster.error('Technical error occourd');
-        }
-      }
-    );
+      });
   }
 
   showfiles: Array<any> = [];
@@ -86,9 +68,9 @@ export class PdfviewadminComponent implements OnInit {
     private toster: ToastrService,
     private aRoute: ActivatedRoute,
     private rout: Router
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
   gridApActive: any;
   searchText: any;
   defaultColDef: ColDef = {
@@ -130,14 +112,11 @@ export class PdfviewadminComponent implements OnInit {
   }
   downloadpdf(File: any) {
     const downloadLink = document.createElement('a');
-    downloadLink.href = "data:application/pdf;base64,"+File.fileString;
+    downloadLink.href = "data:application/pdf;base64," + File.fileString;
     downloadLink.download = File.fileName;
     downloadLink.click();
   }
   openpdf(File: any) {
-    // const blob = new Blob([File.fileString],{ type: 'application/pdf' })
-    // const url= window.URL.createObjectURL(blob);
-    // window.open(url);
     var base64 = File.fileString;
     const blob = this.base64ToBlob(base64, 'application/pdf');
     const url = URL.createObjectURL(blob);
@@ -146,7 +125,7 @@ export class PdfviewadminComponent implements OnInit {
       pdfWindow.document.write(
         "<iframe width='100%' height='100%' src='" + url + "'></iframe>"
       );
-    }else{
+    } else {
       this.toster.error("pdf not avilable")
     }
   }

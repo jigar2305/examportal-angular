@@ -27,8 +27,6 @@ export class QuestionactionComponent
     return false;
   }
   constructor(
-    private aservice: AdminService,
-    private tostr: ToastrService,
     private quecomponent: ListQuestionComponent
   ) {}
   ngOnInit(): void {}

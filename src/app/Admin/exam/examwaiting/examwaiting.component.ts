@@ -73,12 +73,13 @@ export class ExamwaitingComponent implements OnInit {
       field: 'status',
     },
     {
-      headerName: 'Status',
+      headerName: 'Result',
       field: 'result.status',
       cellRenderer: (params: ICellRendererParams) => {
-        if (params.value == 'pass') {
+        let value = params.value.toLowerCase()
+        if (value == 'pass') {
           return '<p style="color: green;">' + params.value + '</p>';
-        } else if (params.value == 'fail') {
+        } else if (value == 'fail') {
           return '<p style="color: red;">' + params.value + '</p>';
         }else{
           return '<b style="color: gray;"> --- </b>'

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { ColDef } from 'ag-grid-community';
+import { ColDef, ICellRendererParams } from 'ag-grid-community';
 import { ToastrService } from 'ngx-toastr';
+import { Question, Subject } from 'src/app/interfaces/entity';
 import { AdminService } from 'src/app/service/admin.service';
 import { QuestionactionComponent } from '../question/questionaction.component';
 
@@ -11,8 +12,8 @@ import { QuestionactionComponent } from '../question/questionaction.component';
 })
 export class ListQuestionComponent {
 
-  questions: Array<any> = [];
-  subjects: Array<any> = [];
+  questions: Array<Question> = [];
+  subjects: Array<Subject> = [];
   questionId!: number;
   count!:number
   constructor(private aservice: AdminService, private tostr: ToastrService) {}
@@ -30,7 +31,9 @@ export class ListQuestionComponent {
     {
       headerName: 'question',
       field: 'question',
-      minWidth:400
+      minWidth:400,
+      maxWidth:500,
+      cellRenderer: (params: ICellRendererParams) => {return params.value;}
     },
     {
       headerName: 'A',
@@ -85,20 +88,13 @@ export class ListQuestionComponent {
     this.aservice.iscontainexamquestion(questionId).subscribe((res)=>{
       this.count = res.data
       this.questionId = questionId
-    },(err)=>{
-        this.tostr.error(err.error.msg);
     })
   }
 
   delete() {
       this.aservice.deletquestion(this.questionId).subscribe(
         (res) => {
-          this.tostr.success(res.msg);
           this.questions = this.questions.filter((r) => r.questionId != this.questionId);
-        },
-        (err) => {
-          this.tostr.error(err.error.msg);
-        }
-      );
+       });
   }
 }

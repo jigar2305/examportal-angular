@@ -209,7 +209,13 @@ export class EditsubjectComponent implements OnInit {
       // if(filesize > (1024*20)) {
       //   this.toster.info('pdf size should be less than 20Mb');
       // }
-      if (file.type == 'application/pdf') {
+      let i = true
+      this.files.forEach((e)=>{
+        if(e.fileName == file.name){
+          i = false
+        }
+      })
+      if (file.type == 'application/pdf' && i) {
         this.convertToBase64(file, file.name);
       }
     }

@@ -8,27 +8,24 @@ import { StudentService } from 'src/app/service/student.service';
     <div class="container-fluid">
       <div class="card">
         <div class="card-body">
-          <div class="card-header">
-            <h1 class="">{{ result.exam.examName }}</h1>
+          <div *ngIf="result">
+            <h1>{{ result.exam.examName }}</h1>
             <div class="row">
-              <h2 class="col-6">
+              <h4 class="col-6">
                 <strong>Total:&nbsp;</strong>{{ result.totalMarks }}
-              </h2>
-              <h2 class="col-6">
+              </h4>
+              <h3 class="col-6">
                 <strong>Obtain:&nbsp;</strong>{{ result.obtainMarks }}
-              </h2>
+              </h3>
               <h1
                 class="col-6"
-                *ngIf="(result.totalMarks * 33) / 100 < result.obtainMarks"
-              >
-                pass
+                *ngIf="result.status == 'Pass'" style="color: green;">
+                {{result.status}}
               </h1>
               <h1
                 class="col-6"
-                *ngIf="(result.totalMarks * 33) / 100 > result.obtainMarks"
-                style="color: red;"
-              >
-                fail
+                *ngIf="result.status != 'Pass'" style="color: red;">
+                {{result.status}}
               </h1>
             </div>
           </div>
@@ -52,11 +49,11 @@ import { StudentService } from 'src/app/service/student.service';
             <tbody>
               <tr *ngFor="let q of que; let i = index">
                 <th scope="row">{{ i + 1 }}</th>
-                <td>{{ q.question.question }}</td>
-                <td>{{ q.question.a }}</td>
-                <td>{{ q.question.b }}</td>
-                <td>{{ q.question.c }}</td>
-                <td>{{ q.question.d }}</td>
+                <td [innerHtml]="q.question.question | htmlConvert"></td>
+                <td [innerHtml]="q.question.a | htmlConvert"></td>
+                <td [innerHtml]="q.question.b | htmlConvert"></td>
+                <td [innerHtml]="q.question.c | htmlConvert"></td>
+                <td [innerHtml]="q.question.d | htmlConvert"></td>
                 <td>{{ q.question.correctAnswer }}</td>
                 <td
                   *ngIf="q.question.correctAnswer == q.selectedOption"
@@ -104,14 +101,12 @@ export class UserExamResultViewComponent implements OnInit {
     this.sservice.getresultquestion(userId, examId).subscribe(
       (res) => {
         this.que = res.data;
-      },
-      (err) => { }
+      }
     );
     this.sservice.getresult(resultId).subscribe(
       (res) => {
         this.result = res.data;
-      },
-      (err) => { }
+      }
     );
   }
 }

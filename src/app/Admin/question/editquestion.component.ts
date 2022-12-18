@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Editor, Toolbar } from 'ngx-editor';
 import { ToastrService } from 'ngx-toastr';
+import { Question } from 'src/app/interfaces/entity';
 import { AdminService } from 'src/app/service/admin.service';
 
 @Component({
   selector: 'app-editquestion',
   template: `
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
         <div class="col-12">
           <div class="card">
@@ -17,11 +19,20 @@ import { AdminService } from 'src/app/service/admin.service';
                   >question</label
                 >
                 <div class="col-sm-10">
-                  <textarea
+                <div class="NgxEditor__Wrapper">
+                      <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
+                      <ngx-editor
+                        [editor]="editor"
+                        [(ngModel)]="questionObj.question"
+                        [disabled]="false"
+                        [placeholder]="'Type here...'"
+                      ></ngx-editor>
+                    </div>
+                  <!-- <textarea
                     type="text"
                     class="form-control"
                     [(ngModel)]="questionObj.question"
-                  ></textarea>
+                  ></textarea> -->
                 </div>
               </div>
               <div class="row mb-3">
@@ -163,7 +174,7 @@ import { AdminService } from 'src/app/service/admin.service';
                   data-bs-dismiss="modal"
                   (click)="onupdate()"
                 >
-                  added
+                  update
                 </button>
               </div>
             </div>
@@ -176,8 +187,7 @@ import { AdminService } from 'src/app/service/admin.service';
 })
 export class EditquestionComponent implements OnInit {
 
-  questionObj:any
-
+  questionObj!:Question
 
   onupdate() {
     if (
@@ -193,11 +203,7 @@ export class EditquestionComponent implements OnInit {
     } else {
       this.aservice.updatequestions(this.questionObj).subscribe(
         (res) => {
-          this.tostr.success('question updated..');
           this.rout.navigateByUrl('/admin/list-question')
-        },
-        (err) => {
-          this.tostr.error('something went wrong');
         }
       );
     }
@@ -209,20 +215,30 @@ export class EditquestionComponent implements OnInit {
     private aRoute: ActivatedRoute,
     private rout: Router
   ) {}
+  editor!: Editor;
+  toolbar: Toolbar = [
+    ['bold', 'italic'],
+    ['underline', 'strike'],
+    ['code', 'blockquote'],
+    ['ordered_list', 'bullet_list'],
+    [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
+    ['link', 'image'],
+    ['text_color', 'background_color'],
+    ['align_left', 'align_center', 'align_right', 'align_justify'],
+  ];
 
-  ngOnInit(): void {
-    this.aservice
+
+ngOnDestroy(): void {
+  this.editor.destroy();
+}
+
+ngOnInit(): void {
+  this.editor = new Editor();
+  this.aservice
       .getquestion(this.aRoute.snapshot.params['questionId'])
       .subscribe(
         (res) => {
           this.questionObj=res.data
-        },
-        (err) => {
-          if (err.error.data == "question not found"){
-            this.tostr.error('question Not found');
-          }else{
-            this.tostr.error('Technical error occurred');
-          }
         }
       );
   }

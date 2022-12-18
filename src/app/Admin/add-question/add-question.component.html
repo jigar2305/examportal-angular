@@ -1,0 +1,142 @@
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-10">
+          <h5 class="card-title">Add question</h5>
+        </div>
+      </div>
+      <div class="card-header">
+        <div class="row">
+          <div class="col-1">
+            <label>subject</label>
+          </div>
+          <div class="col-2">
+            <select aria-label="Default select example" [(ngModel)]="subject">
+              <option *ngFor="let i of subjects" [ngValue]="i">{{i.subjectName}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <form [formGroup]="questionform" (ngSubmit)="onSubmit()">
+        <div class="card">
+          <div class="list-group list-group-flush">
+            <div class="list-group-item">
+              <div class="row mb-3">
+                <label for="inputEmail3" class="col-sm-1 col-form-label">question</label>
+                <div class="col-sm-11">
+                  <div class="NgxEditor__Wrapper">
+                    <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
+                    <ngx-editor [editor]="editor" formControlName="question" [disabled]="false" id="question"
+                      [spellcheck]="true" [placeholder]="'Type here...'">
+                    </ngx-editor>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="row mb-3">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">A</label>
+                    <div class="col-sm-10">
+                      <div class="NgxEditor__Wrapper">
+                        <ngx-editor-menu [editor]="editor1" [toolbar]="toolbar"> </ngx-editor-menu>
+                        <ngx-editor [editor]="editor1" formControlName="a" [disabled]="false" id="a"
+                          [placeholder]="'Type here...'">
+                        </ngx-editor>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="row mb-3">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">B</label>
+                    <div class="col-sm-10">
+                      <div class="NgxEditor__Wrapper">
+                        <ngx-editor-menu [editor]="editor2" [toolbar]="toolbar"> </ngx-editor-menu>
+                        <ngx-editor [editor]="editor2" formControlName="b" [disabled]="false" id="b"
+                          [placeholder]="'Type here...'">
+                        </ngx-editor>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="row mb-3">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">C</label>
+                    <div class="col-sm-10">
+                      <div class="NgxEditor__Wrapper">
+                        <ngx-editor-menu [editor]="editor3" [toolbar]="toolbar"> </ngx-editor-menu>
+                        <ngx-editor [editor]="editor3" formControlName="c" [disabled]="false" id="c"
+                          [placeholder]="'Type here...'">
+                        </ngx-editor>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="row mb-3">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">D</label>
+                    <div class="col-sm-10">
+                      <div class="NgxEditor__Wrapper">
+                        <ngx-editor-menu [editor]="editor4" [toolbar]="toolbar"> </ngx-editor-menu>
+                        <ngx-editor [editor]="editor4" formControlName="d" [disabled]="false" id="d"
+                          [placeholder]="'Type here...'">
+                        </ngx-editor>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="row mb-3">
+                <label for="inputEmail3" class="col-sm-1 col-form-label">Answer</label>
+                <div class="col-sm-11">
+                  <div class="row">
+                    <div class="col-1">
+                      A. &nbsp;
+                      <input class="form-check-input" type="radio" formControlName="correctAnswer" value="a">
+                    </div>
+                    <div class="col-1">
+                      B. &nbsp;
+                      <input class="form-check-input" type="radio" formControlName="correctAnswer" value="b">
+                    </div>
+                    <div class="col-1">
+                      c. &nbsp;
+                      <input class="form-check-input" type="radio" formControlName="correctAnswer" value="c">
+                    </div>
+                    <div class="col-1">
+                      D.&nbsp;
+                      <input class="form-check-input" type="radio" formControlName="correctAnswer" value="d">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="inputEmail3" class="col-sm-1 col-form-label">level</label>
+                <div class="col-sm-4">
+                  <div class="row">
+                    <div class="col-3">
+                      hard. &nbsp;
+                      <input class="form-check-input" type="radio" formControlName="level" value="hard">
+                    </div>
+                    <div class="col-4">
+                      moderate. &nbsp;
+                      <input class="form-check-input" type="radio" formControlName="level" value="moderate">
+                    </div>
+                    <div class="col-3">
+                      easy. &nbsp;
+                      <input class="form-check-input" type="radio" formControlName="level" value="easy">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer text-center border-top-0">
+            <button class="btn btn-primary mr-1">submit</button>&nbsp;
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

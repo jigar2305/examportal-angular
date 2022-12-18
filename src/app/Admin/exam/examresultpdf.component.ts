@@ -6,6 +6,7 @@ import {
   ValueGetterParams,
 } from 'ag-grid-community';
 import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from 'src/app/service/admin.service';
 import * as XLSX from 'xlsx';
@@ -74,6 +75,7 @@ import * as XLSX from 'xlsx';
           </div>
           <div class="modal-body">
             <div class="container" id="pdf" #pdf>
+              <div id="ppt" #ppt>
               <div style="text-align: center; margin-bottom: 10px;">
                 <a class="logo d-flex align-items-center">
                   <img src="assets/img/logo.png" alt="" />
@@ -82,8 +84,10 @@ import * as XLSX from 'xlsx';
               </div>
               <h6 class="mb-2"><b>Exam :</b> {{ examName }}</h6>
               <h6 class="mb-2"><b>Total Mark :</b> {{ Total }}</h6>
-              <h6 class="mb-5"><b>Passing Mark :</b> {{ passingMark }}</h6>
-              <table class="table table-striped" id="table">
+              <h6 class="mb-2"><b>Passing Mark :</b> {{ passingMark }}</h6>
+              <h6 class="mb-5"><b>Exam Date :</b> {{ ExamDate }}</h6>
+              </div>
+              <table class="table table-striped" id="table" #table>
                 <thead>
                   <tr>
                     <th scope="col">No.</th>
@@ -117,11 +121,14 @@ import * as XLSX from 'xlsx';
 })
 export class ExamresultpdfComponent {
   @ViewChild('pdf', { static: false }) pdf!: ElementRef;
+  @ViewChild('ppt', { static: false }) ppt!: ElementRef;
+  @ViewChild('table', { static: false }) table!: ElementRef;
   examId!: number;
   examName: string = '';
   results: Array<any> = [];
   Total!: number;
   passingMark!: number;
+  ExamDate!:string
   constructor(
     private aRoute: ActivatedRoute,
     private aservice: AdminService,
@@ -152,10 +159,18 @@ export class ExamresultpdfComponent {
       field: 'obtainMarks',
     },
     {
+      headerName: 'Exam Date',
+      field: 'exam.date',
+    },
+    {
+      headerName: 'Percentage',
+      field: 'exam.percentage',
+    },
+    {
       headerName: 'Status',
       field: 'status',
       cellRenderer: (params: ICellRendererParams) => {
-        if (params.value == 'pass') {
+        if (params.value.toLowerCase() == 'pass') {
           return '<p style="color: green;">' + params.value + '</p>';
         } else {
           return '<p style="color: red;">' + params.value + '</p>';
@@ -185,11 +200,11 @@ export class ExamresultpdfComponent {
         if (this.results.length > 0) {
           this.examName = this.results[0].exam.examName;
           this.Total = this.results[0].totalMarks;
-          this.passingMark = (this.Total / 3);
+          let percentage = this.results[0].exam.percentage
+          let passing = (this.Total*percentage)/100
+          this.passingMark = Math.floor(passing);
+          this.ExamDate = this.results[0].exam.date;
         }
-      },
-      (err) => {
-        this.tostr.error('technical error occourd');
       }
     );
   }
@@ -197,17 +212,18 @@ export class ExamresultpdfComponent {
   makepdf() {
     let doc = new jsPDF('p', 'mm', 'a4');
     let name = this.examName;
-    const elementHTML: any = document.querySelector('#pdf');
+    const elementHTML: any = document.querySelector('#ppt');
     doc.html(elementHTML, {
       callback: function (doc: any) {
+        autoTable(doc, { html: '#table',margin: {top: 55} })
         doc.save(name + '.pdf');
       },
       margin: [10, 10, 10, 10],
       autoPaging: 'text',
       x: 0,
       y: 0,
-      width: 190, //target width in the PDF document
-      windowWidth: 675, //window width in CSS pixels
+      width: 190,
+      windowWidth: 675,
     });
   }
   excel() {

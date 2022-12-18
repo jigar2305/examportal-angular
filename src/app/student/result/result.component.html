@@ -1,7 +1,7 @@
 <div class="card">
   <div class="card-body">
     <div class="card-header">
-      <h1 class="">{{result.exam.examName}}</h1>
+      <h1 class="">{{ExamName}}</h1>
       <div class="row">
         <h2 class="col-6"><strong>Total:&nbsp;</strong>{{result.totalMarks}}</h2>
         <h2 class="col-6"><strong>Obtain:&nbsp;</strong>{{result.obtainMarks}}</h2>
@@ -22,14 +22,14 @@
           <th scope="col">Your answer</th>
         </tr>
       </thead>
-      <tbody >
+      <tbody>
         <tr *ngFor="let q of que; let i = index">
           <th scope="row">{{i+1}}</th>
-          <td>{{q.question.question}}</td>
-          <td>{{q.question.a}}</td>
-          <td>{{q.question.b}}</td>
-          <td>{{q.question.c}}</td>
-          <td>{{q.question.d}}</td>
+          <td [innerHtml]="q.question.question | htmlConvert"></td>
+          <td [innerHtml]="q.question.a | htmlConvert"></td>
+          <td [innerHtml]="q.question.b | htmlConvert"></td>
+          <td [innerHtml]="q.question.c | htmlConvert"></td>
+          <td [innerHtml]="q.question.d | htmlConvert"></td>
           <td *ngIf="isshow">{{q.question.correctAnswer}}</td>
           <td *ngIf="q.question.correctAnswer == q.selectedOption" style="background-color:  green;">
             {{q.selectedOption}}

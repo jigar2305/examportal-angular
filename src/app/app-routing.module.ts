@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
-import { ChildrenOutletContexts, RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { AddCourseComponent } from './Admin/add-course/add-course.component';
 import { AddExamComponent } from './Admin/add-exam/add-exam.component';
+import { AddQuestionComponent } from './Admin/add-question/add-question.component';
 import { AddSubjectComponent } from './Admin/add-subject/add-subject.component';
 import { AddUserComponent } from './Admin/add-user/add-user.component';
 import { AdminComponent } from './Admin/admin/admin.component';
@@ -76,6 +77,7 @@ const routes: Routes = [
       { component: AddUserComponent, path: 'adduser' },
       { component: UserExamsComponent, path: 'user-exams/:userId' },
       { component: UserExamResultViewComponent, path: 'user/result' },
+      { component: AddQuestionComponent, path: 'user/add-question' },
     ],
   },
 

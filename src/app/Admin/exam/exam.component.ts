@@ -5,6 +5,7 @@ import { AdminService } from 'src/app/service/admin.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { ColDef, ICellRendererParams } from 'ag-grid-community';
 import { ExamactionComponent } from './examaction.component';
+import { Exam, User } from 'src/app/interfaces/entity';
 
 @Component({
   selector: 'app-exam',
@@ -13,18 +14,18 @@ import { ExamactionComponent } from './examaction.component';
 })
 export class ExamComponent implements OnInit {
 
-  exams: Array<any> = [];
-  users: any = [];
+  exams: Array<Exam> = [];
+  users: Array<User> = [];
   examId: number = 0;
   dropdownSettings: IDropdownSettings = {};
   dropdownSettingsforsubject: IDropdownSettings = {};
-  userId: Array<any> = [];
+  userId: Array<Sortuser> = [];
   Ids: Array<any> = [];
   enrollexamform: FormGroup;
   subjectIds: Array<any> = [];
   examselected: any;
   count!: number;
-  checkArray:Array<any>=[]
+  checkArray: Array<any> = []
   filterText!: string;
   constructor(
     private adminservice: AdminService,
@@ -170,21 +171,14 @@ export class ExamComponent implements OnInit {
       (res) => {
         this.count = res.data;
         this.examId = examId;
-      },
-      (err) => {
-        this.tostr.error('Technical error occurred');
       }
-      );
-      document.getElementById('model')?.click();
+    );
+    document.getElementById('model')?.click();
   }
   delete() {
     this.adminservice.deleteExam(this.examId).subscribe(
       (res) => {
-        this.tostr.success('exam deleted..');
         this.exams = this.exams.filter((r) => r.examId != this.examId);
-      },
-      (err) => {
-        this.tostr.error('something went wrong');
       }
     );
   }
@@ -197,11 +191,9 @@ export class ExamComponent implements OnInit {
         this.users = res.data;
         this.users = this.users.filter((u: any) => u.role.roleName != 'admin');
         this.users.forEach((element: any) => {
-          this.userId.push({ "userId": element.userId, "firstName": element.firstName, "lastName": element.lastName, "ischeck": false })
+            this.userId.push({ "userId": element.userId, "firstName": element.firstName, "lastName": element.lastName, "ischeck": false })
         });
-      },
-      (err) => {
-        this.tostr.error('Technical error occourd');
+        console.log(this.userId);
       }
     );
   }
@@ -220,14 +212,7 @@ export class ExamComponent implements OnInit {
         examId: this.examId,
         userId: this.Ids,
       };
-      this.adminservice.enrollexam(enroll).subscribe(
-        (res) => {
-          this.tostr.success('exam enroll successfully');
-        },
-        (err) => {
-          this.tostr.error(err.error.msg);
-        }
-      );
+      this.adminservice.enrollexam(enroll).subscribe();
 
       this.Ids = [];
     } else {
@@ -238,25 +223,31 @@ export class ExamComponent implements OnInit {
   filter() {
     this.userId = [];
     this.users.forEach((element: any) => {
-      this.userId.push({ "userId": element.userId, "firstName": element.firstName, "lastName": element.lastName, "ischeck": element.ischeck })
+      this.userId.push({ "userId": element.userId, "firstName": element.firstName, "lastName": element.lastName, "ischeck": false });
     });
     if (this.filterText.length > 0 && this.filterText != '') {
       this.userId = this.userId.filter(e => (e.firstName + " " + e.lastName).toLowerCase().includes(this.filterText) || (e.firstName + "" + e.lastName).toLowerCase().includes(this.filterText))
     }
   }
-  check(user:any) {
-    if(user.ischeck){
-      this.users.forEach((element:any) => {
-        if(user.userId == element.userId){
+  check(user: any) {
+    if (user.ischeck) {
+      this.users.forEach((element: any) => {
+        if (user.userId == element.userId) {
           element.ischeck = false
         }
       });
-    }else{
-     this.users.forEach((element:any) => {
-      if(user.userId == element.userId){
-        element.ischeck = true
-      }
-    });
+    } else {
+      this.users.forEach((element: any) => {
+        if (user.userId == element.userId) {
+          element.ischeck = true
+        }
+      });
     }
   }
+}
+export interface Sortuser {
+  ischeck: boolean;
+  userId: number;
+  firstName: string;
+  lastName: string;
 }
