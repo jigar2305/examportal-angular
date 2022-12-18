@@ -4,6 +4,7 @@ import { Route, Router } from '@angular/router';
 import { Editor } from 'ngx-editor';
 import { Toolbar } from 'ngx-editor';
 import { ToastrService } from 'ngx-toastr';
+import { Observable, Subscriber } from 'rxjs';
 import { Question, Subject } from 'src/app/interfaces/entity';
 import { AdminService } from 'src/app/service/admin.service';
 
@@ -15,13 +16,12 @@ import { AdminService } from 'src/app/service/admin.service';
 })
 export class AddQuestionComponent implements OnInit {
 
-
-
   questionform: FormGroup
   submitted = false;
   subject!: Subject
   subjects: Array<Subject> = []
   questions!: Question
+  url!:string
 
   editor!: Editor;
   editor1!: Editor;
@@ -51,7 +51,6 @@ export class AddQuestionComponent implements OnInit {
       d: new FormControl('', [Validators.required]),
       level: new FormControl('', [Validators.required]),
       correctAnswer: new FormControl('', [Validators.required]),
-      // subject: new FormControl('', [Validators.required]),
     });
   }
   ngOnInit(): void {
@@ -85,16 +84,47 @@ export class AddQuestionComponent implements OnInit {
         d: this.questionform.value.d,
         level: this.questionform.value.level,
         correctAnswer: this.questionform.value.correctAnswer,
+        url: this.url,
         subject: this.subject
       }
       this.adminservice.addquestion(json).subscribe((res)=>{
         if(res.apicode == 200){
           this.questionform.reset()
+          this.url = ''
         }
       })
     }else{
       this.toster.info("please fill form correctly")
     }
+  }
+
+  convertToBase64(file: File, filename: string) {
+    const observable = new Observable((subscriber: Subscriber<any>) => {
+      this.readFile(file, subscriber);
+    });
+    observable.subscribe((d) => {
+     this.url = d
+    });
+  }
+  onChange($event: Event) {
+    const files = ($event.target as HTMLInputElement).files;
+    if (files) {
+      const file = files[0];
+        this.convertToBase64(file, file.name);
+    }
+  }
+  readFile(file: File, subscriber: Subscriber<any>) {
+    const filereader = new FileReader();
+    filereader.readAsDataURL(file);
+
+    filereader.onload = () => {
+      subscriber.next(filereader.result);
+      subscriber.complete();
+    };
+    filereader.onerror = (error) => {
+      subscriber.error(error);
+      subscriber.complete();
+    };
   }
 
 }

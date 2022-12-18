@@ -46,6 +46,7 @@ export interface Question {
     level: string;
     subject: Subject;
     selected: string;
+    url: string;
 }
 export interface Result {
   resultId: number;

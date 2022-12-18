@@ -41,9 +41,6 @@ export class UserComponent {
   ];
 
   defaultColDef: ColDef = {
-    enableRowGroup: true,
-    enablePivot: true,
-    enableValue: true,
     sortable: true,
     resizable: true,
     filter: true,

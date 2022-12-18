@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from 'src/app/service/admin.service';
-import { async, Observable, Subscriber } from 'rxjs';
+import { Observable, Subscriber } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
@@ -19,7 +19,6 @@ export class AddSubjectComponent implements OnInit {
   subject!: string;
   files: Array<any> = [];
   filename!: string;
-  _ = require('lodash');
 
   constructor(
     private adminservice: AdminService,
