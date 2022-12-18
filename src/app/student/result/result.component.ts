@@ -28,17 +28,14 @@ export class ResultComponent implements OnInit {
   getvalue() {
     this.userId = localStorage.getItem("userId")
     this.sservice.getresultquestion(this.userId, this.examId).subscribe(res => {
-      console.log(res);
       this.que = res.data
     })
     this.sservice.getresult(this.resultId).subscribe(res => {
       if(res.apicode == 200){
         this.result = res.data
         this.ExamName = res.data.exam.examName
+        this.isshow = this.result.exam.isshow
       }
-      console.log(this.result);
-
-      this.isshow = this.result.exam.isshow
     })
 
   }

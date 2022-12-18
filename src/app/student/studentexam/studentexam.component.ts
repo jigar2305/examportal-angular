@@ -13,16 +13,13 @@ import { StudentexamactionComponent } from './studentexamaction.component';
   templateUrl: './studentexam.component.html',
   styleUrls: ['./studentexam.component.css'],
 })
-export class StudentexamComponent implements OnInit {
+export class StudentexamComponent {
   exams: Array<any> = [];
   userId: any;
   constructor(
     private adminservice: AdminService,
     private tostr: ToastrService
   ) {}
-
-  ngOnInit(): void {}
-
   colDefs: ColDef[] = [
     { field: 'examName' },
     {

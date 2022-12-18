@@ -12,8 +12,6 @@
         </div>
       </div>
       <div class="card-header">
-
-        <!-- <form [formGroup]="subjectform" (ngSubmit)="subjectvalue()"> -->
         <div class="row">
           <div class="col-1">
             <label>subject</label>
@@ -24,11 +22,7 @@
               <option *ngFor="let i of subjects" [ngValue]="i">{{i.subjectName}}</option>
             </select>
           </div>
-          <!-- <div class="col-2">
-                            <button class="btn btn-primary btn-sm">select</button>
-                        </div> -->
         </div>
-        <!-- </form> -->
       </div>
 
       <form [formGroup]="questionform" (ngSubmit)="onSubmit()">
@@ -48,8 +42,6 @@
                 <div class="row mb-3">
                   <label for="inputEmail3" class="col-sm-2 col-form-label">question</label>
                   <div class="col-sm-10">
-                    <!-- <textarea type="text" class="form-control" formControlName="question"></textarea> -->
-                    <!-- <angular-editor formControlName="question" [config]="config"></angular-editor> -->
                     <div class="NgxEditor__Wrapper">
                       <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
                       <ngx-editor
@@ -143,29 +135,6 @@
     </div>
   </div>
 </div>
-<!-- <div class="modal fade" id="verticalycentered" tabindex="-1" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Select Excelfile:</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <div class="container">
-                <img src="assets/img/excel_example.JPG" alt="" width="500px">
-              </div>
-                <div class="m-2">
-                    <div class="input-group has-validation">
-                        <input class="form-control" type="file" [accept]="exceltype" (change)="onChange($event)">
-                    </div>
-                </div>
-                <div class="m-2">
-                    <button type="submit" class="btn btn-primary" (click)="onUpload()" data-bs-dismiss="modal"
-                        style="width: 100%;">upload</button>
-                </div>
-            </div>
-        </div>
-    </div> -->
 <div class="modal fade" id="largeModal" tabindex="-1" aria-hidden="true" style="display: none;">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
