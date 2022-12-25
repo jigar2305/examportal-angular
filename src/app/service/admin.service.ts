@@ -88,6 +88,10 @@ export class AdminService {
   iscontainexamquestion(questionId:number): Observable<any> {
     return this.http.get(environment.url + 'que/child/'+questionId);
   }
+  getImageByQuestionId(questionId: number): Observable<any> {
+    return this.http.get(environment.url + 'que/getImage/'+questionId);
+  }
+
   // ---------------------------------------------------------------------------------------------
 
   addexam(exam: any): Observable<any> {

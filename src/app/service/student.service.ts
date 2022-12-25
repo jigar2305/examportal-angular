@@ -16,6 +16,9 @@ export class StudentService {
   getquestion(examId:any):Observable<any>{
     return this.http.get(environment.url+"eqc/getque/"+examId)
   }
+  getquestionwithImage(examId:any):Observable<any>{
+    return this.http.get(environment.url+"eqc/getquestion/"+examId)
+  }
   submitquestion(questionanswer:any):Observable<any>{
     return this.http.post(environment.url+"eqc/checkanswer",questionanswer)
   }

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
 import { StudentService } from 'src/app/service/student.service';
 
@@ -50,7 +49,9 @@ export class StudentFilesComponent implements OnInit {
       (res) => {
         this.pdffiles = res.data;
         this.getsubjectlist();
+        console.log(this.pdffiles);
       });
+
   }
 
   onCdownload(subjectfileId: number) {
@@ -73,8 +74,7 @@ export class StudentFilesComponent implements OnInit {
     downloadLink.click();
   }
   openpdf(File: any) {
-    var base64 = File.fileString;
-    const blob = this.base64ToBlob(base64, 'application/pdf');
+    let blob = this.base64ToBlob(File.fileString, 'application/pdf');
     const url = URL.createObjectURL(blob);
     const pdfWindow = window.open(url);
     if (pdfWindow) {

@@ -34,7 +34,6 @@ export interface role {
     roleId: number;
     roleName: string;
 }
-
 export interface Question {
     questionId: number;
     question: string;
@@ -47,6 +46,8 @@ export interface Question {
     subject: Subject;
     selected: string;
     url: string;
+    image:any;
+    imagetype:string;
 }
 export interface Result {
   resultId: number;

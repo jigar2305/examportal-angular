@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-import { catchError, map, retry } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 @Injectable()
@@ -31,6 +31,9 @@ export class ToastrServiceInterceptor implements HttpInterceptor {
               break;
             case 401:
               this.tostr.error(msg)
+              break;
+            case 300:
+              this.tostr.info(msg)
               break;
             default:
               break;

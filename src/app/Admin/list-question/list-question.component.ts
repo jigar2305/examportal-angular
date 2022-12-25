@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ColDef, ICellRendererParams } from 'ag-grid-community';
+import { ColDef, ICellRendererParams, ValueGetterParams } from 'ag-grid-community';
 import { ToastrService } from 'ngx-toastr';
 import { Question, Subject } from 'src/app/interfaces/entity';
 import { AdminService } from 'src/app/service/admin.service';
@@ -11,11 +11,21 @@ import { QuestionactionComponent } from '../question/questionaction.component';
   styleUrls: ['./list-question.component.css'],
 })
 export class ListQuestionComponent {
+  getImage(questionId: number) {
+    this.aservice.getImageByQuestionId(questionId).subscribe(res=>{
+      console.log(res);
+
+      if(res.apicode == 200){
+        this.Image = res.data.imagetype+res.data.image
+      }
+    })
+  }
 
   questions: Array<Question> = [];
   subjects: Array<Subject> = [];
   questionId!: number;
   count!:number
+  Image:any
   constructor(private aservice: AdminService, private tostr: ToastrService) {}
 
   gridApActive: any;
@@ -38,18 +48,22 @@ export class ListQuestionComponent {
     {
       headerName: 'A',
       field: 'a',
+      cellRenderer: (params: ICellRendererParams) => {return params.value;}
     },
     {
       headerName: 'B',
       field: 'b',
+      cellRenderer: (params: ICellRendererParams) => {return params.value;}
     },
     {
       headerName: 'C',
       field: 'c',
+      cellRenderer: (params: ICellRendererParams) => {return params.value;}
     },
     {
       headerName: 'D',
       field: 'd',
+      cellRenderer: (params: ICellRendererParams) => {return params.value;}
     },
     {
       headerName: 'CorrectAnswer',
@@ -61,10 +75,14 @@ export class ListQuestionComponent {
     },
     {
       headerName: 'Action',
+      valueGetter: this.questiondetails,
       field: 'questionId',
       cellRenderer: QuestionactionComponent,
     },
   ];
+  questiondetails(params: ValueGetterParams) {
+    return params.data;
+  }
   defaultColDef: ColDef = {
     sortable: true,
     resizable: true,

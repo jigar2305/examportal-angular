@@ -41,7 +41,6 @@ export class AddQuestionComponent implements OnInit {
   constructor(
     private adminservice: AdminService,
     private toster: ToastrService,
-    private rout: Router
   ) {
     this.questionform = new FormGroup({
       question: new FormControl('', [Validators.required]),
@@ -87,10 +86,12 @@ export class AddQuestionComponent implements OnInit {
         url: this.url,
         subject: this.subject
       }
+      console.log(json);
+
       this.adminservice.addquestion(json).subscribe((res)=>{
         if(res.apicode == 200){
-          this.questionform.reset()
-          this.url = ''
+          this.questionform.reset();
+          this.url = '';
         }
       })
     }else{

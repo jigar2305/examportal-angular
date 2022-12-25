@@ -5,3 +5,7 @@
   border:none !important;
   outline: none;
   }
+.full{
+  height: 100%;
+  width: 100%;
+}

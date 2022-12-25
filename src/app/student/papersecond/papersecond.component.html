@@ -1,4 +1,4 @@
-<div class="container-fluid  mt-5">
+<div class="container-fluid">
   <div class="row">
     <div class="col-12">
       <div class="card">
@@ -19,7 +19,10 @@
             <div class="row g-0">
               <div class="col-md-12">
                 <div class="card-body">
-                  <div class="mb-3 mt-2 ml-0 pl-0 npm" [innerHtml]="'<strong >Q '+(index +1)+')</strong>&nbsp;&nbsp;'+que[index].question | htmlConvert">
+                  <div class="mb-3 mt-2 ml-0 pl-0 npm" [innerHtml]="'<strong>Q '+(index +1)+')</strong>&nbsp;&nbsp;'+que[index].question | htmlConvert">
+                </div>
+                <div *ngIf="que[index].url != null && que[index].image != null" style="text-align: center;" class="mb-2">
+                  <img src="{{que[index].imagetype}}{{que[index].image}}" height="250px" alt="image">
                 </div>
                   <div class="row">
                     <div class="col-6 wrap row">
@@ -49,7 +52,7 @@
                     </div>
                     </div>
                   </div>
-                  <div class="row mt-5">
+                  <div class="row mt-3">
                     <div class="col-10">
                       <button class="btn btn-secondary" (click)="previous(index)" type="button">privious</button>
                     </div>
