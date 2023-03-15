@@ -62,7 +62,7 @@ import { StudentService } from 'src/app/service/student.service';
                   {{ q.selectedOption }}
                 </td>
                 <td
-                  *ngIf="q.question.correctAnswer != q.selectedOption"
+                  *ngIf="q.question.correctAnswer != q.selectedOption && q.selectedOption != '' "
                   style="background-color: red;"
                 >
                   {{ q.selectedOption }}
