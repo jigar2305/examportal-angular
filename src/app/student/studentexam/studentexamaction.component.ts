@@ -8,12 +8,12 @@ import { interval } from 'rxjs';
   selector: 'app-studentexamaction',
   template: `
     <button
-    *ngIf="isshow == 'start'"
-      class="btn btn-sm"
+    class="btn btn-sm"
       routerLink="/student/paper/{{ examId }}"
       >
       start
     </button>
+    <!-- *ngIf="isshow == 'start'" -->
     <button class="btn btn-sm" *ngIf="isshow == 'wait'">Wait</button>
     <button class="btn btn-sm" *ngIf="isshow == 'end'">end</button>
   `,

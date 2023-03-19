@@ -86,14 +86,14 @@ export class PapersecondComponent implements OnInit, OnDestroy {
         examId: this.examId,
       },
     };
-    // this.SService.submitquestion(answers).subscribe(
-    //   (res) => {
-    //     if(res.apicode == 200){
-    //       this.router.navigateByUrl('/student/results');
-    //       this.issubmit = true
-    //     }
-    //   }
-    // );
+    this.SService.submitquestion(answers).subscribe(
+      (res) => {
+        if(res.apicode == 200){
+          this.router.navigateByUrl('/student/results');
+          this.issubmit = true
+        }
+      }
+    );
   }
 }
 
